@@ -13,6 +13,6 @@ namespace ProjectWerner.HelloWorld.Views
             InitializeComponent();
         }
 
-        public UserControl AppUserControl { get; }
+        public UserControl AppUserControl { get { return this; } }
     }
 }
