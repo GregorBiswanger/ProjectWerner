@@ -53,7 +53,8 @@ namespace ProjectWerner.MvvmHelper.Commands
 
         public void RaiseCanExecuteChanged()
         {           
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            if (CanExecuteChanged !=null)
+                CanExecuteChanged.Invoke(this, EventArgs.Empty);
         }
 
         protected override void CleanUp()

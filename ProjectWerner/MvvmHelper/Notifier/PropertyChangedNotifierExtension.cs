@@ -13,12 +13,14 @@ namespace ProjectWerner.MvvmHelper.Notifier
 
 			field = value;
 
-			handler?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+			if (handler != null)
+                handler.Invoke(sender, new PropertyChangedEventArgs(propertyName));
 		}
 
 		public static void Notify (this PropertyChangedEventHandler handler, object sender, string propertyName)
 		{
-			handler?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
+			if (handler != null)
+                handler.Invoke(sender, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

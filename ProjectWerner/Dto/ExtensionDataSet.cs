@@ -19,10 +19,10 @@ namespace ProjectWerner.Dto
 			IsSelected = false;
 		}
 
-		public string        Name       { get; }
-		public ImageSource   Icon       { get; }
-		public Guid          Id         { get; }						
-		public IAppExtension Extension  { get; }
+		public string        Name       { get; private set; }
+		public ImageSource   Icon       { get; private set; }
+		public Guid          Id         { get; private set; }						
+		public IAppExtension Extension  { get; private set; }
 
 		public bool IsSelected
 		{

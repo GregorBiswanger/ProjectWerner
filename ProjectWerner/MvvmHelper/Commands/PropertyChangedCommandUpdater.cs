@@ -27,7 +27,8 @@ namespace ProjectWerner.MvvmHelper.Commands
 		{			
 			if (properties.Contains(propertyChangedEventArgs.PropertyName))
 			{
-				UpdateOfCanExecuteChangedRequired?.Invoke(this, new EventArgs());
+				if (UpdateOfCanExecuteChangedRequired != null)
+                    UpdateOfCanExecuteChangedRequired.Invoke(this, new EventArgs());
 			}
 		}
         

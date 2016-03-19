@@ -36,9 +36,9 @@ namespace ProjectWerner.ViewModels.MainWindow
 			Extensions.First().IsSelected = true;
 		}
 
-		public ICommand ExecuteExtension => null;
+		public ICommand ExecuteExtension { get {return null; } }
 
-		public ObservableCollection<ExtensionDataSet> Extensions { get; }
+        public ObservableCollection<ExtensionDataSet> Extensions { get; private set; }
 
 		public void Dispose () { }
 		public event PropertyChangedEventHandler PropertyChanged;		

@@ -49,9 +49,9 @@ namespace ProjectWerner.ViewModels.MainWindow
 			Extensions[selectedItem].IsSelected = true;
 		}
 
-		public ICommand ExecuteExtension { get; }
+		public ICommand ExecuteExtension { get; private set; }
 
-		public ObservableCollection<ExtensionDataSet> Extensions { get; }
+        public ObservableCollection<ExtensionDataSet> Extensions { get; private set; }
 
 		protected override void CleanUp()
 		{

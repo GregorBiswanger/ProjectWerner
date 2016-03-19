@@ -320,7 +320,8 @@ namespace ProjectWerner.API
         {
             Console.WriteLine("OnMouthClosed");
             IsFaceMouthOpen = false;
-            MouthClosed?.Invoke();
+            if (MouthClosed != null)
+                MouthClosed.Invoke();
         }
 
         /// <summary>
@@ -332,7 +333,8 @@ namespace ProjectWerner.API
         private void OnMouthOpened(object sender, EventArgs e)
         {
             IsFaceMouthOpen = true;
-            MouthOpened?.Invoke();
+            if (MouthOpened != null)
+                MouthOpened.Invoke();
         }
 
         /// <summary>
@@ -342,7 +344,8 @@ namespace ProjectWerner.API
         /// <param name="e"></param>
         private void OnFaceLost(object sender, EventArgs e)
         {
-            FaceLost?.Invoke();
+            if (FaceLost != null)
+                FaceLost.Invoke();
         }
 
         /// <summary>
@@ -352,7 +355,8 @@ namespace ProjectWerner.API
         /// <param name="e"></param>
         private void OnFaceVisible(object sender, EventArgs e)
         {
-            FaceVisible?.Invoke();
+            if (FaceVisible != null)
+                FaceVisible.Invoke();
         }
 
         /// <summary>
