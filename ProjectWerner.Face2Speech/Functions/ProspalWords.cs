@@ -10,16 +10,15 @@ namespace ProjectWerner.Face2Speech.Functions
 {
     class ProspalWords
     {
-        public enum SearchType { All = 0, OnlyEqual = 1, OnlyStartsWith = 2};
+        public enum SearchType { All = 0, OnlyEqual = 1, OnlyStartsWith = 2 };
+        public int Number = 0;
 
         public ObservableCollection<Words> GetFirstLines(ObservableCollection<Words> AllWords, String LastWord, SearchType mySearchType)
         {
             ObservableCollection<Words> myReturnCollection = new ObservableCollection<Words>();
-            Dictionary<String, String> addedWords = new Dictionary<string, string>();
+            Dictionary<String, Words> addedWords = new Dictionary<string, Words>();
             Words newWord;
             IEnumerable<Words> proposalWords;
-
-            int number = 0;
 
             if (mySearchType == SearchType.All || mySearchType == SearchType.OnlyEqual)
             {
@@ -29,21 +28,20 @@ namespace ProjectWerner.Face2Speech.Functions
                 {
                     if (!addedWords.ContainsKey(myWord.Text))
                     {
-                        number = number + 1;
-                        if (number <= 10)
+                        Number = Number + 1;
+                        if (Number <= 10)
                         {
-                            if (number == 10)
+                            if (Number == 10)
                             {
-                                number = 0;
+                                Number = 0;
                             }
 
-                            addedWords.Add(myWord.Text, "");
+                            addedWords.Add(myWord.Text, myWord);
                             newWord = new Words();
-                            newWord.Text = string.Format("{0}: {1}", number, myWord.Text);
+                            newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
                             newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }
-
                     }
                 });
             }
@@ -57,17 +55,17 @@ namespace ProjectWerner.Face2Speech.Functions
                 {
                     if (!addedWords.ContainsKey(myWord.Text))
                     {
-                        number = number + 1;
-                        if (number <= 10)
+                        Number = Number + 1;
+                        if (Number <= 10)
                         {
-                            if (number == 10)
+                            if (Number == 10)
                             {
-                                number = 0;
+                                Number = 0;
                             }
 
-                            addedWords.Add(myWord.Text, "");
+                            addedWords.Add(myWord.Text, myWord);
                             newWord = new Words();
-                            newWord.Text = string.Format("{0}: {1}", number, myWord.Text);
+                            newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
                             newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }

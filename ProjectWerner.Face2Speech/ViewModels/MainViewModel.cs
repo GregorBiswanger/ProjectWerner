@@ -322,15 +322,6 @@ namespace ProjectWerner.Face2Speech.ViewModels
                     ProposalWords = myProspalWords.GetFirstLines(AllWords, text[text.Length - 1], ProspalWords.SearchType.All);
                 }
             }
-            else if (Chars.Type == "space")
-            {
-                if (DisplayText.Length > 0)
-                {
-                    string[] text = DisplayText.Split(' ');
-                    ProposalWords = myProspalWords.GetFirstLines(AllWords, text[text.Length - 1], ProspalWords.SearchType.All);
-                }
-                DisplayText = DisplayText + " ";
-            }
             else if (Chars.Type == "enter")
             {
                 DisplayText = DisplayText + "\n";
@@ -338,6 +329,11 @@ namespace ProjectWerner.Face2Speech.ViewModels
             else if (Chars.Type == "speak")
             {
                 _camera3D.Speech(DisplayText);
+            }
+            else if (Chars.Type == "space")
+            {
+                DisplayText = DisplayText + " ";
+                ProposalWords.Clear();
             }
             else if (Chars.Type == "mark")
             {
@@ -358,17 +354,21 @@ namespace ProjectWerner.Face2Speech.ViewModels
                     }
                     if (SelectedProposalWord.NextWords != null)
                     {
-                        //ProposalWords = myProspalWords.GetFirstLines(AllWords, DisplayText);
-
-                        foreach (String NextWord in SelectedProposalWord.NextWords)
+                        List<String> MyNextWords = SelectedProposalWord.NextWords;
+                        myProspalWords.Number = 0;
+                        ProposalWords.Clear();
+                        foreach (String NextWord in MyNextWords)
                         {
-                            //ProposalWords.Concat(myProspalWords.GetFirstLines(AllWords, NextWord));
-                            ProposalWords = myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual);
+                            foreach (Words myWords in myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual))
+                            {
+                                ProposalWords.Add(myWords);
+                            }
                         }
                     }
                     else
                     {
                         SelectedProposalWordIndex = -1;
+                        myProspalWords.Number = 0;
                         ProposalWords.Clear();
                     }
 
@@ -389,122 +389,6 @@ namespace ProjectWerner.Face2Speech.ViewModels
                 SelectedProposalWordIndex = -1;
             }
         }
-
-        //private void SetProposalWords()
-        //{
-        //    ProposalWords.Clear();
-        //    Dictionary<String, String> AddedWords = new Dictionary<string, string>();
-        //    if (!string.IsNullOrEmpty(DisplayText) ||
-        //        !string.IsNullOrWhiteSpace(DisplayText))
-        //    {
-        //        string lastWord = DisplayText.Trim().Split(' ').Last();
-        //        int number = 0;
-
-        //        IEnumerable<Words> proposalWords =
-        //            AllWords.Where(word => word.Text.Equals(lastWord.ToUpper())).OrderBy(x => x.Text.Length).Take(10);
-
-        //        proposalWords.ToList().ForEach(word =>
-        //        {
-        //            if (!AddedWords.ContainsKey(word.Text))
-        //            {
-        //                number = number + 1;
-        //                if (number <= 10)
-        //                {
-        //                    if (number == 10)
-        //                    {
-        //                        number = 0;
-        //                    }
-
-        //                    AddedWords.Add(word.Text, "");
-        //                    Words newword = new Words();
-        //                    newword.Text = string.Format("{0}: {1}", number, word.Text);
-        //                    newword.NextWords = word.NextWords;
-        //                    ProposalWords.Add(newword);
-        //                }
-
-        //            }
-        //        });
-
-        //        proposalWords =
-        //                AllWords.Where(word => word.Text.StartsWith(lastWord.ToUpper())).OrderBy(x => x.Text.Length).Take(10);
-
-        //        proposalWords.ToList().ForEach(word =>
-        //        {
-        //            if (!AddedWords.ContainsKey(word.Text))
-        //            {
-        //                number = number + 1;
-        //                if (number <= 10)
-        //                {
-        //                    if (number == 10)
-        //                    {
-        //                        number = 0;
-        //                    }
-
-        //                    AddedWords.Add(word.Text, "");
-        //                    Words newword = new Words();
-        //                    newword.Text = string.Format("{0}: {1}", number, word.Text);
-        //                    newword.NextWords = word.NextWords;
-        //                    ProposalWords.Add(newword);
-        //                }
-
-        //            }
-        //        });
-
-        //    }
-        //    if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
-        //    {
-        //        SelectedProposalWordIndex = 0;
-        //    }
-        //    else
-        //    {
-        //        SelectedProposalWordIndex = -1;
-        //    }
-        //}
-
-        //private void SetNextProposalWords(List<String> NextWords)
-        //{
-        //    int number = 0;
-        //    ProposalWords.Clear();
-        //    Dictionary<String, String> AddedWords = new Dictionary<string, string>();
-
-
-        //    foreach (String NextWord in NextWords)
-        //    {
-        //        IEnumerable<Words> proposalWords =
-        //             AllWords.Where(word => word.Text.Equals(NextWord)).OrderBy(x => x.Text.Length).Take(10);
-
-        //        proposalWords.ToList().ForEach(word =>
-        //        {
-        //            if (!AddedWords.ContainsKey(word.Text))
-        //            {
-        //                number = number + 1;
-        //                if (number <= 10)
-        //                {
-        //                    if (number == 10)
-        //                    {
-        //                        number = 0;
-        //                    }
-
-        //                    AddedWords.Add(word.Text, "");
-        //                    Words newword = new Words();
-        //                    newword.Text = string.Format("{0}: {1}", number, word.Text);
-        //                    newword.NextWords = word.NextWords;
-        //                    ProposalWords.Add(newword);
-        //                }
-
-        //            }
-        //        });
-        //        if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
-        //        {
-        //            SelectedProposalWordIndex = 0;
-        //        }
-        //        else
-        //        {
-        //            SelectedProposalWordIndex = -1;
-        //        }
-
-        //    }
-        //}
 
         //http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
