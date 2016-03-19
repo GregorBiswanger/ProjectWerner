@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWerner"
         xmlns:mainWindow="clr-namespace:ProjectWerner.ViewModels.MainWindow"
+        xmlns:dto="clr-namespace:ProjectWerner.Dto"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
@@ -12,20 +13,50 @@
 		<mainWindow:MainWindowViewModelSampledata/>
 	</d:MainWindow.DataContext>
 	
-    <Grid>
-        <Button Content="Button" 
-				HorizontalAlignment="Left" 
-				Margin="184,149,0,0" 
-				VerticalAlignment="Top" 
-				Width="75"
-				Command="{Binding StartFaceToSpeach}"/>
+    <ItemsControl ItemsSource="{Binding Extensions}">
+        
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<WrapPanel ItemHeight="200" 
+						   ItemWidth="200"/>
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+		
+		<ItemsControl.ItemTemplate>
+			<DataTemplate DataType="{x:Type dto:ExtensionDataSet}">
+				<Border BorderThickness="1"
+						BorderBrush="Black">
+					
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						
+						<TextBlock Grid.Row="1"
+								   Text="{Binding Name}"
+								   HorizontalAlignment="Center"
+								   FontFamily="Segoe UI Light"
+								   FontSize="25"/>
+						
+						<Button Grid.Row="2"
+								Content="Start"
+								Margin="10"
+								Command="{Binding DataContext.ExecuteExtension, 
+												  RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
+								CommandParameter="{Binding}"/>
+					</Grid>
+					
+				</Border>
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
 
-		<Button Content="Button" 
-				HorizontalAlignment="Left" 
-				Margin="184,49,0,0" 
-				VerticalAlignment="Top" 
-				Width="75"
-				Command="{Binding StartA}"/>
-
-	</Grid>
+		<ItemsControl.ItemContainerStyle>
+			<Style TargetType="ContentPresenter">
+				<Setter Property="Margin" Value="1"/>
+			</Style>
+		</ItemsControl.ItemContainerStyle>
+		
+	</ItemsControl>
 </Window>

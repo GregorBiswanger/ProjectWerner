@@ -79,6 +79,8 @@
     <Compile Include="MvvmHelper\Notifier\PropertyChangedNotifierExtension.cs" />
     <Compile Include="MvvmHelper\ViewModelBase\ViewModel.cs" />
     <Compile Include="Services\ExtensionLoader.cs" />
+    <Compile Include="Services\IExtensionLoader.cs" />
+    <Compile Include="Dto\ExtensionDataSet.cs" />
     <Compile Include="ViewModels\MainWindow\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindow\MainWindowViewModelSampledata.cs" />
