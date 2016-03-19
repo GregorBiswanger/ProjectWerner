@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ICamera3D.cs" />
+    <Compile Include="Extensions\AppExtensionMetadataAttribute.cs" />
     <Compile Include="Extensions\IAppExtension.cs" />
+    <Compile Include="Extensions\IAppExtensionMetaData.cs" />
     <Compile Include="Extensions\IAssemblyExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

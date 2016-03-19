@@ -39,6 +39,14 @@
       <HintPath>..\packages\libpxcclr.cs.8.0.24.6528\lib\net40\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Assemblies\Microsoft.Kinect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Face, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Microsoft.Kinect.Face.dll</HintPath>
+    </Reference>
     <Reference Include="SharpSenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +60,8 @@
     <Reference Include="System.ComponentModel.Composition.registration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +80,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BoolToCollapsedVisibilityConverter.cs" />
+    <Compile Include="MvvmHelper\Commands\Command.cs" />
+    <Compile Include="MvvmHelper\ConverterBase\GenericValueConverter.cs" />
+    <Compile Include="MvvmHelper\Utils\DisposingObject.cs" />
+    <Compile Include="MvvmHelper\Commands\ICommandUpdater.cs" />
+    <Compile Include="MvvmHelper\ViewModelBase\IViewModel.cs" />
+    <Compile Include="MvvmHelper\Commands\ParameterrizedCommand.cs" />
+    <Compile Include="MvvmHelper\Commands\PropertyChangedCommandUpdater.cs" />
+    <Compile Include="MvvmHelper\Notifier\PropertyChangedNotifierExtension.cs" />
+    <Compile Include="MvvmHelper\ViewModelBase\ViewModel.cs" />
+    <Compile Include="Services\ExtensionLoader.cs" />
+    <Compile Include="Services\ExtensionStarter.cs" />
+    <Compile Include="Services\IExtensionLoader.cs" />
+    <Compile Include="Dto\ExtensionDataSet.cs" />
+    <Compile Include="ViewModels\MainWindow\IMainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\MainWindowViewModelSampledata.cs" />
     <Compile Include="Views\ExtensionWindow.xaml.cs">
       <DependentUpon>ExtensionWindow.xaml</DependentUpon>
     </Compile>
@@ -96,11 +123,20 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -117,7 +153,9 @@
       <Name>ProjectWerner.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\default-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
