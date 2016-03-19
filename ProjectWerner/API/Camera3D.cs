@@ -28,11 +28,13 @@ namespace ProjectWerner.API
 
         private void OnMouthClosed(object sender, EventArgs e)
         {
+            IsFaceMouthOpen = false;
             MouthClosed?.Invoke();
         }
 
         private void OnMouthOpened(object sender, EventArgs e)
         {
+            IsFaceMouthOpen = true;
             MouthOpened?.Invoke();
         }
 

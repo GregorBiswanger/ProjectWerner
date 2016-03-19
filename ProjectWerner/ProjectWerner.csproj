@@ -39,6 +39,10 @@
       <HintPath>..\packages\libpxcclr.cs.8.0.24.6528\lib\net40\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SharpSenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.dll</HintPath>
       <Private>True</Private>
@@ -141,6 +145,10 @@
     <ProjectReference Include="..\ProjectWerner.Contracts\ProjectWerner.Contracts.csproj">
       <Project>{c3a9a4fc-efdc-4923-b8c5-3160911e5967}</Project>
       <Name>ProjectWerner.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectWerner.ServiceLocator\ProjectWerner.ServiceLocator.csproj">
+      <Project>{2B186FFE-10DB-436D-993C-12A05D994EA7}</Project>
+      <Name>ProjectWerner.ServiceLocator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
