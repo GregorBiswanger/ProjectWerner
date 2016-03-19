@@ -34,10 +34,10 @@ namespace ProjectWerner.ViewModels.MainWindow
 			Extensions.First().IsSelected = true;
 
 
-			ExecuteExtension = new ParameterrizedCommand<ExtensionDataSet>(
-				extensionData =>
+			ExecuteExtension = new Command(
+				() =>
 				{
-					var extension = extensionData.Extension;
+					var extension = Extensions[selectedItem].Extension;
 
 					var extensionWindow = new ExtensionWindow();
 					extensionWindow.LayoutRoot.Children.Add(extension.AppUserControl);
