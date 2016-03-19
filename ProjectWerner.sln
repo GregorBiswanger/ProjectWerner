@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner", "ProjectWerner\ProjectWerner.csproj", "{2EC79477-5E2A-4A1F-860A-4404B65B2BBB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69} = {DA979842-6518-4E44-A6B9-EE0D5F3E6E69}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.Contracts", "ProjectWerner.Contracts\ProjectWerner.Contracts.csproj", "{C3A9A4FC-EFDC-4923-B8C5-3160911E5967}"
 EndProject

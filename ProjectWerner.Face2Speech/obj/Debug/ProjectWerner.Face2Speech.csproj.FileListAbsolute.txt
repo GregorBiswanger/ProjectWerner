@@ -17,3 +17,20 @@ C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerne
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_offen_schwarz.svg
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.pdb
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_neutral_schwarz.svg
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_offen_schwarz.svg
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.dll
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.pdb
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.csprojResolveAssemblyReference.cache
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\Views\Keyboard.g.cs
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech_MarkupCompile.cache
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech_MarkupCompile.lref
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\Views\Keyboard.baml
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.g.resources
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.dll
+E:\_ProjektWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.pdb
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Dictionary\words_de-DE.txt
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Dictionary\words_en-Uk.txt
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Dictionary\keyboard_en-Uk.xml
+E:\_ProjektWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Dictionary\keyboard_de-DE.xml

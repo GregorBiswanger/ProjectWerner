@@ -8,8 +8,7 @@
              xmlns:converter="clr-namespace:ProjectWerner.Face2Speech.Converter"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             mc:Ignorable="d" 
-             Height="800" Width="760">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -167,7 +166,7 @@
             <Button MinWidth="50" 
         		FontSize="38" 
         		Content="{Binding Text, Converter={StaticResource IconConverter}}"
-        		Tag="{Binding Text}">
+        		Tag="{Binding .}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding Mode=OneWay, Source={StaticResource ViewModel}}" MethodName="OnButtonClicked"/>
@@ -190,7 +189,7 @@
 			Margin="10,15,10,10" 
 			TextWrapping="Wrap"
 			FontSize="38"
-			Text="{Binding Text}" 
+			Text="{Binding DisplayText}" 
 			TextChanged="OnTextChanged" 
 			CaretBrush="Transparent" Grid.ColumnSpan="2" />
         <Canvas Grid.ColumnSpan="2" Grid.RowSpan="2">
@@ -239,14 +238,15 @@
                  BorderThickness="0"
                  ItemContainerStyle="{DynamicResource WordsStyle}"
                  FontSize="32" 
-                 SelectedIndex="{Binding SelecredProposalWordIndex}" 
-                 SelectedValue="{Binding SelecredProposalWord}">
+                 SelectedIndex="{Binding SelectedProposalWordIndex}" 
+                 SelectedValue="{Binding SelectedProposalWord}"
+                 DisplayMemberPath="Text">
         </ListBox>
         <ListBox Margin="10" 
 			Grid.Row="2"
             Grid.Column="1"
 			ItemTemplate="{DynamicResource LineDataTemplate}"
-			ItemsSource="{Binding Lines}" 
+			ItemsSource="{Binding KeyboardLines}" 
 			HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
 			HorizontalAlignment="Stretch"
@@ -254,7 +254,7 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
 			ItemContainerStyle="{DynamicResource ItemsStyle}"
 			SelectionMode="Multiple"
-			SelectedIndex="{Binding SelectedLineIndex}"
+			SelectedIndex="{Binding SelectedKeyboardLineIndex}"
             BorderBrush="{x:Null}" />
 
         <Grid Grid.ColumnSpan="2"

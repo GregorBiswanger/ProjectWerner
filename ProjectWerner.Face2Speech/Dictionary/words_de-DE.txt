@@ -70112,7 +70112,7 @@ alleinstehenden
 alleinstehender
 alleinstehendes
 allemal
-allen
+allen;wünsche
 allenfalls
 aller
 allerbest
@@ -70173,7 +70173,7 @@ allerwenigster
 allerwenigstes
 allerwichtigste
 allerwichtigsten
-alles
+alles;gute
 alleskönnende
 allezeit
 allfällig
@@ -102919,6 +102919,7 @@ gutbetuchte
 gutbezahlten
 gutbürgerlich
 gutbürgerlichen
+gute;zum;zur
 gutem
 guter
 guterhaltenen
@@ -157420,7 +157421,7 @@ zuleitenden
 zuleitendes
 zuletzt
 zuliess
-zum
+zum;Geburtstag;Hochzeitstag
 zumachen
 zumachend
 zumachenden
