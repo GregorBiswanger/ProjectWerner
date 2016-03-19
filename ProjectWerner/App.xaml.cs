@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
+using ProjectWerner.Services;
+using ProjectWerner.ViewModels.MainWindow;
 
 namespace ProjectWerner
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+
+	public partial class App : Application
     {
-        public static CompositionContainer CompositionContainer;
+		
+
+		public static CompositionContainer CompositionContainer;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -42,6 +38,18 @@ namespace ProjectWerner
             }
 
             base.OnStartup(e);
+
+			var extensionLoader = new ExtensionLoader();
+
+			var mainWindowViewModel = new MainWindowViewModel(extensionLoader);
+
+	        var mainWindow = new MainWindow
+	        {
+				DataContext = mainWindowViewModel
+	        };
+
+			mainWindow.Show();
+
         }
     }
 }
