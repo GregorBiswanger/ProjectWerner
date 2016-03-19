@@ -5,8 +5,8 @@ namespace ProjectWerner.Services
 {
 	internal class ExtensionLoader
 	{
-		[Import]
-		private IAppExtension appExtension;
+		[ImportMany]
+		private IAppExtension[] appExtensions;
 
 		public ExtensionLoader()
 		{
@@ -15,7 +15,12 @@ namespace ProjectWerner.Services
 
 		public IAppExtension GetFaceToSpeachExtension()
 		{
-			return appExtension;
+			return appExtensions[0];
+		}
+
+		public IAppExtension GetA()
+		{
+			return appExtensions[1];
 		}
 	}
 }

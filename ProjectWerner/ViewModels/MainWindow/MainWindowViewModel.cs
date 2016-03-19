@@ -24,9 +24,23 @@ namespace ProjectWerner.ViewModels.MainWindow
 					extensionWindow.Show();
 				}	
 			);
+
+			StartA = new Command(
+				() =>
+				{
+					var faceToSpeachExtension = extensionLoader.GetA();
+
+					var extensionWindow = new ExtensionWindow();
+					extensionWindow.LayoutRoot.Children.Add(faceToSpeachExtension.AppUserControl);
+					extensionWindow.Height = faceToSpeachExtension.AppUserControl.Height;
+					extensionWindow.Width = faceToSpeachExtension.AppUserControl.Width;
+					extensionWindow.Show();
+				}	
+			);
 		}
 
 		public ICommand StartFaceToSpeach { get; }
+		public ICommand StartA { get; }
 
 		protected override void CleanUp() {	}
 		public override event PropertyChangedEventHandler PropertyChanged;		

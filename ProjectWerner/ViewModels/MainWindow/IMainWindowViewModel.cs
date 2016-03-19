@@ -6,5 +6,6 @@ namespace ProjectWerner.ViewModels.MainWindow
 	internal interface IMainWindowViewModel : IViewModel
 	{	
 		ICommand StartFaceToSpeach { get; }	
+		ICommand StartA { get; }
 	}
 }
