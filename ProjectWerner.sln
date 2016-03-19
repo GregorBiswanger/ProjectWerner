@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner", "ProjectWerner\ProjectWerner.csproj", "{2EC79477-5E2A-4A1F-860A-4404B65B2BBB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginA", "ExamplePluginA\ProjectWerner.ExamplePluginA.csproj", "{68F375C3-6467-41F5-AD23-102F228A5DCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginB", "ExamplePluginB\ProjectWerner.ExamplePluginB.csproj", "{8A8AF374-2C9B-4921-8A72-238A1BF2B831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.TobiiEyeTracking", "Extensions\ProjectWerner.TobiiEyeTracking\ProjectWerner.TobiiEyeTracking.csproj", "{FDE89A5F-46AB-490A-B620-5EE625A1CA5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE89A5F-46AB-490A-B620-5EE625A1CA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE89A5F-46AB-490A-B620-5EE625A1CA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE89A5F-46AB-490A-B620-5EE625A1CA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE89A5F-46AB-490A-B620-5EE625A1CA5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +67,6 @@ Global
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 		{68F375C3-6467-41F5-AD23-102F228A5DCC} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 		{8A8AF374-2C9B-4921-8A72-238A1BF2B831} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
+		{FDE89A5F-46AB-490A-B620-5EE625A1CA5B} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 	EndGlobalSection
 EndGlobal
