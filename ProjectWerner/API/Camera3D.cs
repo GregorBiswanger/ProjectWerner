@@ -110,7 +110,7 @@ namespace ProjectWerner.API
             // set IsAvailableChanged event notifier
             this._kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
 
-
+            Sensor_IsAvailableChanged(null,null);
         }
 
         /// <summary>
@@ -119,22 +119,28 @@ namespace ProjectWerner.API
         /// </summary>
         private void CheckRealSense()
         {
-            //list all devices on usb
-            ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
+            
+                //list all devices on usb
+                ManagementObjectCollection collection;
+                using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
                 collection = searcher.Get();
 
-            foreach (var device in collection)
-            {
-                //check usb devices for intel realsense
-                //VID_8086&PID_0A66
-                if (((string)device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
+                foreach (var device in collection)
                 {
-                    _realSenseAvailiable = true;
-                    break;
+                        if (device == null) return;
+                        //check usb devices for intel realsense
+                        //VID_8086&PID_0A66
+                        if (((string) device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
+                        {
+                        
+                            _realSenseAvailiable = true;
+                            break;
+                        }
+                
+      
                 }
-            }
-            collection.Dispose();
+                collection.Dispose();
+           
         }
 
         /// <summary>
@@ -152,10 +158,6 @@ namespace ProjectWerner.API
             {
                 SetupRealSense();
             }
-            else
-            {
-                _camera.Dispose();
-            }
         }
 
         /// <summary>
@@ -164,9 +166,8 @@ namespace ProjectWerner.API
         /// </summary>
         private void SetupRealSense()
         {
-            if (_camera == null) return;
-
             _camera = Camera.Create(Capability.FaceTracking, Capability.FacialExpressionTracking);
+            if (_camera == null) return;
 
             _camera.Face.Visible += OnFaceVisible;
             _camera.Face.NotVisible += OnFaceLost;
@@ -188,8 +189,7 @@ namespace ProjectWerner.API
         {
             if (_kinectSensor == null) return;
 
-            // open the sensor
-            this._kinectSensor.Open();
+            
 
             _bodies = new Body[_kinectSensor.BodyFrameSource.BodyCount];
 
@@ -197,7 +197,8 @@ namespace ProjectWerner.API
             _bodyReader.FrameArrived += BodyReader_FrameArrived;
 
             // Initialize the face source with the desired features
-            _faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.MouthOpen);
+            _faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.RightEyeClosed);
+
             _faceReader = _faceSource.OpenReader();
 
             _faceReader.FrameArrived += FaceReader_FrameArrived;
@@ -294,6 +295,8 @@ namespace ProjectWerner.API
         {
             if (this._kinectSensor != null)
             {
+                // open the sensor
+                this._kinectSensor.Open();
                 // on failure, set the status text
                 this._kinectAvailiable = this._kinectSensor.IsAvailable;
 
@@ -301,11 +304,6 @@ namespace ProjectWerner.API
                 if (_kinectAvailiable)
                 {
                     SetupKinect();
-                }
-                else
-                {
-                    _kinectSensor.Close();
-                    _kinectSensor = null;
                 }
             }
         }
@@ -317,8 +315,7 @@ namespace ProjectWerner.API
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnMouthClosed(object sender, EventArgs e)
-        {
-            Console.WriteLine("OnMouthClosed");
+        { 
             IsFaceMouthOpen = false;
             MouthClosed?.Invoke();
         }
