@@ -8,7 +8,6 @@ using ProjectWerner.Dto;
 using ProjectWerner.MvvmHelper.Commands;
 using ProjectWerner.MvvmHelper.ViewModelBase;
 using ProjectWerner.Services;
-using ProjectWerner.Views;
 
 #pragma warning disable 0067
 
@@ -16,7 +15,7 @@ namespace ProjectWerner.ViewModels.MainWindow
 {
 	internal class MainWindowViewModel : ViewModel, IMainWindowViewModel
 	{
-		private DispatcherTimer selectionTimer;
+		private readonly DispatcherTimer selectionTimer;
 		private int selectedItem;
 
 		public MainWindowViewModel(IExtensionLoader extensionLoader)
@@ -24,27 +23,17 @@ namespace ProjectWerner.ViewModels.MainWindow
 			selectedItem = 0;
 			selectionTimer = new DispatcherTimer
 			{
-				Interval = TimeSpan.FromSeconds(2),
-				IsEnabled = true
+				Interval = TimeSpan.FromSeconds(2)				
 			};
+			selectionTimer.Start();			
 
 			selectionTimer.Tick += OnSeletionTimerTick;
 
 			Extensions = new ObservableCollection<ExtensionDataSet>(extensionLoader.GetExtensions());
 			Extensions.First().IsSelected = true;
 
-
 			ExecuteExtension = new Command(
-				() =>
-				{
-					var extension = Extensions[selectedItem].Extension;
-
-					var extensionWindow = new ExtensionWindow();
-					extensionWindow.LayoutRoot.Children.Add(extension.AppUserControl);
-					extensionWindow.Height = extension.AppUserControl.Height;
-					extensionWindow.Width = extension.AppUserControl.Width;
-					extensionWindow.Show();
-				}	
+				() => ExtensionStarter.StartExtension(Extensions[selectedItem].Extension.AppUserControl)	
 			);
 		}
 
@@ -64,7 +53,11 @@ namespace ProjectWerner.ViewModels.MainWindow
 
 		public ObservableCollection<ExtensionDataSet> Extensions { get; }
 
-		protected override void CleanUp() {	}
+		protected override void CleanUp()
+		{
+			selectionTimer.Stop();
+			selectionTimer.Tick -= OnSeletionTimerTick;
+		}
 		public override event PropertyChangedEventHandler PropertyChanged;		
 	}
 }
