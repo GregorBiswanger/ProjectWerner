@@ -1,21 +1,86 @@
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe.config
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.pdb
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.dll
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.pdb
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.csprojResolveAssemblyReference.cache
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\MainWindow.g.cs
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\App.g.cs
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.cache
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.lref
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\MainWindow.baml
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.g.resources
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.Properties.Resources.resources
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.csproj.GenerateResource.Cache
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.exe
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.pdb
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.g.cs
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.baml
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\libpxcclr.cs.dll
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.dll
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.RealSense.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe.config
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.pdb
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\libpxcclr.cs.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.RealSense.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.pdb
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.xml
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.csprojResolveAssemblyReference.cache
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\MainWindow.g.cs
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.g.cs
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\App.g.cs
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.cache
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.lref
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\MainWindow.baml
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.baml
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.g.resources
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.Properties.Resources.resources
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.csproj.GenerateResource.Cache
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.exe
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.pdb
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\ExpressionRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\EyeLeftRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\EyeRightRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\FacialHairIRRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\FacialHairRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\Feature.config
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\GlassesIRRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\GlassesRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\LookingAwayRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\MouthMovedRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\MouthOpenRandomForest.model
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceAlignment.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceAlignmentColor.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceAlignmentColor27.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceDetector.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceOrientation.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\FaceTrackingColor27.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel_globalPCA.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_F.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HLP.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HRP.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\PCAMaskBias.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\front.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\front_nose.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\left_nose.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\right_nose.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.pra
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.wgh
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.pra
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.wgh
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.pra
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.wgh
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.mod.bin
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\fullMeanHead60_tri.ply
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\FullHeadMaskVertexCorrespondence.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_shape_classifier.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_appearance_classifier.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\MouthModel\MeanShapes.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\EvalModel\Front.p.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HRP.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HLP.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_F.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\NuiDatabase\Expression\NuiExpressionModelManifest.txt
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.Face.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.Toolkit.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.Tools.dll
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\Microsoft.Kinect.Face.xml
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\obj\Debug\ProjectWerner.csproj.ProjectWerner.exe.config
+C:\Users\kilia\Source\Repos\ProjectWerner\ProjectWerner\bin\Debug\USBClassLibrary.dll

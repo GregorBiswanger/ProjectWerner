@@ -37,7 +37,12 @@ namespace ProjectWerner.Face2Speech.ViewModels
         public bool MouthClosed { get; set; }
 
         [Import]
-        private readonly ICamera3D _camera3D;
+        private ICamera3D _camera3D
+        {
+            get { return _camera3D1; }
+            set { _camera3D1 = value; }
+        }
+
         private readonly DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
 
@@ -134,10 +139,10 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                //_camera3D.MouthOpened += OnMouthOpened;
-                //_camera3D.MouthClosed += OnMouthClosed;
-                //_camera3D.FaceVisible += OnFaceDetected;
-                //_camera3D.FaceLost += OnFaceLost;
+                _camera3D.MouthOpened += OnMouthOpened;
+                _camera3D.MouthClosed += OnMouthClosed;
+                _camera3D.FaceVisible += OnFaceDetected;
+                _camera3D.FaceLost += OnFaceLost;
 
                 _words = File.ReadAllLines("Extensions\\Face2Speech\\Dictionary\\german.txt", Encoding.UTF8);
 
@@ -175,12 +180,14 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
         private void OnFaceDetected()
         {
+            Console.WriteLine("onfacedetected ");
             LostFace = false;
             _dispatcherTimer.Start();
         }
 
         private void OnFaceLost()
         {
+            Console.WriteLine("onfacelost ");
             LostFace = true;
             _dispatcherTimer.Stop();
         }
@@ -314,6 +321,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
         }
 
         private bool _waitForConfirmation = false;
+        private ICamera3D _camera3D1;
 
         private void WaitForConfirmation()
         {

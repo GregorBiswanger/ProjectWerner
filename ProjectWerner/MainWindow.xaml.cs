@@ -28,7 +28,7 @@ namespace ProjectWerner
         public MainWindow()
         {
             InitializeComponent();
-
+            new Camera3D();
             App.CompositionContainer.ComposeParts(this);
         }
 
