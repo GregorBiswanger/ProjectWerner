@@ -19,3 +19,7 @@ C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerne
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\libpxcclr.cs.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.RealSense.dll
+C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Ninject.dll
+C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.ServiceLocator.dll
+C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\ProjectWerner.ServiceLocator.pdb
+C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Ninject.xml

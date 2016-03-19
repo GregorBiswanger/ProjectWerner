@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using ProjectWerner.Contracts.API;
+using ProjectWerner.ServiceLocator;
 using PropertyChanged;
 
 namespace ProjectWerner.Face2Speech.ViewModels
@@ -36,7 +37,6 @@ namespace ProjectWerner.Face2Speech.ViewModels
         public bool MouthOpen { get; set; }
         public bool MouthClosed { get; set; }
 
-        [Import]
         private readonly ICamera3D _camera3D;
         private readonly DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
@@ -134,17 +134,18 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                //_camera3D.MouthOpened += OnMouthOpened;
-                //_camera3D.MouthClosed += OnMouthClosed;
-                //_camera3D.FaceVisible += OnFaceDetected;
-                //_camera3D.FaceLost += OnFaceLost;
+                _camera3D = MicroKernel.Get<ICamera3D>();
+                _camera3D.MouthOpened += OnMouthOpened;
+                _camera3D.MouthClosed += OnMouthClosed;
+                _camera3D.FaceVisible += OnFaceDetected;
+                _camera3D.FaceLost += OnFaceLost;
 
                 _words = File.ReadAllLines("Extensions\\Face2Speech\\Dictionary\\german.txt", Encoding.UTF8);
 
                 _dispatcherTimer = new DispatcherTimer();
                 _dispatcherTimer.Tick += OnInterval;
                 _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
-                //_dispatcherTimer.Start();
+                _dispatcherTimer.Start();
 
                 // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
                 SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);

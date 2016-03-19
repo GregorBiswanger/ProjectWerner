@@ -10,6 +10,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
+using ProjectWerner.API;
+using ProjectWerner.Contracts.API;
+using ProjectWerner.ServiceLocator;
 
 namespace ProjectWerner
 {
@@ -22,6 +25,8 @@ namespace ProjectWerner
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
+
             var aggregateCatalog = new AggregateCatalog();
             aggregateCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
