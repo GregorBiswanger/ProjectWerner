@@ -19,3 +19,24 @@ C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerne
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\libpxcclr.cs.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\SharpSenses.RealSense.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe.config
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.exe
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.pdb
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\ProjectWerner.exe
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\ProjectWerner.pdb
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\libpxcclr.cs.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\SharpSenses.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\SharpSenses.RealSense.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\ProjectWerner.Contracts.pdb
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.csprojResolveAssemblyReference.cache
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\MainWindow.g.cs
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.g.cs
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\App.g.cs
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.cache
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner_MarkupCompile.lref
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\MainWindow.baml
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\Views\ExtensionWindow.baml
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.g.resources
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.Properties.Resources.resources
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\obj\Debug\ProjectWerner.csproj.GenerateResource.Cache

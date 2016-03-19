@@ -17,3 +17,17 @@ C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerne
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_offen_schwarz.svg
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.dll
 C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.pdb
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Dictionary\german.txt
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_neutral_schwarz.svg
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\Images\Mund_offen_schwarz.svg
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner\bin\Debug\Extensions\Face2Speech\ProjectWerner.Face2Speech.pdb
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.csprojResolveAssemblyReference.cache
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\Views\Keyboard.g.cs
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech_MarkupCompile.cache
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech_MarkupCompile.lref
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\Views\Keyboard.baml
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.g.resources
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.dll
+C:\Users\alexomanie\Documents\projectWerner\ProjectWerner.Face2Speech\obj\Debug\ProjectWerner.Face2Speech.pdb
