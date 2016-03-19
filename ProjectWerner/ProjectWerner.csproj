@@ -39,6 +39,14 @@
       <HintPath>..\packages\libpxcclr.cs.8.0.24.6528\lib\net40\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Assemblies\Microsoft.Kinect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Face, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Microsoft.Kinect.Face.dll</HintPath>
+    </Reference>
     <Reference Include="SharpSenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +60,8 @@
     <Reference Include="System.ComponentModel.Composition.registration" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />

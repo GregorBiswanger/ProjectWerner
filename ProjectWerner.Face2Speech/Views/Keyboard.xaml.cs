@@ -10,7 +10,7 @@ namespace ProjectWerner.Face2Speech.Views
     {
         public Keyboard()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
