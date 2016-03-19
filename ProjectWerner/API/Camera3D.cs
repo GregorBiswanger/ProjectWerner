@@ -1,11 +1,9 @@
 ﻿using ProjectWerner.Contracts.API;
 using System;
 using System.Collections.Generic;
-using Microsoft.Kinect;
 using SharpSenses;
 using SharpSenses.RealSense.Capabilities;
 using System.Management;
-using Microsoft.Kinect.Face;
 using System.Speech.Synthesis;
 using System.Linq;
 using System.Threading;
@@ -59,19 +57,19 @@ namespace ProjectWerner.API
         private bool _kinectAvailiable;
 
         // The sensor objects.
-        KinectSensor _kinectSensor;
+        //KinectSensor _kinectSensor;
 
-        // The face frame source
-        FaceFrameSource _faceSource;
+        //// The face frame source
+        //FaceFrameSource _faceSource;
 
-        // The face frame reader
-        FaceFrameReader _faceReader;
+        //// The face frame reader
+        //FaceFrameReader _faceReader;
 
-        // The body frame reader is used to identify the bodies
-        BodyFrameReader _bodyReader = null;
+        //// The body frame reader is used to identify the bodies
+        //BodyFrameReader _bodyReader = null;
 
         // The list of bodies identified by the sensor
-        IList<Body> _bodies = null;
+        //IList<Body> _bodies = null;
 
         #endregion
 
@@ -105,10 +103,10 @@ namespace ProjectWerner.API
         private void CheckKinect()
         {
             // one sensor is currently supported
-            this._kinectSensor = KinectSensor.GetDefault();
+            //this._kinectSensor = KinectSensor.GetDefault();
 
-            // set IsAvailableChanged event notifier
-            this._kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
+            //// set IsAvailableChanged event notifier
+            //this._kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
 
 
         }
@@ -186,21 +184,21 @@ namespace ProjectWerner.API
         /// </summary>
         private void SetupKinect()
         {
-            if (_kinectSensor == null) return;
+            //if (_kinectSensor == null) return;
 
-            // open the sensor
-            this._kinectSensor.Open();
+            //// open the sensor
+            //this._kinectSensor.Open();
 
-            _bodies = new Body[_kinectSensor.BodyFrameSource.BodyCount];
+            //_bodies = new Body[_kinectSensor.BodyFrameSource.BodyCount];
 
-            _bodyReader = _kinectSensor.BodyFrameSource.OpenReader();
-            _bodyReader.FrameArrived += BodyReader_FrameArrived;
+            //_bodyReader = _kinectSensor.BodyFrameSource.OpenReader();
+            //_bodyReader.FrameArrived += BodyReader_FrameArrived;
 
-            // Initialize the face source with the desired features
-            _faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.MouthOpen);
-            _faceReader = _faceSource.OpenReader();
+            //// Initialize the face source with the desired features
+            //_faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.MouthOpen);
+            //_faceReader = _faceSource.OpenReader();
 
-            _faceReader.FrameArrived += FaceReader_FrameArrived;
+            //_faceReader.FrameArrived += FaceReader_FrameArrived;
         }
 
         /// <summary>
@@ -208,28 +206,28 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-        {
-            using (var frame = e.FrameReference.AcquireFrame())
-            {
-                if (frame != null)
-                {
-                    //when body is found
-                    frame.GetAndRefreshBodyData(_bodies);
+        //private void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
+        //{
+        //    using (var frame = e.FrameReference.AcquireFrame())
+        //    {
+        //        if (frame != null)
+        //        {
+        //            //when body is found
+        //            frame.GetAndRefreshBodyData(_bodies);
 
-                    Body body = _bodies.Where(b => b.IsTracked).FirstOrDefault();
+        //            Body body = _bodies.Where(b => b.IsTracked).FirstOrDefault();
 
-                    if (!_faceSource.IsTrackingIdValid)
-                    {
-                        if (body != null)
-                        {
-                            // Assign a tracking ID to the face source
-                            _faceSource.TrackingId = body.TrackingId;
-                        }
-                    }
-                }
-            }
-        }
+        //            if (!_faceSource.IsTrackingIdValid)
+        //            {
+        //                if (body != null)
+        //                {
+        //                    // Assign a tracking ID to the face source
+        //                    _faceSource.TrackingId = body.TrackingId;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
 
         /// <summary>
@@ -237,34 +235,34 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FaceReader_FrameArrived(object sender, FaceFrameArrivedEventArgs e)
-        {
-            using (var frame = e.FrameReference.AcquireFrame())
-            {
-                if (frame != null)
-                {
-                    FaceFrameResult result = frame.FaceFrameResult;
+        //private void FaceReader_FrameArrived(object sender, FaceFrameArrivedEventArgs e)
+        //{
+        //    using (var frame = e.FrameReference.AcquireFrame())
+        //    {
+        //        if (frame != null)
+        //        {
+        //            FaceFrameResult result = frame.FaceFrameResult;
 
-                    if (result != null)
-                    {
-                        //face is visible
-                        OnFaceVisible(null, null);
+        //            if (result != null)
+        //            {
+        //                //face is visible
+        //                OnFaceVisible(null, null);
 
-                        // Get the face characteristics
-                        var mouthOpen = result.FaceProperties[FaceProperty.MouthOpen];
-                        //result.FaceFrameFeatures 
-                        //fire events
+        //                // Get the face characteristics
+        //                var mouthOpen = result.FaceProperties[FaceProperty.MouthOpen];
+        //                //result.FaceFrameFeatures 
+        //                //fire events
 
-                        CallAction(mouthOpen, OnMouthOpened, OnMouthClosed);
-                    }
-                    else
-                    {
-                        //face is invisible (lost)
-                        OnFaceLost(null, null);
-                    }
-                }
-            }
-        }
+        //                CallAction(mouthOpen, OnMouthOpened, OnMouthClosed);
+        //            }
+        //            else
+        //            {
+        //                //face is invisible (lost)
+        //                OnFaceLost(null, null);
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Calls Action depending on DetectionResult
@@ -272,43 +270,43 @@ namespace ProjectWerner.API
         /// <param name="detectionResult"></param>
         /// <param name="resultYes">call when DetectionResult.Yes</param>
         /// <param name="resultNo">call when DetectionResult.No</param>
-        private void CallAction(DetectionResult detectionResult, Action<object, EventArgs> resultYes, Action<object, EventArgs> resultNo)
-        {
-            switch (detectionResult)
-            {
-                case DetectionResult.Yes:
-                    resultYes(null, null);
-                    break;
-                case DetectionResult.No:
-                    resultNo(null, null);
-                    break;
-            }
-        }
+        //private void CallAction(DetectionResult detectionResult, Action<object, EventArgs> resultYes, Action<object, EventArgs> resultNo)
+        //{
+        //    switch (detectionResult)
+        //    {
+        //        case DetectionResult.Yes:
+        //            resultYes(null, null);
+        //            break;
+        //        case DetectionResult.No:
+        //            resultNo(null, null);
+        //            break;
+        //    }
+        //}
 
         /// <summary>
         /// Handles the event which the sensor becomes unavailable (E.g. paused, closed, unplugged).
         /// </summary>
         /// <param name="sender">object sending the event</param>
         /// <param name="e">event arguments</param>
-        private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
-        {
-            if (this._kinectSensor != null)
-            {
-                // on failure, set the status text
-                this._kinectAvailiable = this._kinectSensor.IsAvailable;
+        //private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
+        //{
+        //    if (this._kinectSensor != null)
+        //    {
+        //        // on failure, set the status text
+        //        this._kinectAvailiable = this._kinectSensor.IsAvailable;
 
-                //setup kinect events etc
-                if (_kinectAvailiable)
-                {
-                    SetupKinect();
-                }
-                else
-                {
-                    _kinectSensor.Close();
-                    _kinectSensor = null;
-                }
-            }
-        }
+        //        //setup kinect events etc
+        //        if (_kinectAvailiable)
+        //        {
+        //            SetupKinect();
+        //        }
+        //        else
+        //        {
+        //            _kinectSensor.Close();
+        //            _kinectSensor = null;
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// fired when mouth is closed
