@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -17,7 +16,7 @@ using PropertyChanged;
 
 namespace ProjectWerner.Face2Speech.ViewModels
 {
-    [ImplementPropertyChanged]
+	[ImplementPropertyChanged]
     public class MainViewModel
     {
         public ObservableCollection<Line> Lines { get; set; }

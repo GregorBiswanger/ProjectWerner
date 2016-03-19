@@ -4,10 +4,80 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWerner"
+        xmlns:mainWindow="clr-namespace:ProjectWerner.ViewModels.MainWindow"
+        xmlns:dto="clr-namespace:ProjectWerner.Dto"
+        xmlns:converter="clr-namespace:ProjectWerner.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="184,149,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
-    </Grid>
+	<d:MainWindow.DataContext>
+		<mainWindow:MainWindowViewModelSampledata/>
+	</d:MainWindow.DataContext>
+	
+	<Window.Resources>
+		<converter:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter"/>
+	</Window.Resources>
+	
+	<Grid>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="50"/>
+		</Grid.RowDefinitions>
+	
+		<ItemsControl ItemsSource="{Binding Extensions}">
+        
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel ItemHeight="200" 
+							   ItemWidth="200"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+		
+			<ItemsControl.ItemTemplate>
+				<DataTemplate DataType="{x:Type dto:ExtensionDataSet}">
+					<Border BorderThickness="1"
+							BorderBrush="Black">
+					
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition Height="50"/>
+							</Grid.RowDefinitions>
+						
+							<Rectangle Grid.Row="0"
+									   Grid.RowSpan ="2"
+									   Fill="Aqua"
+									   Visibility="{Binding IsSelected, 
+															Converter={StaticResource BoolToCollapsedVisibilityConverter}}"/>
+						
+							<Image Grid.Row="0"
+								   Source="{Binding Icon}"/>
+						
+							<TextBlock Grid.Row="1"
+									   Text="{Binding Name}"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"
+									   FontFamily="Segoe UI Light"
+									   FontSize="25"/>
+													
+						</Grid>
+					
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+
+			<ItemsControl.ItemContainerStyle>
+				<Style TargetType="ContentPresenter">
+					<Setter Property="Margin" Value="1"/>
+				</Style>
+			</ItemsControl.ItemContainerStyle>
+		
+		</ItemsControl>
+
+		<Button Grid.Row="1"
+				Margin="5"
+				Content="Simuliere Trigger"
+				Command="{Binding ExecuteExtension}"/>
+	</Grid>
 </Window>

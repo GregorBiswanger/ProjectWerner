@@ -1,11 +1,11 @@
-﻿using ProjectWerner.Contracts.API;
-using System;
+﻿using System;
+using ProjectWerner.Contracts.API;
 using SharpSenses;
 using SharpSenses.RealSense.Capabilities;
 
 namespace ProjectWerner.API
 {
-    public class Camera3D : ICamera3D
+	public class Camera3D : ICamera3D
     {
         public event Action FaceVisible;
         public event Action FaceLost;
