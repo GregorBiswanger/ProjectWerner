@@ -4,10 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWerner"
+        xmlns:mainWindow="clr-namespace:ProjectWerner.ViewModels.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+
+	<d:MainWindow.DataContext>
+		<mainWindow:MainWindowViewModelSampledata/>
+	</d:MainWindow.DataContext>
+	
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="184,149,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Button Content="Button" 
+				HorizontalAlignment="Left" 
+				Margin="184,149,0,0" 
+				VerticalAlignment="Top" 
+				Width="75"
+				Command="{Binding StartFaceToSpeach}"/>
 
     </Grid>
 </Window>

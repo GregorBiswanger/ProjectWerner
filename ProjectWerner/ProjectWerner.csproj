@@ -78,7 +78,10 @@
     <Compile Include="MvvmHelper\Commands\PropertyChangedCommandUpdater.cs" />
     <Compile Include="MvvmHelper\Notifier\PropertyChangedNotifierExtension.cs" />
     <Compile Include="MvvmHelper\ViewModelBase\ViewModel.cs" />
-    <Compile Include="MvvmHelper\ViewModels\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="Services\ExtensionLoader.cs" />
+    <Compile Include="ViewModels\MainWindow\IMainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainWindow\MainWindowViewModelSampledata.cs" />
     <Compile Include="Views\ExtensionWindow.xaml.cs">
       <DependentUpon>ExtensionWindow.xaml</DependentUpon>
     </Compile>
