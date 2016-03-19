@@ -1,5 +1,0 @@
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner.Contracts\bin\Debug\ProjectWerner.Contracts.dll
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner.Contracts\bin\Debug\ProjectWerner.Contracts.pdb
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.csprojResolveAssemblyReference.cache
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.dll
-C:\Users\Gregor\Documents\Visual Studio 2015\Projects\ProjectWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.pdb
