@@ -41,11 +41,15 @@
     </Reference>
     <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Kinect\v2.0_1409\Assemblies\Microsoft.Kinect.dll</HintPath>
+      <HintPath>Libs\KinectSDK\Microsoft.Kinect.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Kinect.Face, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Microsoft.Kinect.Face.dll</HintPath>
+      <HintPath>Libs\KinectSDK\Face_x86\Microsoft.Kinect.Face.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -141,6 +145,47 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\ExpressionRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\EyeLeftRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\EyeRightRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\FacialHairIRRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\FacialHairRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\Feature.config" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\GlassesIRRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\GlassesRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\LookingAwayRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\MouthMovedRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\MouthOpenRandomForest.model" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceAlignment.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceAlignmentColor.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceAlignmentColor27.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceDetector.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceOrientation.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\FaceTrackingColor27.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\3DModel.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\3DModel_globalPCA.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_F.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HLP.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HRP.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\PCAMaskBias.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\front.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\front_nose.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\left.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\left_nose.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\right.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\right_nose.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\EyeClose.pra" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\EyeClose.wgh" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.pra" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.wgh" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.pra" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.wgh" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\MouthModel\close.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\MouthModel\lopen.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\front.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\left.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\right.mod.bin" />
+    <None Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\WholeHeadModel\fullMeanHead60_tri.ply" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -164,6 +209,29 @@
   <ItemGroup>
     <Resource Include="Images\default-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libs\KinectSDK\Face_x86\Kinect20.Face.dll" />
+    <Content Include="Libs\KinectSDK\Face_x86\Microsoft.Kinect.Face.dll" />
+    <Resource Include="Libs\KinectSDK\Face_x86\Microsoft.Kinect.Face.xml" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\Expression\NuiExpressionModelManifest.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_F.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HLP.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HRP.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\Front.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\left.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\EvalModel\right.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\MouthModel\close.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\MouthModel\lopen.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\MouthModel\MeanShapes.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_appearance_classifier.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_shape_classifier.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\front.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\left.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\ViewModel\right.p.txt" />
+    <Resource Include="Libs\KinectSDK\Face_x86\NuiDatabase\HDFaceTracker\WholeHeadModel\FullHeadMaskVertexCorrespondence.txt" />
+    <Content Include="Libs\KinectSDK\Microsoft.Kinect.dll" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
