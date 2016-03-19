@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using ProjectWerner.Dto;
 using ProjectWerner.MvvmHelper.Commands;
@@ -16,6 +17,8 @@ namespace ProjectWerner.ViewModels.MainWindow
 		public MainWindowViewModel(IExtensionLoader extensionLoader)
 		{
 			Extensions = new ObservableCollection<ExtensionDataSet>(extensionLoader.GetExtensions());
+			Extensions.First().IsSelected = true;
+
 
 			ExecuteExtension = new ParameterrizedCommand<ExtensionDataSet>(
 				extensionData =>

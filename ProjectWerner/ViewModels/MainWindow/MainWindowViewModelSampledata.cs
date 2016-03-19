@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -31,6 +32,8 @@ namespace ProjectWerner.ViewModels.MainWindow
 				new ExtensionDataSet(null, "Ex8", GetDefaultIcon(), Guid.Empty),
 				new ExtensionDataSet(null, "Ex9", GetDefaultIcon(), Guid.Empty),
 			};
+
+			Extensions.First().IsSelected = true;
 		}
 
 		public ICommand ExecuteExtension => null;

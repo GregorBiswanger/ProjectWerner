@@ -6,12 +6,17 @@
         xmlns:local="clr-namespace:ProjectWerner"
         xmlns:mainWindow="clr-namespace:ProjectWerner.ViewModels.MainWindow"
         xmlns:dto="clr-namespace:ProjectWerner.Dto"
+        xmlns:converter="clr-namespace:ProjectWerner.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
 	<d:MainWindow.DataContext>
 		<mainWindow:MainWindowViewModelSampledata/>
 	</d:MainWindow.DataContext>
+	
+	<Window.Resources>
+		<converter:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter"/>
+	</Window.Resources>
 	
     <ItemsControl ItemsSource="{Binding Extensions}">
         
@@ -33,6 +38,12 @@
 							<RowDefinition/>
 							<RowDefinition/>
 						</Grid.RowDefinitions>
+						
+						<Rectangle Grid.Row="0"
+								   Grid.RowSpan ="3"
+								   Fill="Aqua"
+								   Visibility="{Binding IsSelected, 
+														Converter={StaticResource BoolToCollapsedVisibilityConverter}}"/>
 						
 						<Image Grid.Row="0"
 							   Source="{Binding Icon}"/>
