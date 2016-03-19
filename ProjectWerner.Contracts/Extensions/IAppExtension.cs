@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace ProjectWerner.Contracts.Extensions
 {
-    [InheritedExport]
+    //[InheritedExport]
     public interface IAppExtension
     {
          UserControl AppUserControl { get; }

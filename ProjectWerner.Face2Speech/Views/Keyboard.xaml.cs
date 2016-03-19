@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
 
 namespace ProjectWerner.Face2Speech.Views
 {
-    /// <summary>
-    /// Interaction logic for Keyboard.xaml
-    /// </summary>
-    public partial class Keyboard : UserControl, IAppExtension
+	[AppExtensionMetadataAttribute(Name = "Face2Speech")]
+	[Export(typeof(IAppExtension))]
+	public partial class Keyboard : IAppExtension
     {
         public Keyboard()
         {

@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
 
 namespace ProjectWerner.ExampleExenstionB.Views
 {
-    /// <summary>
-    /// Interaktionslogik für MainView.xaml
-    /// </summary>
-    public partial class MainView : IAppExtension
+	[AppExtensionMetadataAttribute(Name = "B")]
+	[Export(typeof(IAppExtension))]
+	public partial class MainView : IAppExtension
     {
         public MainView()
         {
