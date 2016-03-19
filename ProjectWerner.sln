@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.Face2Speech",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginA", "ExamplePluginA\ProjectWerner.ExamplePluginA.csproj", "{68F375C3-6467-41F5-AD23-102F228A5DCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginB", "ExamplePluginB\ProjectWerner.ExamplePluginB.csproj", "{8A8AF374-2C9B-4921-8A72-238A1BF2B831}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 		{68F375C3-6467-41F5-AD23-102F228A5DCC} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 	EndGlobalSection
 EndGlobal
