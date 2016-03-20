@@ -8,12 +8,12 @@ namespace ProjectWerner.Extensions.Face2Speech.ViewModels
     {
         public int SelectedWordIndex { get; set; }
 
-        public List<Word> Words { get; set; }
+        public List<KeyboardChars> Words { get; set; }
         public bool IsSelected { get; set; }
 
         public Line()
         {
-            Words = new List<Word>();
+            Words = new List<KeyboardChars>();
             SelectedWordIndex = -1;
         }
     }
