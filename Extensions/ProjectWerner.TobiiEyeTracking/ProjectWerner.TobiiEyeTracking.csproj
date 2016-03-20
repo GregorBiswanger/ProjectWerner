@@ -57,7 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\CameraEyeTracking.cs" />
+    <Compile Include="Logic\EyeBlinkAnalyzer.cs" />
     <Compile Include="InputSimulation\MouseSimulator.cs" />
+    <Compile Include="Logic\PositionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
