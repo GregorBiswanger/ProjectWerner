@@ -16,6 +16,7 @@ using PropertyChanged;
 using System.Xml;
 using System.Globalization;
 using ProjectWerner.Face2Speech.Functions;
+using ProjectWerner.ServiceLocator;
 
 namespace ProjectWerner.Face2Speech.ViewModels
 {
@@ -39,8 +40,8 @@ namespace ProjectWerner.Face2Speech.ViewModels
         public bool MouthClosed { get; set; }
 
         [Import]
-        private readonly ICamera3D _camera3D;
-        private readonly DispatcherTimer _dispatcherTimer;
+        private ICamera3D _camera3D;
+        private DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
 
         public MainViewModel()
@@ -63,20 +64,26 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                //_camera3D.MouthOpened += OnMouthOpened;
-                //_camera3D.MouthClosed += OnMouthClosed;
-                //_camera3D.FaceVisible += OnFaceDetected;
-                //_camera3D.FaceLost += OnFaceLost;
+                _camera3D = MicroKernel.Get<ICamera3D>();
+                _camera3D.MouthOpened += OnMouthOpened;
+                _camera3D.MouthClosed += OnMouthClosed;
+                _camera3D.FaceVisible += OnFaceDetected;
+                _camera3D.FaceLost += OnFaceLost;
+                _camera3D.Connected += Connected;
 
-                _dispatcherTimer = new DispatcherTimer();
-                _dispatcherTimer.Tick += OnInterval;
-                _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
-                //_dispatcherTimer.Start();
-
-                // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
-                SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
-                SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             }
+        }
+
+        private void Connected()
+        {
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += OnInterval;
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
+            _dispatcherTimer.Start();
+
+            // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
+            SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+            SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
         }
 
         private void LoadConfig()
