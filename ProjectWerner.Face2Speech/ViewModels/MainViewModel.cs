@@ -313,12 +313,13 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             Dictionary<String, String> AddedWords = new Dictionary<string, string>();
             int result = 0;
+            string[] text;
             if (Chars.Type == "delete")
             {
                 if (DisplayText.Length > 0)
                 {
                     DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
-                    string[] text = DisplayText.Split(' ');
+                    text = DisplayText.Split(' ');
                     ProposalWords = myProspalWords.GetFirstLines(AllWords, text[text.Length - 1], ProspalWords.SearchType.All);
                 }
             }
@@ -341,12 +342,35 @@ namespace ProjectWerner.Face2Speech.ViewModels
             }
             else if (int.TryParse(Chars.Text, out result) || Chars.Type == "ok")
             {
+                if (int.TryParse(Chars.Text, out result)) {
+                    int clickedNumber = int.Parse(Chars.Text);
+                    if (clickedNumber-1 <= ProposalWords.Count)
+                    {
+                        SelectedProposalWordIndex = clickedNumber - 1;
+                    }
+                }
                 if (SelectedProposalWord != null)
                 {
-                    string[] text = DisplayText.Split(' ');
+                    text = DisplayText.Split(' ');
                     if (text[text.Length - 1] != SelectedProposalWord.Text.Substring(3))
                     {
-                        DisplayText = DisplayText + SelectedProposalWord.Text.Substring(3) + " ";
+                        if (int.TryParse(Chars.Text, out result))
+                        {
+                            if (text[text.Length - 1] == "")
+                            {
+                                text[text.Length - 1] = text[text.Length - 2].Replace(text[text.Length - 2], SelectedProposalWord.Text.Substring(3)) + " ";
+                            } else
+                            {
+                                text[text.Length - 1] = text[text.Length - 1].Replace(text[text.Length - 1], SelectedProposalWord.Text.Substring(3)) + " ";
+                            }
+
+                            DisplayText = string.Join(" ", text);
+                        }
+                        else
+                        {
+                            DisplayText = DisplayText + SelectedProposalWord.Text.Substring(3) + " ";
+                        }
+                            
                     }
                     else
                     {

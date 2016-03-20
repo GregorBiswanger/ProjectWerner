@@ -44,6 +44,21 @@ namespace ProjectWerner.Face2Speech.Functions
                         }
                     }
                 });
+                if (myReturnCollection.Count == 0)
+                {
+                    Number = Number + 1;
+                    if (Number <= 10)
+                    {
+                        if (Number == 10)
+                        {
+                            Number = 0;
+                        }
+                        newWord = new Words();
+                        newWord.Text = string.Format("{0}: {1}", Number, LastWord);
+                        //newWord.NextWords = myWord.NextWords;
+                        myReturnCollection.Add(newWord);
+                    }
+                }
             }
 
             if (mySearchType == SearchType.All || mySearchType == SearchType.OnlyStartsWith)
