@@ -92,7 +92,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
             DisplayText = string.Empty;
             SelectedKeyboardLineIndex = -1;
             selectedCulture = CultureInfo.CurrentCulture.Name;
-            selectedCulture = "fr-FR";
+            //selectedCulture = "fr-FR";
         }
 
 
