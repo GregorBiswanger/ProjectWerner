@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectWerner.Views"
         mc:Ignorable="d"
-        Title="ExtensionWindow" Height="300" Width="300">
+        Title="ExtensionWindow" Background="Transparent" AllowsTransparency="True" Focusable="False"
+        WindowStyle="None" WindowState="Maximized" IsHitTestVisible="True">
     <Grid x:Name="LayoutRoot">
     </Grid>
 </Window>

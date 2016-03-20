@@ -39,8 +39,8 @@ namespace ProjectWerner
         {
             ExtensionWindow extensionWindow = new ExtensionWindow();
             extensionWindow.LayoutRoot.Children.Add(appExtension.AppUserControl);
-            extensionWindow.Height = appExtension.AppUserControl.Height;
-            extensionWindow.Width = appExtension.AppUserControl.Width;
+            //extensionWindow.Height = appExtension.AppUserControl.Height;
+            //extensionWindow.Width = appExtension.AppUserControl.Width;
             extensionWindow.Show();
         }
     }

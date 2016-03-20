@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ProjectWerner.MouseCursor.Views.TestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectWerner.MouseCursor.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid>
+        <Button x:Name="LeftButton" Content="Zeiger nach links" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center"
+                TouchDown="LeftButton_OnTouchDown" TouchUp="LeftButton_OnTouchUp" Click="LeftButton_OnClick"/>
+        
+        <Button x:Name="RightButton" Content="Zeiger nach rechts" Width="200" Height="100" HorizontalAlignment="Right" VerticalAlignment="Center"
+                TouchDown="RightButton_TouchDown" TouchUp="RightButton_TouchUp" Click="RightButton_OnClick"/>
+        
+        <Button x:Name="UpButton" Content="Zeiger nach oben" Width="200" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top"
+                TouchDown="UpButton_TouchDown" TouchUp="UpButton_TouchUp" Click="UpButton_OnClick"/>
+        
+        <Button x:Name="ResetButton" Content="Zurücksetzen" Width="200" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Click="ResetButton_OnClick"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <Button x:Name="LeftClickButton" Content="Linksklick" Width="200" Height="100"/>
+        <Button x:Name="DownButton" Content="Zeiger nach unten" Width="200" Height="100" Margin="40 0"
+                TouchDown="DownButton_OnTouchDown" TouchUp="DownButton_TouchUp" Click="DownButton_OnClick"/>
+        <Button x:Name="RightClickButton" Content="Rechtsklick" Width="200" Height="100"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
