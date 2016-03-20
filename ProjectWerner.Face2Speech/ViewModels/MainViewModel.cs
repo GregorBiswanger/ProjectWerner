@@ -85,6 +85,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
             DisplayText = string.Empty;
             SelectedKeyboardLineIndex = -1;
             selectedCulture = CultureInfo.CurrentCulture.Name;
+            selectedCulture = "fr-FR";
         }
 
 
@@ -344,6 +345,10 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 if (int.TryParse(Chars.Text, out result)) {
                     int clickedNumber = int.Parse(Chars.Text);
+                    if (clickedNumber == 0)
+                    {
+                        clickedNumber = 10;
+                    }
                     if (clickedNumber-1 <= ProposalWords.Count)
                     {
                         SelectedProposalWordIndex = clickedNumber - 1;

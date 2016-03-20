@@ -26,7 +26,7 @@ namespace ProjectWerner.Face2Speech.Functions
 
                 proposalWords.ToList().ForEach(myWord =>
                 {
-                    if (!addedWords.ContainsKey(myWord.Text))
+                    if (!addedWords.ContainsKey(myWord.Text) && myReturnCollection.Count < 10)
                     {
                         Number = Number + 1;
                         if (Number <= 10)
@@ -68,7 +68,7 @@ namespace ProjectWerner.Face2Speech.Functions
 
                 proposalWords.ToList().ForEach(myWord =>
                 {
-                    if (!addedWords.ContainsKey(myWord.Text))
+                    if (!addedWords.ContainsKey(myWord.Text) && myReturnCollection.Count < 10)
                     {
                         Number = Number + 1;
                         if (Number <= 10)

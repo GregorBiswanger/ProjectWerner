@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,18 @@ namespace ProjectWerner.Face2Speech.Functions
             String myText;
             String[] myWords;
             Words myWordsObject;
-            System.IO.StreamReader textstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\words_" + selectedCulture + ".txt", System.Text.Encoding.UTF8);
+
+            System.IO.StreamReader textstream;
+
+            try
+            {
+                textstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\words_" + selectedCulture + ".txt", System.Text.Encoding.UTF8);
+            }
+            catch (Exception)
+            {
+
+                textstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\words_de-DE.txt", System.Text.Encoding.UTF8);
+            }
 
             while (textstream.Peek() >= 0)
             {
@@ -31,7 +43,7 @@ namespace ProjectWerner.Face2Speech.Functions
                 {
                     //Wenn ; vorhanden, dann sind auch sinnvolle darauffolgende Wörter vorhanden, die gespeichert werden.                    
                     myWords = myLine.Split(new Char[] { ';' });
-                    
+
                     for (int i = 0; i < myWords.Length; i++)
                     {
                         myText = myWords[i].ToUpper();
@@ -48,7 +60,7 @@ namespace ProjectWerner.Face2Speech.Functions
                 else
                 {
                     myWordsObject.Text = myText;
-                    
+
                 }
                 myReturnCollection.Add(myWordsObject);
             }
@@ -59,8 +71,16 @@ namespace ProjectWerner.Face2Speech.Functions
         {
             ObservableCollection<Line> myReturnCollection = new ObservableCollection<Line>();
             Line _readDictLine;
+            System.IO.StreamReader xmlstream;
+            try
+            {
+                xmlstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\keyboard_" + selectedCulture + ".xml", System.Text.Encoding.UTF8);
+            }
+            catch (Exception)
+            {
 
-            System.IO.StreamReader xmlstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\keyboard_" + selectedCulture + ".xml", System.Text.Encoding.UTF8);
+                xmlstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\keyboard_de-DE.xml", System.Text.Encoding.UTF8);
+            }
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlstream);
