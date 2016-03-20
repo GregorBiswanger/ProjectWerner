@@ -2,11 +2,11 @@
 using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
 
-namespace Extensions.MyBrandNewExtension.Views
+namespace $safeprojectname$.Views
 {
-    [AppExtensionMetadataAttribute(Name = "<Your plugin Name>")]
-    [Export(typeof(IAppExtension))]
-    public partial class MainView : IAppExtension
+	[AppExtensionMetadataAttribute(Name = "<Your plugin Name>")]
+	[Export(typeof(IAppExtension))]
+	public partial class MainView : IAppExtension
     {
         public MainView()
         {

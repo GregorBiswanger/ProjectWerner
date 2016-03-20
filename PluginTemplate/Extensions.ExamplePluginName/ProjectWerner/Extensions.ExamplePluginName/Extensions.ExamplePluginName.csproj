@@ -7,8 +7,8 @@
     <ProjectGuid>{DE76B895-EFDC-48C3-87AA-A638CC3CCBD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Extensions.MyBrandNewExtension</RootNamespace>
-    <AssemblyName>Extensions.MyBrandNewExtension</AssemblyName>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\ProjectWerner\bin\Debug\Extensions\Extensions.MyBrandNewExtension\</OutputPath>
+    <OutputPath>..\ProjectWerner\bin\Debug\Extensions\$safeprojectname$\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\ProjectWerner\bin\Release\Extensions\Extensions.MyBrandNewExtension\</OutputPath>
+    <OutputPath>..\ProjectWerner\bin\Release\Extensions\$safeprojectname$\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -59,11 +59,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ProjectWerner.Contracts\ProjectWerner.Contracts.csproj">
+    <ProjectReference Include="..\..\..\ProjectWerner.Contracts\ProjectWerner.Contracts.csproj">
       <Project>{C3A9A4FC-EFDC-4923-B8C5-3160911E5967}</Project>
       <Name>ProjectWerner.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ProjectWerner.ServiceLocator\ProjectWerner.ServiceLocator.csproj">
+    <ProjectReference Include="..\..\..\ProjectWerner.ServiceLocator\ProjectWerner.ServiceLocator.csproj">
       <Project>{2b186ffe-10db-436d-993c-12a05d994ea7}</Project>
       <Name>ProjectWerner.ServiceLocator</Name>
     </ProjectReference>
