@@ -1,5 +1,0 @@
-E:\_ProjektWerner\ProjectWerner.Contracts\bin\Debug\ProjectWerner.Contracts.dll
-E:\_ProjektWerner\ProjectWerner.Contracts\bin\Debug\ProjectWerner.Contracts.pdb
-E:\_ProjektWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.csprojResolveAssemblyReference.cache
-E:\_ProjektWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.dll
-E:\_ProjektWerner\ProjectWerner.Contracts\obj\Debug\ProjectWerner.Contracts.pdb
