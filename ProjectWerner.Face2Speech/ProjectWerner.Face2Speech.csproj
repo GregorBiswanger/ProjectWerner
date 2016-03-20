@@ -107,6 +107,10 @@
       <Project>{c3a9a4fc-efdc-4923-b8c5-3160911e5967}</Project>
       <Name>ProjectWerner.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProjectWerner.ServiceLocator\ProjectWerner.ServiceLocator.csproj">
+      <Project>{2b186ffe-10db-436d-993c-12a05d994ea7}</Project>
+      <Name>ProjectWerner.ServiceLocator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Keyboard.xaml">

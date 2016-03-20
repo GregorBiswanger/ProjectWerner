@@ -1,6 +1,7 @@
 ﻿using ProjectWerner.Contracts.API;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using Microsoft.Kinect;
 using SharpSenses;
@@ -17,6 +18,7 @@ using SharpSenses.RealSense;
 
 namespace ProjectWerner.API
 {
+    [Export(typeof(ICamera3D))]
     public class Camera3D : ICamera3D
     {
         #region Actions
@@ -40,6 +42,12 @@ namespace ProjectWerner.API
         /// when mouth is closed
         /// </summary>
         public event Action MouthClosed;
+
+        /// <summary>
+        /// called when camera is connected
+        /// camera can be connected after application start
+        /// </summary>
+        public event Action Connected;
 
         #endregion
 
@@ -201,6 +209,8 @@ namespace ProjectWerner.API
             FacialExpressionCapability.MonthOpenThreshold = MouthOpenValue;
 
             _camera.Start();
+
+            Connected?.Invoke();
         }
 
         /// <summary>
@@ -226,7 +236,8 @@ namespace ProjectWerner.API
             _faceReader = _faceSource.OpenReader();
             
             _faceReader.FrameArrived += FaceReader_FrameArrived;
-           
+
+            Connected?.Invoke();
         }
 
         /// <summary>
