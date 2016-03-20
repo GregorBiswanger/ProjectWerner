@@ -6,7 +6,7 @@ namespace ProjectWerner.Face2Speech.Views
 {
 	[AppExtensionMetadataAttribute(Name = "Face2Speech")]
 	[Export(typeof(IAppExtension))]
-	public partial class Keyboard : IAppExtension
+	public partial class Keyboard : UserControl, IAppExtension
     {
         public Keyboard()
         {
