@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner", "ProjectWerner\ProjectWerner.csproj", "{2EC79477-5E2A-4A1F-860A-4404B65B2BBB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69} = {DA979842-6518-4E44-A6B9-EE0D5F3E6E69}
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831} = {8A8AF374-2C9B-4921-8A72-238A1BF2B831}
+		{68F375C3-6467-41F5-AD23-102F228A5DCC} = {68F375C3-6467-41F5-AD23-102F228A5DCC}
+		{2B186FFE-10DB-436D-993C-12A05D994EA7} = {2B186FFE-10DB-436D-993C-12A05D994EA7}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.Contracts", "ProjectWerner.Contracts\ProjectWerner.Contracts.csproj", "{C3A9A4FC-EFDC-4923-B8C5-3160911E5967}"
@@ -13,6 +16,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.Face2Speech", "ProjectWerner.Face2Speech\ProjectWerner.Face2Speech.csproj", "{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ServiceLocator", "ProjectWerner.ServiceLocator\ProjectWerner.ServiceLocator.csproj", "{2B186FFE-10DB-436D-993C-12A05D994EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginA", "ExamplePluginA\ProjectWerner.ExamplePluginA.csproj", "{68F375C3-6467-41F5-AD23-102F228A5DCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePluginB", "ExamplePluginB\ProjectWerner.ExamplePluginB.csproj", "{8A8AF374-2C9B-4921-8A72-238A1BF2B831}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,11 +41,25 @@ Global
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B186FFE-10DB-436D-993C-12A05D994EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B186FFE-10DB-436D-993C-12A05D994EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B186FFE-10DB-436D-993C-12A05D994EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B186FFE-10DB-436D-993C-12A05D994EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68F375C3-6467-41F5-AD23-102F228A5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DA979842-6518-4E44-A6B9-EE0D5F3E6E69} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
+		{68F375C3-6467-41F5-AD23-102F228A5DCC} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
+		{8A8AF374-2C9B-4921-8A72-238A1BF2B831} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 	EndGlobalSection
 EndGlobal
