@@ -1,0 +1,8 @@
+1. Close Visual Studio
+2. Unzip the file 'Extensions.ExamplePluginName.zip' into the following path:
+..\My Documents\Visual Studio 2015\ProjectTemplates\Visual C#\
+3. Start Visual Studio
+4. Open the solution 'ProjectWerner'
+5. Choose the Add menu for a new project
+6. Select the category 'Project Werner' and use the template 'Project Werner, Extensions'
+6. Replace suggested name 'Extensions.ExamplePluginName' with your new one.

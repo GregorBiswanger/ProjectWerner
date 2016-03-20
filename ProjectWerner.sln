@@ -24,6 +24,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.ExamplePlugin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner.HelloWorld", "ProjectWerner.HelloWorld\ProjectWerner.HelloWorld.csproj", "{51490632-27E6-40B6-AD99-241EF7A86C78}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61A4030C-64A8-491C-A4F8-9C7D95888668}"
+	ProjectSection(SolutionItems) = preProject
+		PluginTemplate\Extensions.ExamplePluginName.zip = PluginTemplate\Extensions.ExamplePluginName.zip
+		PluginTemplate\HowToDeploy.txt = PluginTemplate\HowToDeploy.txt
+		PluginTemplate\HowToUpdate.txt = PluginTemplate\HowToUpdate.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{EA17455F-1BA8-4D6B-9706-26F7DA8B94A0}"
+	ProjectSection(SolutionItems) = preProject
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\__TemplateIcon.ico = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\__TemplateIcon.ico
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Properties\AssemblyInfo.cs = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Properties\AssemblyInfo.cs
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Extensions.ExamplePluginName.csproj = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Extensions.ExamplePluginName.csproj
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Views\MainView.xaml = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Views\MainView.xaml
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Views\MainView.xaml.cs = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\Views\MainView.xaml.cs
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\ViewModels\MainViewModel.cs = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\ViewModels\MainViewModel.cs
+		PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\MyTemplate.vstemplate = PluginTemplate\ProjectWerner\Extensions.ExamplePluginName\MyTemplate.vstemplate
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,5 +85,6 @@ Global
 		{68F375C3-6467-41F5-AD23-102F228A5DCC} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 		{8A8AF374-2C9B-4921-8A72-238A1BF2B831} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
 		{51490632-27E6-40B6-AD99-241EF7A86C78} = {9349AC9C-09BB-4FCB-8F2E-A6C99DEA8D3D}
+		{EA17455F-1BA8-4D6B-9706-26F7DA8B94A0} = {61A4030C-64A8-491C-A4F8-9C7D95888668}
 	EndGlobalSection
 EndGlobal

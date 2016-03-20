@@ -1,0 +1,7 @@
+1. Go to your local project path for 'Project Werner'
+like: D:\...\GitHubRoot\ProjectWerner\PluginTemplate\ProjectWerner\Extensions.ExamplePluginName
+2. Copy ALL new added references to the project file 'Extensions.ExamplePluginName.csproj'
+Note: You can unload an existing project, edit the csproj file and copy all necessary references
+3. Add all new files as references to 'MyTemplate.vstemplate'
+Note: You can edit the files within Visual Studio without closing the solution.
+4. Check the 'HowToDeploy.txt' to test and update your template
