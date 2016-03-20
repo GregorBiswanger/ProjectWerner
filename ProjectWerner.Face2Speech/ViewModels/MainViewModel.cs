@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,146 +12,82 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using ProjectWerner.Contracts.API;
-using ProjectWerner.ServiceLocator;
 using PropertyChanged;
+using System.Xml;
+using System.Globalization;
+using ProjectWerner.Face2Speech.Functions;
 
 namespace ProjectWerner.Face2Speech.ViewModels
 {
-	[ImplementPropertyChanged]
+    [ImplementPropertyChanged]
     public class MainViewModel
     {
-        public ObservableCollection<Line> Lines { get; set; }
+        public string selectedCulture { get; set; }
+        public bool AcitvateFirstProspalWord { get; set; }
 
-        public ObservableCollection<string> ProposalWords { get; set; }
+        public string DisplayText { get; set; }
+        public ObservableCollection<Line> KeyboardLines { get; set; }
+        public int SelectedKeyboardLineIndex { get; set; }
+        public ObservableCollection<Words> AllWords { get; set; }
+        public ObservableCollection<Words> ProposalWords { get; set; }
+        public Words SelectedProposalWord { get; set; }
+        public int SelectedProposalWordIndex { get; set; }
 
-        public string Text { get; set; }
-
-        public int SelectedLineIndex { get; set; }
-
-        public int SelecredProposalWordIndex { get; set; }
-
-        public string SelecredProposalWord { get; set; }
-
+        //Gesichterkennung
         public bool LostFace { get; set; }
-
         public bool MouthOpen { get; set; }
         public bool MouthClosed { get; set; }
 
+        [Import]
         private readonly ICamera3D _camera3D;
         private readonly DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
 
-        string[] _words;
-
-
         public MainViewModel()
         {
-            Lines = new ObservableCollection<Line>();
-            ProposalWords = new ObservableCollection<string>();
-            Text = string.Empty;
-            SelectedLineIndex = -1;
+            LoadConfig();
 
-            Line lineA = new Line();
-            lineA.Words.Add(new Word { Text = "delete" });
-            lineA.Words.Add(new Word { Text = "a" });
-            lineA.Words.Add(new Word { Text = "i" });
-            lineA.Words.Add(new Word { Text = "c" });
-            lineA.Words.Add(new Word { Text = "b" });
-            lineA.Words.Add(new Word { Text = "e" });
-            lineA.Words.Add(new Word { Text = "g" });
+            ReadDictionary myReadDictionary = new ReadDictionary();
+            ProposalWords = new ObservableCollection<Words>();
 
-            Line lineB = new Line();
-            lineB.Words.Add(new Word { Text = "t" });
-            lineB.Words.Add(new Word { Text = "s" });
-            lineB.Words.Add(new Word { Text = "d" });
-            lineB.Words.Add(new Word { Text = "f" });
-            lineB.Words.Add(new Word { Text = "m" });
-            lineB.Words.Add(new Word { Text = "k" });
-            lineB.Words.Add(new Word { Text = "j" });
-
-            Line lineC = new Line();
-            lineC.Words.Add(new Word { Text = "w" });
-            lineC.Words.Add(new Word { Text = "l" });
-            lineC.Words.Add(new Word { Text = "h" });
-            lineC.Words.Add(new Word { Text = "n" });
-            lineC.Words.Add(new Word { Text = "p" });
-            lineC.Words.Add(new Word { Text = "q" });
-            lineC.Words.Add(new Word { Text = "x" });
-
-            Line lineD = new Line();
-            lineD.Words.Add(new Word { Text = "o" });
-            lineD.Words.Add(new Word { Text = "y" });
-            lineD.Words.Add(new Word { Text = "r" });
-            lineD.Words.Add(new Word { Text = "u" });
-            lineD.Words.Add(new Word { Text = "v" });
-            lineD.Words.Add(new Word { Text = "z" });
-            lineD.Words.Add(new Word { Text = "es" });
-
-            Line lineE = new Line();
-            lineE.Words.Add(new Word { Text = "1" });
-            lineE.Words.Add(new Word { Text = "2" });
-            lineE.Words.Add(new Word { Text = "3" });
-            lineE.Words.Add(new Word { Text = "4" });
-            lineE.Words.Add(new Word { Text = "5" });
-            lineE.Words.Add(new Word { Text = "6" });
-            lineE.Words.Add(new Word { Text = "space" });
-
-            Line lineF = new Line();
-            lineF.Words.Add(new Word { Text = "7" });
-            lineF.Words.Add(new Word { Text = "8" });
-            lineF.Words.Add(new Word { Text = "9" });
-            lineF.Words.Add(new Word { Text = "0" });
-            lineF.Words.Add(new Word { Text = "." });
-            lineF.Words.Add(new Word { Text = "," });
-            lineF.Words.Add(new Word { Text = "X" });
-
-            Line lineG = new Line();
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-            lineG.Words.Add(new Word { Text = "X" });
-
-            Line lineH = new Line();
-            lineH.Words.Add(new Word { Text = "enter" });
-            lineH.Words.Add(new Word { Text = "#" });
-            lineH.Words.Add(new Word { Text = "speak" });
-            lineH.Words.Add(new Word { Text = "X" });
-            lineH.Words.Add(new Word { Text = "X" });
-            lineH.Words.Add(new Word { Text = "X" });
-            lineH.Words.Add(new Word { Text = "X" });
-
-            Lines.Add(lineA);
-            Lines.Add(lineB);
-            Lines.Add(lineC);
-            Lines.Add(lineD);
-            Lines.Add(lineE);
-            Lines.Add(lineF);
-            Lines.Add(lineG);
-            Lines.Add(lineH);
+            KeyboardLines = myReadDictionary.LoadKeyboardDictionary(selectedCulture);
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                _camera3D = MicroKernel.Get<ICamera3D>();
-                _camera3D.MouthOpened += OnMouthOpened;
-                _camera3D.MouthClosed += OnMouthClosed;
-                _camera3D.FaceVisible += OnFaceDetected;
-                _camera3D.FaceLost += OnFaceLost;
+                AllWords = myReadDictionary.LoadWordsDictionary(selectedCulture);
+            }
+            else
+            {
+                AllWords = new ObservableCollection<Words>();
+            }
 
-                _words = File.ReadAllLines("Extensions\\Face2Speech\\Dictionary\\german.txt", Encoding.UTF8);
+            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
+                //_camera3D.MouthOpened += OnMouthOpened;
+                //_camera3D.MouthClosed += OnMouthClosed;
+                //_camera3D.FaceVisible += OnFaceDetected;
+                //_camera3D.FaceLost += OnFaceLost;
 
                 _dispatcherTimer = new DispatcherTimer();
                 _dispatcherTimer.Tick += OnInterval;
                 _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
-                _dispatcherTimer.Start();
+                //_dispatcherTimer.Start();
 
                 // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
                 SetThreadExecutionState(EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
                 SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
             }
         }
+
+        private void LoadConfig()
+        {
+            AcitvateFirstProspalWord = true;
+            DisplayText = string.Empty;
+            SelectedKeyboardLineIndex = -1;
+            selectedCulture = CultureInfo.CurrentCulture.Name;
+        }
+
+
 
         private void OnMouthOpened()
         {
@@ -160,12 +97,12 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
         private void OnMouthClosed()
         {
-            if (SelectedLineIndex != -1)
+            if (SelectedKeyboardLineIndex != -1)
             {
-                if (Lines[SelectedLineIndex].SelectedWordIndex != -1 &&
-                    Lines[SelectedLineIndex].SelectedWordIndex != Lines[SelectedLineIndex].Words.Count)
+                if (KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex != -1 &&
+                    KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex != KeyboardLines[SelectedKeyboardLineIndex].Words.Count)
                 {
-                    Lines[SelectedLineIndex].Words[Lines[SelectedLineIndex].SelectedWordIndex].IsActive = false;
+                    KeyboardLines[SelectedKeyboardLineIndex].Words[KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex].IsActive = false;
                 }
             }
 
@@ -197,8 +134,8 @@ namespace ProjectWerner.Face2Speech.ViewModels
             }
             else if (_multiSelectCount == 8)
             {
-                Lines.ToList().ForEach(line => line.IsSelected = false);
-                SelectedLineIndex = -1;
+                KeyboardLines.ToList().ForEach(line => line.IsSelected = false);
+                SelectedKeyboardLineIndex = -1;
 
                 if (_camera3D.IsFaceMouthOpen)
                 {
@@ -209,42 +146,42 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 if (_camera3D.IsFaceMouthOpen)
                 {
-                    if (Lines[0].IsSelected)
+                    if (KeyboardLines[0].IsSelected)
                     {
-                        Lines.ToList().ForEach(line => line.IsSelected = false);
+                        KeyboardLines.ToList().ForEach(line => line.IsSelected = false);
 
-                        SelectedLineIndex = 0;
+                        SelectedKeyboardLineIndex = 0;
                     }
                     else
                     {
-                        Lines.ToList().ForEach(line => line.IsSelected = false);
+                        KeyboardLines.ToList().ForEach(line => line.IsSelected = false);
 
-                        SelectedLineIndex = Lines.Count / 2;
+                        SelectedKeyboardLineIndex = KeyboardLines.Count / 2;
                     }
 
                     _multiSelectActive = false;
                     _multiSelectCount = 0;
                 }
-                else if (Lines[0].IsSelected)
+                else if (KeyboardLines[0].IsSelected)
                 {
-                    Lines.ToList().ForEach(line => line.IsSelected = false);
+                    KeyboardLines.ToList().ForEach(line => line.IsSelected = false);
 
-                    int halfCount = Lines.Count / 2;
-                    for (int i = halfCount; i < Lines.Count; i++)
+                    int halfCount = KeyboardLines.Count / 2;
+                    for (int i = halfCount; i < KeyboardLines.Count; i++)
                     {
-                        Lines[i].IsSelected = true;
+                        KeyboardLines[i].IsSelected = true;
                     }
 
                     _multiSelectCount = _multiSelectCount + 1;
                 }
                 else
                 {
-                    Lines.ToList().ForEach(line => line.IsSelected = false);
+                    KeyboardLines.ToList().ForEach(line => line.IsSelected = false);
 
-                    int halfCount = Lines.Count / 2;
+                    int halfCount = KeyboardLines.Count / 2;
                     for (int i = 0; i < halfCount; i++)
                     {
-                        Lines[i].IsSelected = true;
+                        KeyboardLines[i].IsSelected = true;
                     }
 
                     _multiSelectCount = _multiSelectCount + 1;
@@ -254,45 +191,45 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 if (!_lineSelected && !_camera3D.IsFaceMouthOpen)
                 {
-                    if (SelectedLineIndex == Lines.Count - 1 ||
-                        (Lines.Count - 1) / 2 == SelectedLineIndex)
+                    if (SelectedKeyboardLineIndex == KeyboardLines.Count - 1 ||
+                        (KeyboardLines.Count - 1) / 2 == SelectedKeyboardLineIndex)
                     {
-                        SelectedLineIndex = -1;
+                        SelectedKeyboardLineIndex = -1;
                         _multiSelectActive = true;
                     }
                     else
                     {
-                        SelectedLineIndex = SelectedLineIndex + 1;
+                        SelectedKeyboardLineIndex = SelectedKeyboardLineIndex + 1;
                     }
                 }
                 else if (!_lineSelected &&
-                    SelectedLineIndex != -1 &&
+                    SelectedKeyboardLineIndex != -1 &&
                     _camera3D.IsFaceMouthOpen)
                 {
                     _lineSelected = true;
-                    Lines[SelectedLineIndex].SelectedWordIndex = 0;
+                    KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex = 0;
                     SetProposalWordIndex();
                 }
                 else if (_lineSelected)
                 {
-                    if (Lines[SelectedLineIndex].SelectedWordIndex == Lines[SelectedLineIndex].Words.Count)
+                    if (KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex == KeyboardLines[SelectedKeyboardLineIndex].Words.Count)
                     {
-                        if (SelectedLineIndex == Lines.Count)
+                        if (SelectedKeyboardLineIndex == KeyboardLines.Count)
                         {
-                            SelectedLineIndex = -1;
+                            SelectedKeyboardLineIndex = -1;
                         }
                         else
                         {
-                            Lines[SelectedLineIndex].SelectedWordIndex = -1;
+                            KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex = -1;
                             _lineSelected = false;
 
-                            if (SelectedLineIndex <= (Lines.Count - 1) / 2)
+                            if (SelectedKeyboardLineIndex <= (KeyboardLines.Count - 1) / 2)
                             {
-                                SelectedLineIndex = -1;
+                                SelectedKeyboardLineIndex = -1;
                             }
                             else
                             {
-                                SelectedLineIndex = (Lines.Count) / 2;
+                                SelectedKeyboardLineIndex = (KeyboardLines.Count) / 2;
                             }
                         }
                     }
@@ -300,12 +237,12 @@ namespace ProjectWerner.Face2Speech.ViewModels
                     {
                         if (_camera3D.IsFaceMouthOpen)
                         {
-                            Lines[SelectedLineIndex].Words[Lines[SelectedLineIndex].SelectedWordIndex].IsActive = true;
+                            KeyboardLines[SelectedKeyboardLineIndex].Words[KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex].IsActive = true;
                             _waitForConfirmation = true;
                         }
                         else
                         {
-                            Lines[SelectedLineIndex].SelectedWordIndex = Lines[SelectedLineIndex].SelectedWordIndex + 1;
+                            KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex = KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex + 1;
                             SetProposalWordIndex();
                         }
                     }
@@ -322,11 +259,11 @@ namespace ProjectWerner.Face2Speech.ViewModels
             Thread.Sleep(new TimeSpan(0, 0, _intervalSeconds));
             if (_camera3D.IsFaceMouthOpen)
             {
-                Lines[SelectedLineIndex].Words[Lines[SelectedLineIndex].SelectedWordIndex].IsActive = false;
-                SetTextActivity(Lines[SelectedLineIndex].Words[Lines[SelectedLineIndex].SelectedWordIndex].Text);
-                Lines[SelectedLineIndex].SelectedWordIndex = -1;
+                KeyboardLines[SelectedKeyboardLineIndex].Words[KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex].IsActive = false;
+                SetTextActivity(KeyboardLines[SelectedKeyboardLineIndex].Words[KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex]);
+                KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex = -1;
                 _lineSelected = false;
-                SelectedLineIndex = -1;
+                SelectedKeyboardLineIndex = -1;
                 _multiSelectActive = true;
                 _multiSelectCount = 0;
             }
@@ -337,28 +274,28 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
         private void SetProposalWordIndex()
         {
-            if (Lines[SelectedLineIndex].SelectedWordIndex == Lines[SelectedLineIndex].Words.Count)
+            if (KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex == KeyboardLines[SelectedKeyboardLineIndex].Words.Count)
             {
-                SelecredProposalWordIndex = -1;
+                SelectedProposalWordIndex = -1;
             }
             else
             {
-                string text = Lines[SelectedLineIndex].Words[Lines[SelectedLineIndex].SelectedWordIndex].Text;
+                string text = KeyboardLines[SelectedKeyboardLineIndex].Words[KeyboardLines[SelectedKeyboardLineIndex].SelectedWordIndex].Text;
                 int result;
                 if (int.TryParse(text, out result))
                 {
                     if (result == 0)
                     {
-                        SelecredProposalWordIndex = 9;
+                        SelectedProposalWordIndex = 9;
                     }
                     else
                     {
-                        SelecredProposalWordIndex = (result - 1);
+                        SelectedProposalWordIndex = (result - 1);
                     }
                 }
                 else
                 {
-                    SelecredProposalWordIndex = -1;
+                    SelectedProposalWordIndex = -1;
                 }
             }
         }
@@ -367,81 +304,91 @@ namespace ProjectWerner.Face2Speech.ViewModels
         {
             Button button = (Button)sender;
 
-            SetTextActivity(button.Tag.ToString());
+            SetTextActivity((KeyboardChars)button.Tag);
         }
 
-        private void SetTextActivity(string content)
+        private void SetTextActivity(KeyboardChars Chars)
         {
-            int result = 0;
+            ProspalWords myProspalWords = new ProspalWords();
 
-            if (content == "delete")
+            Dictionary<String, String> AddedWords = new Dictionary<string, string>();
+            int result = 0;
+            if (Chars.Type == "delete")
             {
-                if (Text.Length > 0)
+                if (DisplayText.Length > 0)
                 {
-                    Text = Text.Remove(Text.Length - 1, 1);
-                    SetProposalWords();
+                    DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
+                    string[] text = DisplayText.Split(' ');
+                    ProposalWords = myProspalWords.GetFirstLines(AllWords, text[text.Length - 1], ProspalWords.SearchType.All);
                 }
             }
-            else if (content == "space")
+            else if (Chars.Type == "enter")
             {
-                Text = Text + " ";
+                DisplayText = DisplayText + "\n";
+            }
+            else if (Chars.Type == "speak")
+            {
+                _camera3D.Speech(DisplayText);
+            }
+            else if (Chars.Type == "space")
+            {
+                DisplayText = DisplayText + " ";
                 ProposalWords.Clear();
             }
-            else if (content == "enter")
+            else if (Chars.Type == "mark")
             {
-                Text = Text + "\n";
-                ProposalWords.Clear();
+                DisplayText = DisplayText.Trim() + Chars.Text + " ";
             }
-            else if (content == "speak")
+            else if (int.TryParse(Chars.Text, out result) || Chars.Type == "ok")
             {
-                _camera3D.Speech(Text);
-            }
-            else if (int.TryParse(content, out result))
-            {
-                if (SelecredProposalWord != null)
+                if (SelectedProposalWord != null)
                 {
-                    string[] text = Text.Split(' ');
-                    text[text.Length - 1] = SelecredProposalWord.Replace(result + ": ", "") + " ";
-                    Text = string.Join(" ", text);
-                    SelecredProposalWordIndex = -1;
-                    ProposalWords.Clear();
+                    string[] text = DisplayText.Split(' ');
+                    if (text[text.Length - 1] != SelectedProposalWord.Text.Substring(3))
+                    {
+                        DisplayText = DisplayText + SelectedProposalWord.Text.Substring(3) + " ";
+                    }
+                    else
+                    {
+                        DisplayText = DisplayText + " ";
+                    }
+                    if (SelectedProposalWord.NextWords != null)
+                    {
+                        List<String> MyNextWords = SelectedProposalWord.NextWords;
+                        myProspalWords.Number = 0;
+                        ProposalWords.Clear();
+                        foreach (String NextWord in MyNextWords)
+                        {
+                            foreach (Words myWords in myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual))
+                            {
+                                ProposalWords.Add(myWords);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SelectedProposalWordIndex = -1;
+                        myProspalWords.Number = 0;
+                        ProposalWords.Clear();
+                    }
+
                 }
             }
             else
             {
-                Text = Text + content;
-
-                SetProposalWords();
+                DisplayText = DisplayText + Chars.Text;
+                string lastWord = DisplayText.Trim().Split(' ').Last();
+                ProposalWords = myProspalWords.GetFirstLines(AllWords, lastWord, ProspalWords.SearchType.All);
             }
-        }
-
-        private void SetProposalWords()
-        {
-            ProposalWords.Clear();
-
-            if (!string.IsNullOrEmpty(Text) ||
-                !string.IsNullOrWhiteSpace(Text))
+            if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
             {
-                string lastWord = Text.Split(' ').Last();
-                IEnumerable<string> proposalWords =
-                    _words.Where(word => word.ToUpper().StartsWith(lastWord.ToUpper())).OrderBy(x => x.Length).Take(10);
-                int number = 0;
-                proposalWords.ToList().ForEach(word =>
-                {
-                    number = number + 1;
-                    if (number == 10)
-                    {
-                        number = 0;
-                    }
-                    ProposalWords.Add(string.Format("{0}: {1}", number, word));
-                });
+                SelectedProposalWordIndex = 0;
             }
-
-            SelecredProposalWordIndex = -1;
+            else
+            {
+                SelectedProposalWordIndex = -1;
+            }
         }
-
-
-
 
         //http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
