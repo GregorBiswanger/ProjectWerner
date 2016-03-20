@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Blend for Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWerner", "ProjectWerner\ProjectWerner.csproj", "{2EC79477-5E2A-4A1F-860A-4404B65B2BBB}"
@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions.ExamplePluginA",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions.ExamplePluginB", "Extensions\Extensions.ExamplePluginB\Extensions.ExamplePluginB.csproj", "{8A8AF374-2C9B-4921-8A72-238A1BF2B831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions..Face2Speech", "Extensions\Extensions.Face2Speech\Extensions..Face2Speech.csproj", "{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions.Face2Speech", "Extensions\Extensions.Face2Speech\Extensions.Face2Speech.csproj", "{DA979842-6518-4E44-A6B9-EE0D5F3E6E69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
