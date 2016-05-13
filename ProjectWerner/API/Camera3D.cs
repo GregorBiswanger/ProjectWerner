@@ -1,6 +1,8 @@
 ﻿using ProjectWerner.Contracts.API;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Microsoft.Kinect;
 using SharpSenses;
 using SharpSenses.RealSense.Capabilities;
@@ -9,12 +11,18 @@ using Microsoft.Kinect.Face;
 using System.Speech.Synthesis;
 using System.Linq;
 using System.Threading;
+using System.Windows;
+using System.Windows.Interop;
+using SharpSenses.RealSense;
+
 
 namespace ProjectWerner.API
 {
+    [Export(typeof(ICamera3D))]
     public class Camera3D : ICamera3D
     {
         #region Actions
+
         /// <summary>
         /// when face is not or not anymore visible
         /// </summary>
@@ -34,6 +42,12 @@ namespace ProjectWerner.API
         /// when mouth is closed
         /// </summary>
         public event Action MouthClosed;
+
+        /// <summary>
+        /// called when camera is connected
+        /// camera can be connected after application start
+        /// </summary>
+        public event Action Connected;
 
         #endregion
 
@@ -59,19 +73,19 @@ namespace ProjectWerner.API
         private bool _kinectAvailiable;
 
         // The sensor objects.
-        KinectSensor _kinectSensor;
+        private KinectSensor _kinectSensor;
 
         // The face frame source
-        FaceFrameSource _faceSource;
+        private FaceFrameSource _faceSource;
 
         // The face frame reader
-        FaceFrameReader _faceReader;
+        private FaceFrameReader _faceReader;
 
         // The body frame reader is used to identify the bodies
-        BodyFrameReader _bodyReader = null;
+        private BodyFrameReader _bodyReader = null;
 
         // The list of bodies identified by the sensor
-        IList<Body> _bodies = null;
+        private IList<Body> _bodies = null;
 
         #endregion
 
@@ -97,6 +111,7 @@ namespace ProjectWerner.API
             CheckKinect();
             CheckRealSense();
             SetupCamera();
+            Usb();
         }
 
         /// <summary>
@@ -104,13 +119,14 @@ namespace ProjectWerner.API
         /// </summary>
         private void CheckKinect()
         {
+         
             // one sensor is currently supported
             this._kinectSensor = KinectSensor.GetDefault();
 
             // set IsAvailableChanged event notifier
             this._kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
 
-            Sensor_IsAvailableChanged(null,null);
+            Sensor_IsAvailableChanged(null, null);
         }
 
         /// <summary>
@@ -119,28 +135,31 @@ namespace ProjectWerner.API
         /// </summary>
         private void CheckRealSense()
         {
-            
-                //list all devices on usb
-                ManagementObjectCollection collection;
-                using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
-                collection = searcher.Get();
 
-                foreach (var device in collection)
+            //list all devices on usb
+            ManagementObjectCollection collection;
+            using (var searcher = new ManagementObjectSearcher(@"Select * From Win32_USBHub"))
+                collection = searcher.Get();
+            bool found = false;
+            foreach (var device in collection)
+            {
+                if (device == null) return;
+                //check usb devices for intel realsense
+                //VID_8086&PID_0A66
+                if (((string) device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
                 {
-                        if (device == null) return;
-                        //check usb devices for intel realsense 
-                        //VID_8086&PID_0A66
-                        if (((string) device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
-                        {
-                        
-                            _realSenseAvailiable = true;
-                            break;
-                        }
-                
-      
+                    found = true;
+                    break;
                 }
-                collection.Dispose();
+            }
+            collection.Dispose();
+            _realSenseAvailiable = found;
            
+            if (!_realSenseAvailiable)
+            {
+               _camera.SilentlyDispose();
+            }
+            GC.Collect();
         }
 
         /// <summary>
@@ -149,6 +168,7 @@ namespace ProjectWerner.API
         /// </summary>
         private void SetupCamera()
         {
+           
             if (_kinectAvailiable)
             {
                 SetupKinect();
@@ -166,7 +186,19 @@ namespace ProjectWerner.API
         /// </summary>
         private void SetupRealSense()
         {
-            _camera = Camera.Create(Capability.FaceTracking, Capability.FacialExpressionTracking);
+            if (_camera == null)
+            {
+                try
+                {
+                    _camera = Camera.Create(Capability.FaceTracking, Capability.FacialExpressionTracking);
+                    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+
             if (_camera == null) return;
 
             _camera.Face.Visible += OnFaceVisible;
@@ -175,7 +207,10 @@ namespace ProjectWerner.API
             _camera.Face.Mouth.Closed += OnMouthClosed;
 
             FacialExpressionCapability.MonthOpenThreshold = MouthOpenValue;
+
             _camera.Start();
+
+            Connected?.Invoke();
         }
 
         /// <summary>
@@ -189,19 +224,20 @@ namespace ProjectWerner.API
         {
             if (_kinectSensor == null) return;
 
-            
-
             _bodies = new Body[_kinectSensor.BodyFrameSource.BodyCount];
-
+            
             _bodyReader = _kinectSensor.BodyFrameSource.OpenReader();
-            _bodyReader.FrameArrived += BodyReader_FrameArrived;
+
+            _bodyReader.FrameArrived += BodyReader_FrameArrived; 
 
             // Initialize the face source with the desired features
-            _faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.RightEyeClosed);
+            _faceSource = new FaceFrameSource(_kinectSensor, 0, FaceFrameFeatures.MouthOpen);
 
             _faceReader = _faceSource.OpenReader();
-
+            
             _faceReader.FrameArrived += FaceReader_FrameArrived;
+
+            Connected?.Invoke();
         }
 
         /// <summary>
@@ -211,10 +247,12 @@ namespace ProjectWerner.API
         /// <param name="e"></param>
         private void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
+         
             using (var frame = e.FrameReference.AcquireFrame())
             {
                 if (frame != null)
                 {
+                  
                     //when body is found
                     frame.GetAndRefreshBodyData(_bodies);
 
@@ -229,6 +267,7 @@ namespace ProjectWerner.API
                         }
                     }
                 }
+             
             }
         }
 
@@ -240,6 +279,7 @@ namespace ProjectWerner.API
         /// <param name="e"></param>
         private void FaceReader_FrameArrived(object sender, FaceFrameArrivedEventArgs e)
         {
+         
             using (var frame = e.FrameReference.AcquireFrame())
             {
                 if (frame != null)
@@ -273,7 +313,8 @@ namespace ProjectWerner.API
         /// <param name="detectionResult"></param>
         /// <param name="resultYes">call when DetectionResult.Yes</param>
         /// <param name="resultNo">call when DetectionResult.No</param>
-        private void CallAction(DetectionResult detectionResult, Action<object, EventArgs> resultYes, Action<object, EventArgs> resultNo)
+        private void CallAction(DetectionResult detectionResult, Action<object, EventArgs> resultYes,
+            Action<object, EventArgs> resultNo)
         {
             switch (detectionResult)
             {
@@ -293,10 +334,15 @@ namespace ProjectWerner.API
         /// <param name="e">event arguments</param>
         private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
         {
+         
             if (this._kinectSensor != null)
             {
-                // open the sensor
-                this._kinectSensor.Open();
+              
+                if (!_kinectSensor.IsOpen)
+                {
+                    // open the sensor
+                    this._kinectSensor.Open();
+                }
                 // on failure, set the status text
                 this._kinectAvailiable = this._kinectSensor.IsAvailable;
 
@@ -315,7 +361,7 @@ namespace ProjectWerner.API
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnMouthClosed(object sender, EventArgs e)
-        { 
+        {
             IsFaceMouthOpen = false;
             MouthClosed?.Invoke();
         }
@@ -373,7 +419,8 @@ namespace ProjectWerner.API
                 using (SpeechSynthesizer synth = new SpeechSynthesizer())
                 {
                     //system sprache
-                    synth.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.NotSet, 0, Thread.CurrentThread.CurrentUICulture);
+                    synth.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.NotSet, 0,
+                        Thread.CurrentThread.CurrentUICulture);
 
                     // Configure the audio output. 
                     synth.SetOutputToDefaultAudioDevice();
@@ -383,7 +430,39 @@ namespace ProjectWerner.API
                 }
             }
 
+
         }
 
+
+        /// <summary>
+        /// setup event handler that recognizes ubs device (dis)connected
+        /// </summary>
+        private void Usb()
+        {//From Win32_USBHub  Win32_USBControllerDevice
+            WqlEventQuery q = new WqlEventQuery("__InstanceOperationEvent",
+                "TargetInstance ISA 'Win32_USBHub' ");
+
+            q.WithinInterval = TimeSpan.FromSeconds(1);
+
+            ManagementEventWatcher w = new ManagementEventWatcher(q);
+
+            w.EventArrived += new EventArrivedEventHandler(OnEventArrived);
+
+            w.Start();
+        }
+
+        /// <summary>
+        /// event is fired when usb device is (dis)connected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OnEventArrived(object sender, EventArrivedEventArgs e)
+        {
+        
+            //USB Device Changed
+            CheckKinect();
+            CheckRealSense();
+               SetupCamera();
+        }
     }
 }

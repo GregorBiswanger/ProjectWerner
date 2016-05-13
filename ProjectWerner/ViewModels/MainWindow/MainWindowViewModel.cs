@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
+using ProjectWerner.API;
 using ProjectWerner.Dto;
 using ProjectWerner.MvvmHelper.Commands;
 using ProjectWerner.MvvmHelper.ViewModelBase;

@@ -11,6 +11,20 @@ namespace ProjectWerner.Contracts.API
         event Action MouthOpened;
         event Action MouthClosed;
         bool IsFaceMouthOpen { get; set; }
+
+        /// <summary>
+        /// Only works with intel real sense
+        /// how much the mouth has to be open to fire open event
+        /// 0 closed - 100 open
+        /// </summary>
+        int MouthOpenValue { get; set; }
+
         void Speech(string message);
+
+        /// <summary>
+        /// called when camera is connected
+        /// camera can be connected after application start
+        /// </summary>
+        event Action Connected;
     }
 }
