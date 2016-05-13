@@ -64,21 +64,22 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
+                _dispatcherTimer = new DispatcherTimer();
+                _dispatcherTimer.Tick += OnInterval;
+                _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
+
                 _camera3D = MicroKernel.Get<ICamera3D>();
                 _camera3D.MouthOpened += OnMouthOpened;
                 _camera3D.MouthClosed += OnMouthClosed;
                 _camera3D.FaceVisible += OnFaceDetected;
                 _camera3D.FaceLost += OnFaceLost;
-                _camera3D.Connected += Connected;
-
+                //_camera3D.Connected += Connected;
             }
         }
 
         private void Connected()
         {
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Tick += OnInterval;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, _intervalSeconds);
+            
             _dispatcherTimer.Start();
 
             // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
