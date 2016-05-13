@@ -128,7 +128,7 @@ namespace ProjectWerner.API
                 foreach (var device in collection)
                 {
                         if (device == null) return;
-                        //check usb devices for intel realsense
+                        //check usb devices for intel realsense 
                         //VID_8086&PID_0A66
                         if (((string) device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
                         {
