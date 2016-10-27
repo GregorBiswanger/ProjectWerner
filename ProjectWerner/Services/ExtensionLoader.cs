@@ -15,7 +15,7 @@ namespace ProjectWerner.Services
 		#pragma warning disable 649
 
 		[ImportMany(typeof (IAppExtension))]
-		private IEnumerable<Lazy<IAppExtension, IAppExtensionMetaData>> extensions;
+		private IEnumerable<Lazy<IAppExtension, IAppExtensionMetaData>> _extensions;
 		
 
 		#pragma warning restore 649
@@ -28,7 +28,7 @@ namespace ProjectWerner.Services
 		
 		public IReadOnlyList<ExtensionDataSet> GetExtensions ()
 		{
-			return extensions.Select(importedData => new ExtensionDataSet(importedData.Value, importedData.Metadata.Name, GetDefaultIcon(), Guid.NewGuid()))
+			return _extensions.Select(importedData => new ExtensionDataSet(importedData.Value, importedData.Metadata.Name, GetDefaultIcon(), Guid.NewGuid()))
 								.ToList();
 		}
 

@@ -14,6 +14,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,6 +81,7 @@
       <HintPath>..\packages\libpxcclr.cs.8.0.24.6528\lib\net40\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Kinect.2.0.1410.19000\lib\net45\Microsoft.Kinect.dll</HintPath>
       <Private>True</Private>
@@ -90,6 +93,10 @@
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=1.50.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.1.50.4\lib\dotnet\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpSenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.dll</HintPath>
@@ -106,6 +113,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
     <Reference Include="System.Speech" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -124,23 +132,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\BoolToCollapsedVisibilityConverter.cs" />
-    <Compile Include="MvvmHelper\Commands\Command.cs" />
-    <Compile Include="MvvmHelper\ConverterBase\GenericValueConverter.cs" />
-    <Compile Include="MvvmHelper\Utils\DisposingObject.cs" />
-    <Compile Include="MvvmHelper\Commands\ICommandUpdater.cs" />
-    <Compile Include="MvvmHelper\ViewModelBase\IViewModel.cs" />
-    <Compile Include="MvvmHelper\Commands\ParameterrizedCommand.cs" />
-    <Compile Include="MvvmHelper\Commands\PropertyChangedCommandUpdater.cs" />
-    <Compile Include="MvvmHelper\Notifier\PropertyChangedNotifierExtension.cs" />
-    <Compile Include="MvvmHelper\ViewModelBase\ViewModel.cs" />
     <Compile Include="Services\ExtensionLoader.cs" />
     <Compile Include="Services\ExtensionStarter.cs" />
     <Compile Include="Services\IExtensionLoader.cs" />
     <Compile Include="Dto\ExtensionDataSet.cs" />
-    <Compile Include="ViewModels\MainWindow\IMainWindowViewModel.cs" />
-    <Compile Include="ViewModels\MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\MainWindow\MainWindowViewModelSampledata.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Dto\ExtensionDataSetSampledata.cs" />
     <Compile Include="Views\ExtensionWindow.xaml.cs">
       <DependentUpon>ExtensionWindow.xaml</DependentUpon>
     </Compile>
@@ -321,6 +318,7 @@
     <Resource Include="Images\default-icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
     <Content Include="Libs\KinectSDK\Face_x86\Kinect20.Face.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -390,6 +388,13 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
