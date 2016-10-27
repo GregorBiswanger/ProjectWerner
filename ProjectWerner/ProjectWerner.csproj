@@ -132,15 +132,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Features\Camera3DSimulator\Camera3DSimulatorView.xaml.cs">
+      <DependentUpon>Camera3DSimulatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Camera3DSimulator\Camera3DSimulatorViewModel.cs" />
     <Compile Include="Services\ExtensionLoader.cs" />
     <Compile Include="Services\ExtensionStarter.cs" />
     <Compile Include="Services\IExtensionLoader.cs" />
     <Compile Include="Dto\ExtensionDataSet.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Dto\ExtensionDataSetSampledata.cs" />
-    <Compile Include="Views\ExtensionWindow.xaml.cs">
-      <DependentUpon>ExtensionWindow.xaml</DependentUpon>
+    <Compile Include="Features\ExtensionDashboard\ExtensionDashboardView.xaml.cs">
+      <DependentUpon>ExtensionDashboardView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Features\Camera3DSimulator\Camera3DSimulatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -155,7 +163,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ExtensionWindow.xaml">
+    <Page Include="Features\ExtensionDashboard\ExtensionDashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

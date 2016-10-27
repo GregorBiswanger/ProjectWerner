@@ -2,10 +2,12 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using ProjectWerner.API;
 using ProjectWerner.Contracts.API;
+using ProjectWerner.Features.Camera3DSimulator;
 using ProjectWerner.ServiceLocator;
 
 namespace ProjectWerner
@@ -17,6 +19,12 @@ namespace ProjectWerner
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            if (e.Args.Contains("camera3d-simulator"))
+            {
+                var camera3DSimulatorView = new Camera3DSimulatorView();
+                camera3DSimulatorView.Show();
+            }
+
             MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
 
             var aggregateCatalog = new AggregateCatalog();

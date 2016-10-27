@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-    xmlns:viewModels="clr-namespace:ProjectWerner.ViewModels"
     xmlns:dto="clr-namespace:ProjectWerner.Dto"
+    xmlns:projectWerner="clr-namespace:ProjectWerner"
     x:Class="ProjectWerner.MainWindow"
     Title="Project Werner"
     Width="650"
@@ -14,7 +14,7 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <viewModels:MainWindowViewModel x:Key="MainWindowViewModel" />
+        <projectWerner:MainWindowViewModel x:Key="MainWindowViewModel" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <DataTemplate x:Key="ExtensionDataTemplate" DataType="dto:ExtensionDataSet">
             <Border BorderBrush="Black" BorderThickness="1">

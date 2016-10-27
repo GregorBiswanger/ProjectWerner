@@ -9,7 +9,7 @@ using ProjectWerner.Services;
 
 #pragma warning disable 0067
 
-namespace ProjectWerner.ViewModels
+namespace ProjectWerner
 {
 	internal class MainWindowViewModel
 	{
