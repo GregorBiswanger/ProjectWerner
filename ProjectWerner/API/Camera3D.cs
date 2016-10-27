@@ -338,7 +338,7 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMouthClosed(object sender, EventArgs e)
+        public void OnMouthClosed(object sender, EventArgs e)
         {
             IsFaceMouthOpen = false;
             MouthClosed?.Invoke();
@@ -350,7 +350,7 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMouthOpened(object sender, EventArgs e)
+        public void OnMouthOpened(object sender, EventArgs e)
         {
             IsFaceMouthOpen = true;
             MouthOpened?.Invoke();
@@ -361,7 +361,7 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnFaceLost(object sender, EventArgs e)
+        public void OnFaceLost(object sender, EventArgs e)
         {
             FaceLost?.Invoke();
         }
@@ -371,7 +371,7 @@ namespace ProjectWerner.API
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnFaceVisible(object sender, EventArgs e)
+        public void OnFaceVisible(object sender, EventArgs e)
         {
             FaceVisible?.Invoke();
         }

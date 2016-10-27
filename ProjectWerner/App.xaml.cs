@@ -19,13 +19,13 @@ namespace ProjectWerner
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
+
             if (e.Args.Contains("camera3d-simulator"))
             {
                 var camera3DSimulatorView = new Camera3DSimulatorView();
                 camera3DSimulatorView.Show();
             }
-
-            MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
 
             var aggregateCatalog = new AggregateCatalog();
             aggregateCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
