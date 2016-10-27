@@ -142,8 +142,8 @@
     <Compile Include="Dto\ExtensionDataSet.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Dto\ExtensionDataSetSampledata.cs" />
-    <Compile Include="Features\ExtensionDashboard\ExtensionDashboardView.xaml.cs">
-      <DependentUpon>ExtensionDashboardView.xaml</DependentUpon>
+    <Compile Include="Features\ExtensionWindow\ExtensionWindowView.xaml.cs">
+      <DependentUpon>ExtensionWindowView.xaml</DependentUpon>
     </Compile>
     <Page Include="Features\Camera3DSimulator\Camera3DSimulatorView.xaml">
       <SubType>Designer</SubType>
@@ -163,7 +163,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Features\ExtensionDashboard\ExtensionDashboardView.xaml">
+    <Page Include="Features\ExtensionWindow\ExtensionWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
