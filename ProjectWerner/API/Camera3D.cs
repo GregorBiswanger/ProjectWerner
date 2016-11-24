@@ -12,7 +12,6 @@ using System.Linq;
 using System.Threading;
 using SharpSenses.RealSense;
 
-
 namespace ProjectWerner.API
 {
     [Export(typeof(ICamera3D))]
@@ -45,6 +44,8 @@ namespace ProjectWerner.API
         /// camera can be connected after application start
         /// </summary>
         public event Action Connected;
+
+        public event Action<byte[]> NewImageAvailable;
 
         #endregion
 
@@ -141,7 +142,8 @@ namespace ProjectWerner.API
                 if (device == null) return;
                 //check usb devices for intel realsense
                 //VID_8086&PID_0A66
-                if (((string) device.GetPropertyValue("DeviceID")).Contains("VID_8086&PID_0A66"))
+                string deviceId = device.GetPropertyValue("DeviceID").ToString();
+                if (deviceId.Contains("VID_8086&PID_0A66") || deviceId.Contains("VID_8086&PID_0A80"))
                 {
                     found = true;
                     break;
@@ -183,7 +185,8 @@ namespace ProjectWerner.API
             {
                 try
                 {
-                    _camera = Camera.Create(Capability.FaceTracking, Capability.FacialExpressionTracking);
+                    _camera = Camera.Create(Capability.FaceTracking, Capability.FacialExpressionTracking,
+                        Capability.ImageStreamTracking);
                 }
                 catch (Exception ex)
                 {
@@ -197,12 +200,19 @@ namespace ProjectWerner.API
             _camera.Face.NotVisible += OnFaceLost;
             _camera.Face.Mouth.Opened += OnMouthOpened;
             _camera.Face.Mouth.Closed += OnMouthClosed;
+            _camera.ImageStream.NewImageAvailable += OnNewImageAvailable;
 
             FacialExpressionCapability.MonthOpenThreshold = MouthOpenValue;
 
             _camera.Start();
 
             Connected?.Invoke();
+        }
+
+
+        private void OnNewImageAvailable(object sender, ImageEventArgs imageEventArgs)
+        {
+            NewImageAvailable?.Invoke(imageEventArgs.BitmapImage);
         }
 
         /// <summary>
@@ -384,28 +394,18 @@ namespace ProjectWerner.API
         /// <param name="message"></param>
         public void Speech(string message)
         {
-            //realsense
-            if (_camera != null)
+            // Initialize a new instance of the SpeechSynthesizer.
+            using (SpeechSynthesizer synthesizer = new SpeechSynthesizer())
             {
-                //deutsch
-                _camera.Speech.Say(message);
-            }
-            //kinect
-            else
-            {
-                // Initialize a new instance of the SpeechSynthesizer.
-                using (SpeechSynthesizer synth = new SpeechSynthesizer())
-                {
-                    //system sprache
-                    synth.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.NotSet, 0,
-                        Thread.CurrentThread.CurrentUICulture);
+                //system sprache
+                synthesizer.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.NotSet, 0,
+                    Thread.CurrentThread.CurrentUICulture);
 
-                    // Configure the audio output. 
-                    synth.SetOutputToDefaultAudioDevice();
+                // Configure the audio output. 
+                synthesizer.SetOutputToDefaultAudioDevice();
 
-                    // Speak a string synchronously.
-                    synth.Speak(message);
-                }
+                // Speak a string synchronously.
+                synthesizer.Speak(message);
             }
         }
 

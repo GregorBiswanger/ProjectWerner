@@ -77,8 +77,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libpxcclr.cs, Version=8.0.24.6528, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\libpxcclr.cs.8.0.24.6528\lib\net40\libpxcclr.cs.dll</HintPath>
+    <Reference Include="libpxcclr.cs, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libpxcclr.cs.10.0.26.400\lib\net40\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -90,20 +90,20 @@
       <HintPath>..\packages\Microsoft.Kinect.Face.2.0.1410.19000\lib\net45\Microsoft.Kinect.Face.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=4.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.4.0.0-beta-0134\lib\net45\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PropertyChanged, Version=1.50.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.1.50.4\lib\dotnet\PropertyChanged.dll</HintPath>
+    <Reference Include="PropertyChanged, Version=1.52.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.1.52.1\lib\netstandard10\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SharpSenses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.dll</HintPath>
+      <HintPath>..\packages\sharpsenses.realsense.0.10.0.0\lib\net45\SharpSenses.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpSenses.RealSense, Version=0.9.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sharpsenses.realsense.0.9.9.0\lib\net45\SharpSenses.RealSense.dll</HintPath>
+    <Reference Include="SharpSenses.RealSense, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sharpsenses.realsense.0.10.0.0\lib\net45\SharpSenses.RealSense.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -136,6 +136,10 @@
       <DependentUpon>Camera3DSimulatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\Camera3DSimulator\Camera3DSimulatorViewModel.cs" />
+    <Compile Include="Features\FacePreviewWindow\FacePreviewView.xaml.cs">
+      <DependentUpon>FacePreviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FacePreviewWindow\FacePreviewViewModel.cs" />
     <Compile Include="Services\ExtensionLoader.cs" />
     <Compile Include="Services\ExtensionStarter.cs" />
     <Compile Include="Services\IExtensionLoader.cs" />
@@ -146,6 +150,10 @@
       <DependentUpon>ExtensionWindowView.xaml</DependentUpon>
     </Compile>
     <Page Include="Features\Camera3DSimulator\Camera3DSimulatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\FacePreviewWindow\FacePreviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,7 +334,7 @@
     <Resource Include="Images\default-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml" />
     <Content Include="Libs\KinectSDK\Face_x86\Kinect20.Face.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -396,12 +404,12 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.30.0-beta01\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.30.0-beta01\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.30.0-beta01\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.30.0-beta01\build\dotnet\Fody.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

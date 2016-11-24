@@ -10,6 +10,7 @@ namespace ProjectWerner.Contracts.API
         event Action FaceLost;
         event Action MouthOpened;
         event Action MouthClosed;
+        event Action<byte[]> NewImageAvailable;
         bool IsFaceMouthOpen { get; set; }
 
         /// <summary>

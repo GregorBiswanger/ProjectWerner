@@ -4,7 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using ProjectWerner.Contracts.API;
 using ProjectWerner.Dto;
+using ProjectWerner.Features.FacePreviewWindow;
+using ProjectWerner.ServiceLocator;
 using ProjectWerner.Services;
 
 #pragma warning disable 0067
@@ -17,6 +20,7 @@ namespace ProjectWerner
 
         private readonly DispatcherTimer _selectionTimer;
 		private int _selectedItemIndex;
+	    private ICamera3D _camera3D;
 
 		public MainWindowViewModel()
 		{
@@ -26,6 +30,8 @@ namespace ProjectWerner
             }
             else
             {
+                _camera3D = MicroKernel.Get<ICamera3D>();
+
                 var extensionLoader = new ExtensionLoader();
                 Extensions = new ObservableCollection<ExtensionDataSet>(extensionLoader.GetExtensions());
                 Extensions.First().IsSelected = true;
@@ -37,6 +43,9 @@ namespace ProjectWerner
 
                 _selectionTimer.Tick += OnSeletionTimerTick;
                 _selectionTimer.Start();
+
+                FacePreviewView facePreviewView = new FacePreviewView();
+                facePreviewView.Show();
             }
         }
 
