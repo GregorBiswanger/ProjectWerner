@@ -1,31 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ProjectWerner.Contracts.API;
 using ProjectWerner.Contracts.Extensions;
 
 namespace ProjectWerner.Face2Speech.Views
 {
-    /// <summary>
-    /// Interaction logic for Keyboard.xaml
-    /// </summary>
-    public partial class Keyboard : UserControl, IAppExtension
+	[AppExtensionMetadataAttribute(Name = "Face2Speech")]
+	[Export(typeof(IAppExtension))]
+	public partial class Keyboard :  IAppExtension
     {
         public Keyboard()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)

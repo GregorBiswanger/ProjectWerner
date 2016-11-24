@@ -1,27 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Configuration;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
+using ProjectWerner.API;
+using ProjectWerner.Contracts.API;
+using ProjectWerner.Features.Camera3DSimulator;
+using ProjectWerner.ServiceLocator;
 
 namespace ProjectWerner
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+
+	public partial class App : Application
     {
-        public static CompositionContainer CompositionContainer;
+		public static CompositionContainer CompositionContainer;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
+
+            if (e.Args.Contains("camera3d-simulator"))
+            {
+                var camera3DSimulatorView = new Camera3DSimulatorView();
+                camera3DSimulatorView.Show();
+            }
+
             var aggregateCatalog = new AggregateCatalog();
             aggregateCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 

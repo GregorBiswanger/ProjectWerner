@@ -1,0 +1,71 @@
+﻿<Keyboard Name="France">
+  <Line>
+    <Char>1</Char>
+    <Char>2</Char>
+    <Char>3</Char>
+    <Char>4</Char>
+    <Char>5</Char>
+    <Char>6</Char>
+    <Char>7</Char>
+    <Char>8</Char>
+    <Char>9</Char>
+    <Char>0</Char>
+    <Char>ß</Char>
+  </Line>
+  <Line>
+    <Char>A</Char>
+    <Char>Z</Char>
+    <Char>E</Char>
+    <Char>R</Char>
+    <Char>T</Char>
+    <Char>Y</Char>
+    <Char>U</Char>
+    <Char>I</Char>
+    <Char>O</Char>
+    <Char>P</Char>
+  </Line>
+  <Line>
+    <Char>Q</Char>
+    <Char>S</Char>
+    <Char>D</Char>
+    <Char>F</Char>
+    <Char>G</Char>
+    <Char>H</Char>
+    <Char>J</Char>
+    <Char>K</Char>
+    <Char>L</Char>
+    <Char>M</Char>
+  </Line>
+  <Line>
+    <Char>W</Char>
+    <Char>X</Char>
+    <Char>C</Char>
+    <Char>V</Char>
+    <Char>B</Char>
+    <Char>N</Char>
+    <Char>é</Char>
+    <Char>è</Char>
+    <Char>à</Char>
+    <Char>ç</Char>
+    <Char>œ</Char>
+  </Line>
+  <Line>
+    <Char>ù</Char>
+    <Char Type="mark">,</Char>
+    <Char Type="mark">.</Char>
+    <Char Type="mark">;</Char>
+    <Char Type="mark">:</Char>
+    <Char Type="mark">!</Char>
+    <Char Type="mark">?</Char>
+    <Char Type="mark">§</Char>
+    <Char Type="mark">$</Char>
+    <Char Type="mark">€</Char>
+  </Line>
+  <Line>
+    <Char Type="ok">OK</Char>
+    <Char Type="space">ESPACE</Char>
+    <Char Type="enter">ENTER</Char>
+    <Char Type="delete">DÉTREMPER</Char>
+    <Char Type="speak">PARLER</Char>
+  </Line>
+</Keyboard>
