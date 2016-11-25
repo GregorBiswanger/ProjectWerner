@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectWerner.Features.Camera3DSimulator"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="ProjectWerner.Features.Camera3DSimulator.Camera3DSimulatorView"
+        mc:Ignorable="d"
+        Title="Camera3D Simulator" Height="200" Width="200" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="Manual" Left="0" Top="0">
+    <Window.Resources>
+        <local:Camera3DSimulatorViewModel x:Key="ViewModel" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource ViewModel}">
+        <Button Content="Mouth open" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="174" Height="35">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <ei:CallMethodAction MethodName="MouthOpen" TargetObject="{Binding Mode=OneWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Content="Mouth close" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="174" Height="40">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <ei:CallMethodAction MethodName="MouthClose" TargetObject="{Binding Mode=OneWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <CheckBox Content="Face recognized" IsChecked="{Binding FaceRecognized}" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

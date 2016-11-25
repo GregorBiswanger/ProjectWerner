@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using ProjectWerner.Views;
+using ProjectWerner.Features.ExtensionWindow;
 
 namespace ProjectWerner.Services
 {
@@ -7,7 +7,7 @@ namespace ProjectWerner.Services
 	{
 		public static void StartExtension(FrameworkElement extensionMainElement)
 		{			
-			var extensionWindow = new ExtensionWindow
+			var extensionWindow = new ExtensionWindowView
 			{
 				LayoutRoot = {Child = extensionMainElement},
 				Height = extensionMainElement.Height,

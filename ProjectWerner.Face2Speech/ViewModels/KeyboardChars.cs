@@ -1,4 +1,6 @@
-﻿namespace ProjectWerner.Extensions.HelloWorld.ViewModels
+﻿using PropertyChanged;
+
+namespace ProjectWerner.Face2Speech.ViewModels
 {
     [ImplementPropertyChanged]
     public class KeyboardChars

@@ -7,22 +7,25 @@ using System.Reflection;
 using System.Windows;
 using ProjectWerner.API;
 using ProjectWerner.Contracts.API;
+using ProjectWerner.Features.Camera3DSimulator;
 using ProjectWerner.ServiceLocator;
-using ProjectWerner.Services;
-using ProjectWerner.ViewModels.MainWindow;
 
 namespace ProjectWerner
 {
 
 	public partial class App : Application
     {
-		
-
 		public static CompositionContainer CompositionContainer;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
+
+            if (e.Args.Contains("camera3d-simulator"))
+            {
+                var camera3DSimulatorView = new Camera3DSimulatorView();
+                camera3DSimulatorView.Show();
+            }
 
             var aggregateCatalog = new AggregateCatalog();
             aggregateCatalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
@@ -44,18 +47,6 @@ namespace ProjectWerner
             }
 
             base.OnStartup(e);
-
-			var extensionLoader = new ExtensionLoader();
-
-			var mainWindowViewModel = new MainWindowViewModel(extensionLoader);
-
-	        var mainWindow = new MainWindow
-	        {
-				DataContext = mainWindowViewModel
-	        };
-
-			mainWindow.Show();
-
         }
     }
 }

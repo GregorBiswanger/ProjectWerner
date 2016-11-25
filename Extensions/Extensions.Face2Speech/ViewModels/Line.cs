@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PropertyChanged;
 
-namespace ProjectWerner.Extensions.Face2Speech.ViewModels
+namespace ProjectWerner.Face2Speech.ViewModels
 {
     [ImplementPropertyChanged]
     public class Line

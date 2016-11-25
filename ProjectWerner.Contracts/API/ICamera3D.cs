@@ -10,6 +10,7 @@ namespace ProjectWerner.Contracts.API
         event Action FaceLost;
         event Action MouthOpened;
         event Action MouthClosed;
+        event Action<byte[]> NewImageAvailable;
         bool IsFaceMouthOpen { get; set; }
 
         /// <summary>
@@ -19,6 +20,10 @@ namespace ProjectWerner.Contracts.API
         /// </summary>
         int MouthOpenValue { get; set; }
 
+        void OnMouthOpened(object sender, EventArgs e);
+        void OnMouthClosed(object sender, EventArgs e);
+        void OnFaceLost(object sender, EventArgs e);
+        void OnFaceVisible(object sender, EventArgs e);
         void Speech(string message);
 
         /// <summary>
