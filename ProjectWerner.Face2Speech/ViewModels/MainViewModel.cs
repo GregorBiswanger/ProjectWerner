@@ -17,21 +17,25 @@ using System.Xml;
 using System.Globalization;
 using ProjectWerner.Face2Speech.Functions;
 using ProjectWerner.ServiceLocator;
+using ProjectWerner.Face2Speech.Models;
 
 namespace ProjectWerner.Face2Speech.ViewModels
 {
     [ImplementPropertyChanged]
     public class MainViewModel
     {
-        public string selectedCulture { get; set; }
+        public CultureInfo selectedCulture { get; set; }
         public bool AcitvateFirstProspalWord { get; set; }
 
         public string DisplayText { get; set; }
         public ObservableCollection<Line> KeyboardLines { get; set; }
         public int SelectedKeyboardLineIndex { get; set; }
-        public ObservableCollection<Words> AllWords { get; set; }
-        public ObservableCollection<Words> ProposalWords { get; set; }
-        public Words SelectedProposalWord { get; set; }
+        public ObservableCollection<LanguageDictionary> AllLanguages { get; set; }
+
+        public LanguageDictionary SelectedLanguage { get; set; }
+        public ObservableCollection<WordDictionary> AllWords { get; set; }
+        public ObservableCollection<WordDictionary> ProposalWords { get; set; }
+        public WordDictionary SelectedProposalWord { get; set; }
         public int SelectedProposalWordIndex { get; set; }
 
         //Gesichterkennung
@@ -48,18 +52,20 @@ namespace ProjectWerner.Face2Speech.ViewModels
         {
             LoadConfig();
 
-            ReadDictionary myReadDictionary = new ReadDictionary();
-            ProposalWords = new ObservableCollection<Words>();
+            DictionaryManager myReadDictionary = new DictionaryManager();
+            //ProposalWords = new ObservableCollection<Words>();
 
             KeyboardLines = myReadDictionary.LoadKeyboardDictionary(selectedCulture);
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                AllWords = myReadDictionary.LoadWordsDictionary(selectedCulture);
+                myReadDictionary.LoadAllWords(selectedCulture);
+                SelectedLanguage = myReadDictionary.AllLanguages[0];
+                AllWords = SelectedLanguage.Words;
             }
             else
             {
-                AllWords = new ObservableCollection<Words>();
+                AllWords = new ObservableCollection<WordDictionary>();
             }
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -92,7 +98,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
             AcitvateFirstProspalWord = true;
             DisplayText = string.Empty;
             SelectedKeyboardLineIndex = -1;
-            selectedCulture = CultureInfo.CurrentCulture.Name;
+            selectedCulture = CultureInfo.CurrentCulture;
             //selectedCulture = "fr-FR";
         }
 
@@ -357,7 +363,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
                     {
                         clickedNumber = 10;
                     }
-                    if (clickedNumber-1 <= ProposalWords.Count)
+                    if (clickedNumber - 1 <= ProposalWords.Count)
                     {
                         SelectedProposalWordIndex = clickedNumber - 1;
                     }
@@ -391,16 +397,16 @@ namespace ProjectWerner.Face2Speech.ViewModels
                     }
                     if (SelectedProposalWord.NextWords != null)
                     {
-                        List<String> MyNextWords = SelectedProposalWord.NextWords;
-                        myProspalWords.Number = 0;
-                        ProposalWords.Clear();
-                        foreach (String NextWord in MyNextWords)
-                        {
-                            foreach (Words myWords in myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual))
-                            {
-                                ProposalWords.Add(myWords);
-                            }
-                        }
+                        //List<String> MyNextWords = SelectedProposalWord.NextWords;
+                        //myProspalWords.Number = 0;
+                        //ProposalWords.Clear();
+                        //foreach (String NextWord in MyNextWords)
+                        //{
+                        //    foreach (WordDictionary myWords in myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual))
+                        //    {
+                        //        ProposalWords.Add(myWords);
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -417,14 +423,14 @@ namespace ProjectWerner.Face2Speech.ViewModels
                 string lastWord = DisplayText.Trim().Split(' ').Last();
                 ProposalWords = myProspalWords.GetFirstLines(AllWords, lastWord, ProspalWords.SearchType.All);
             }
-            if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
-            {
-                SelectedProposalWordIndex = 0;
-            }
-            else
-            {
-                SelectedProposalWordIndex = -1;
-            }
+            //if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
+            //{
+            //    SelectedProposalWordIndex = 0;
+            //}
+            //else
+            //{
+            //    SelectedProposalWordIndex = -1;
+            //}
         }
 
         //http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html

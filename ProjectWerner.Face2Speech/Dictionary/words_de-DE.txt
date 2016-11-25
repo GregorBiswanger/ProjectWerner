@@ -22326,6 +22326,7 @@ Glasdosen
 Glases
 Glasfabertechnologie
 Glasfabrik
+glas
 Glasfabriken
 Glasfaserkabel
 Glasfenster
@@ -65690,7 +65691,7 @@ Zupfinstrument
 Zupfinstrumente
 Zupfinstrumenten
 Zuppa
-Zur;Hochzeit
+Zur
 Zurechnung
 Zurechnungsfähigkeit
 Zurechtweisung
@@ -70173,7 +70174,7 @@ allerwenigster
 allerwenigstes
 allerwichtigste
 allerwichtigsten
-alles;gute
+alles
 alleskönnende
 allezeit
 allfällig
@@ -102919,7 +102920,7 @@ gutbetuchte
 gutbezahlten
 gutbürgerlich
 gutbürgerlichen
-gute;zum;zur
+gute
 gutem
 guter
 guterhaltenen
@@ -129311,7 +129312,7 @@ stillt
 stillte
 stillten
 stilltet
-stillverg.ügtes
+stillvergnügtes
 stillvergnügper
 stillvergnügte
 stillvergnügtem
@@ -157421,7 +157422,7 @@ zuleitenden
 zuleitendes
 zuletzt
 zuliess
-zum;Geburtstag;Hochzeitstag
+zum
 zumachen
 zumachend
 zumachenden

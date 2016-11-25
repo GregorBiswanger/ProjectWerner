@@ -1,4 +1,5 @@
-﻿using ProjectWerner.Face2Speech.ViewModels;
+﻿using ProjectWerner.Face2Speech.Models;
+using ProjectWerner.Face2Speech.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,16 +14,16 @@ namespace ProjectWerner.Face2Speech.Functions
         public enum SearchType { All = 0, OnlyEqual = 1, OnlyStartsWith = 2 };
         public int Number = 0;
 
-        public ObservableCollection<Words> GetFirstLines(ObservableCollection<Words> AllWords, String LastWord, SearchType mySearchType)
+        public ObservableCollection<WordDictionary> GetFirstLines(ObservableCollection<WordDictionary> AllWords, String LastWord, SearchType mySearchType)
         {
-            ObservableCollection<Words> myReturnCollection = new ObservableCollection<Words>();
-            Dictionary<String, Words> addedWords = new Dictionary<string, Words>();
-            Words newWord;
-            IEnumerable<Words> proposalWords;
+            ObservableCollection<WordDictionary> myReturnCollection = new ObservableCollection<WordDictionary>();
+            Dictionary<String, WordDictionary> addedWords = new Dictionary<string, WordDictionary>();
+            WordDictionary newWord;
+            IEnumerable<WordDictionary> proposalWords;
 
             if (mySearchType == SearchType.All || mySearchType == SearchType.OnlyEqual)
             {
-                proposalWords = AllWords.Where(myWord => myWord.Text.Equals(LastWord)).OrderBy(x => x.Text.Length).Take(10);
+                proposalWords = AllWords.Where(MyText => MyText.Text.Equals(LastWord)).OrderBy(x => x.Text.Length).Take(10);
 
                 proposalWords.ToList().ForEach(myWord =>
                 {
@@ -37,9 +38,9 @@ namespace ProjectWerner.Face2Speech.Functions
                             }
 
                             addedWords.Add(myWord.Text, myWord);
-                            newWord = new Words();
+                            newWord = new WordDictionary();
                             newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
-                            newWord.NextWords = myWord.NextWords;
+                            //newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }
                     }
@@ -53,7 +54,7 @@ namespace ProjectWerner.Face2Speech.Functions
                         {
                             Number = 0;
                         }
-                        newWord = new Words();
+                        newWord = new WordDictionary();
                         newWord.Text = string.Format("{0}: {1}", Number, LastWord);
                         //newWord.NextWords = myWord.NextWords;
                         myReturnCollection.Add(newWord);
@@ -79,9 +80,9 @@ namespace ProjectWerner.Face2Speech.Functions
                             }
 
                             addedWords.Add(myWord.Text, myWord);
-                            newWord = new Words();
+                            newWord = new WordDictionary();
                             newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
-                            newWord.NextWords = myWord.NextWords;
+                            //newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }
 
