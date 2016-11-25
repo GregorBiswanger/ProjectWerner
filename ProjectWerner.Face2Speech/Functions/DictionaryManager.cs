@@ -12,60 +12,7 @@ namespace ProjectWerner.Face2Speech.Functions
 {
     class DictionaryManager
     {
-        //public ObservableCollection<Words> LoadWordsDictionary(String selectedCulture)
-        //{
-        //    ObservableCollection<Words> myReturnCollection = new ObservableCollection<Words>();
-        //    String myLine;
-        //    String myText;
-        //    String[] myWords;
-        //    Words myWordsObject;
-
-        //    System.IO.StreamReader textstream;
-
-        //    try
-        //    {
-        //        textstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\words_" + selectedCulture + ".txt", System.Text.Encoding.UTF8);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        textstream = new System.IO.StreamReader("Extensions\\Face2Speech\\Dictionary\\words_de-DE.txt", System.Text.Encoding.UTF8);
-        //    }
-
-        //    while (textstream.Peek() >= 0)
-        //    {
-        //        myLine = textstream.ReadLine();
-        //        myText = myLine.ToUpper();
-        //        myWordsObject = new Words();
-        //        myWordsObject.NextWords = new List<String>();
-
-        //        if (myLine.IndexOf(";") > 0)
-        //        {
-        //            //Wenn ; vorhanden, dann sind auch sinnvolle darauffolgende Wörter vorhanden, die gespeichert werden.                    
-        //            myWords = myLine.Split(new Char[] { ';' });
-
-        //            for (int i = 0; i < myWords.Length; i++)
-        //            {
-        //                myText = myWords[i].ToUpper();
-        //                if (i == 0)
-        //                {
-        //                    myWordsObject.Text = myText;
-        //                }
-        //                else
-        //                {
-        //                    myWordsObject.NextWords.Add(myWords[i].ToUpper());
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            myWordsObject.Text = myText;
-
-        //        }
-        //        myReturnCollection.Add(myWordsObject);
-        //    }
-        //    return myReturnCollection;
-        //}
+        private const string WordsTempFileName = "WordsTemp.xml";
 
         public ObservableCollection<LanguageDictionary> AllLanguages { get; set; } = new ObservableCollection<LanguageDictionary>();
 
@@ -164,7 +111,7 @@ namespace ProjectWerner.Face2Speech.Functions
         {
 
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<LanguageDictionary>));
-            using (TextWriter writer = new StreamWriter("MeineDatei.xml"))
+            using (TextWriter writer = new StreamWriter(WordsTempFileName))
             {
                 serializer.Serialize(writer, AllLanguages);
             }
@@ -172,16 +119,14 @@ namespace ProjectWerner.Face2Speech.Functions
 
         private void Deserialize()
         {
-
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<LanguageDictionary>));
-            if (File.Exists("MeineDatei.xml") ){
-                using (TextReader reader = new StreamReader("MeineDatei.xml"))
+            if (File.Exists(WordsTempFileName))
+            {
+                using (TextReader reader = new StreamReader(WordsTempFileName))
                 {
                     AllLanguages = (ObservableCollection<LanguageDictionary>)serializer.Deserialize(reader);
                 }
             }
-       }
+        }
     }
-
 }
-
