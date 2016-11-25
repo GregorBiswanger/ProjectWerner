@@ -154,7 +154,7 @@ namespace ProjectWerner.API
             }
             else
             {
-                _camera.Dispose();
+                _camera?.Dispose();
             }
         }
 
