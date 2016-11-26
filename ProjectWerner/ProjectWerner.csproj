@@ -136,6 +136,7 @@
       <DependentUpon>Camera3DSimulatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Features\Camera3DSimulator\Camera3DSimulatorViewModel.cs" />
+    <Compile Include="Features\FacePreviewWindow\Converters\WindowStateConverter.cs" />
     <Compile Include="Features\FacePreviewWindow\FacePreviewView.xaml.cs">
       <DependentUpon>FacePreviewView.xaml</DependentUpon>
     </Compile>

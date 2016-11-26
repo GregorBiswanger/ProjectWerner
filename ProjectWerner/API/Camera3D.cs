@@ -111,7 +111,7 @@ namespace ProjectWerner.API
         /// </summary>
         public Camera3D()
         {
-            MouthOpenValue = 30;
+            MouthOpenValue = 50;
             CheckKinect();
             CheckRealSense();
             SetupCamera();
