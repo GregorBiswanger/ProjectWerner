@@ -17,21 +17,24 @@ using System.Xml;
 using System.Globalization;
 using ProjectWerner.Face2Speech.Functions;
 using ProjectWerner.ServiceLocator;
+using ProjectWerner.Face2Speech.Models;
 
 namespace ProjectWerner.Face2Speech.ViewModels
 {
     [ImplementPropertyChanged]
     public class MainViewModel
     {
-        public string selectedCulture { get; set; }
+        public CultureInfo selectedCulture { get; set; }
         public bool AcitvateFirstProspalWord { get; set; }
 
         public string DisplayText { get; set; }
         public ObservableCollection<Line> KeyboardLines { get; set; }
         public int SelectedKeyboardLineIndex { get; set; }
-        public ObservableCollection<Words> AllWords { get; set; }
-        public ObservableCollection<Words> ProposalWords { get; set; }
-        public Words SelectedProposalWord { get; set; }
+        public ObservableCollection<LanguageDictionary> AllLanguages { get; set; }
+
+        public LanguageDictionary SelectedLanguage { get; set; }
+        public ObservableCollection<WordDictionary> ProposalWords { get; set; }
+        public WordDictionary SelectedProposalWord { get; set; }
         public int SelectedProposalWordIndex { get; set; }
 
         //Gesichterkennung
@@ -44,22 +47,18 @@ namespace ProjectWerner.Face2Speech.ViewModels
         private DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
 
+        private IDictionaryManager myDictionaryManager;
+
         public MainViewModel()
         {
             LoadConfig();
-
-            ReadDictionary myReadDictionary = new ReadDictionary();
-            ProposalWords = new ObservableCollection<Words>();
-
-            KeyboardLines = myReadDictionary.LoadKeyboardDictionary(selectedCulture);
+            myDictionaryManager = new DictionaryManager();
+            KeyboardLines = myDictionaryManager.LoadKeyboardDictionary(selectedCulture);
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                AllWords = myReadDictionary.LoadWordsDictionary(selectedCulture);
-            }
-            else
-            {
-                AllWords = new ObservableCollection<Words>();
+                myDictionaryManager.LoadAllWords(selectedCulture);
+                SelectedLanguage = myDictionaryManager.AllLanguages[0];
             }
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -92,11 +91,9 @@ namespace ProjectWerner.Face2Speech.ViewModels
             AcitvateFirstProspalWord = true;
             DisplayText = string.Empty;
             SelectedKeyboardLineIndex = -1;
-            selectedCulture = CultureInfo.CurrentCulture.Name;
+            selectedCulture = CultureInfo.CurrentCulture;
             //selectedCulture = "fr-FR";
         }
-
-
 
         private void OnMouthOpened()
         {
@@ -325,106 +322,182 @@ namespace ProjectWerner.Face2Speech.ViewModels
             string[] text;
             if (Chars.Type == "delete")
             {
-                if (DisplayText.Length > 0)
-                {
-                    DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
-                    text = DisplayText.Split(' ');
-                    ProposalWords = myProspalWords.GetFirstLines(AllWords, text[text.Length - 1], ProspalWords.SearchType.All);
-                }
+                text = TextActivityDelete(myProspalWords);
             }
             else if (Chars.Type == "enter")
             {
-                DisplayText = DisplayText + "\n";
+                TextActivityEnter();
             }
             else if (Chars.Type == "speak")
             {
-                _camera3D.Speech(DisplayText);
+                TextActivitySpeak();
+                myDictionaryManager.OnExit();
             }
             else if (Chars.Type == "space")
             {
-                DisplayText = DisplayText + " ";
-                ProposalWords.Clear();
+                TextActivitySpace();
+                RefillProposalWords(myProspalWords);
             }
             else if (Chars.Type == "mark")
             {
-                DisplayText = DisplayText.Trim() + Chars.Text + " ";
+                TextActivityMark(Chars);
             }
             else if (int.TryParse(Chars.Text, out result) || Chars.Type == "ok")
             {
-                if (int.TryParse(Chars.Text, out result)) {
-                    int clickedNumber = int.Parse(Chars.Text);
-                    if (clickedNumber == 0)
-                    {
-                        clickedNumber = 10;
-                    }
-                    if (clickedNumber-1 <= ProposalWords.Count)
-                    {
-                        SelectedProposalWordIndex = clickedNumber - 1;
-                    }
-                }
-                if (SelectedProposalWord != null)
+                if (DisplayText != "")
                 {
-                    text = DisplayText.Split(' ');
-                    if (text[text.Length - 1] != SelectedProposalWord.Text.Substring(3))
-                    {
-                        if (int.TryParse(Chars.Text, out result))
-                        {
-                            if (text[text.Length - 1] == "")
-                            {
-                                text[text.Length - 1] = text[text.Length - 2].Replace(text[text.Length - 2], SelectedProposalWord.Text.Substring(3)) + " ";
-                            } else
-                            {
-                                text[text.Length - 1] = text[text.Length - 1].Replace(text[text.Length - 1], SelectedProposalWord.Text.Substring(3)) + " ";
-                            }
-
-                            DisplayText = string.Join(" ", text);
-                        }
-                        else
-                        {
-                            DisplayText = DisplayText + SelectedProposalWord.Text.Substring(3) + " ";
-                        }
-                            
-                    }
-                    else
-                    {
-                        DisplayText = DisplayText + " ";
-                    }
-                    if (SelectedProposalWord.NextWords != null)
-                    {
-                        List<String> MyNextWords = SelectedProposalWord.NextWords;
-                        myProspalWords.Number = 0;
-                        ProposalWords.Clear();
-                        foreach (String NextWord in MyNextWords)
-                        {
-                            foreach (Words myWords in myProspalWords.GetFirstLines(AllWords, NextWord, ProspalWords.SearchType.OnlyEqual))
-                            {
-                                ProposalWords.Add(myWords);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        SelectedProposalWordIndex = -1;
-                        myProspalWords.Number = 0;
-                        ProposalWords.Clear();
-                    }
-
+                    result = TextActivitySelect(Chars, myProspalWords);
                 }
             }
             else
             {
-                DisplayText = DisplayText + Chars.Text;
-                string lastWord = DisplayText.Trim().Split(' ').Last();
-                ProposalWords = myProspalWords.GetFirstLines(AllWords, lastWord, ProspalWords.SearchType.All);
+                TextActivityType(Chars, myProspalWords);
             }
-            if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
+
+
+            if (ProposalWords != null)
             {
-                SelectedProposalWordIndex = 0;
+                if (ProposalWords.Count > 0 && AcitvateFirstProspalWord)
+                {
+                    SelectedProposalWordIndex = 0;
+                }
+                else
+                {
+                    SelectedProposalWordIndex = -1;
+                }
+                myProspalWords.SetNumbers(ProposalWords);
             }
-            else
+        }
+
+        private string[] TextActivityDelete(ProspalWords myProspalWords)
+        {
+            string[] text = new string[0];
+            if (DisplayText.Length > 0)
             {
-                SelectedProposalWordIndex = -1;
+                DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
+                text = DisplayText.Split(' ');
+                if (DisplayText == "")
+                {
+                    ProposalWords.Clear();
+                }
+                else
+                {
+                    ProposalWords = myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, text[text.Length - 1], ProspalWords.SearchType.All);
+                }
+
+
             }
+            return text;
+        }
+
+        private void TextActivityEnter()
+        {
+            DisplayText = DisplayText + "\n";
+        }
+
+        private void TextActivitySpeak()
+        {
+            myDictionaryManager.SaveCallsNextWords(DisplayText.Trim());
+            Clipboard.SetText(DisplayText);
+            _camera3D.Speech(DisplayText);
+            DisplayText = "";
+        }
+
+        private void TextActivitySpace()
+        {
+            string lastWord = DisplayText.Trim().Split(' ').Last();
+
+            DisplayText = DisplayText + " ";
+            ProposalWords.Clear();
+
+            SelectedProposalWord = myDictionaryManager.AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(lastWord)).FirstOrDefault<WordDictionary>();
+        }
+
+        private void TextActivityMark(KeyboardChars Chars)
+        {
+            DisplayText = DisplayText.Trim() + Chars.Text + " ";
+        }
+
+        private int TextActivitySelect(KeyboardChars Chars, ProspalWords myProspalWords)
+        {
+            int result = SelectNumber(Chars);
+             
+            if (SelectedProposalWord != null)
+            {
+                string[] text = DisplayText.Split(' ');
+                if (text[text.Length - 1] != SelectedProposalWord.Text.Substring(3))
+                {
+                    if (text[text.Length - 1] == "")
+                    {
+                        text[text.Length - 1] = text[text.Length - 2].Replace(text[text.Length - 2], SelectedProposalWord.Text.Substring(3)) + " ";
+                    }
+                    else
+                    {
+                        text[text.Length - 1] = text[text.Length - 1].Replace(text[text.Length - 1], SelectedProposalWord.Text.Substring(3)) + " ";
+                    }
+
+                    DisplayText = string.Join(" ", text);
+                }
+                else
+                {
+                    DisplayText = DisplayText + " ";
+                }
+
+                RefillProposalWords(myProspalWords);
+
+            }
+            return result;
+        }
+
+        private void RefillProposalWords(ProspalWords myProspalWords)
+        {
+            if (SelectedProposalWord != null)
+            {
+                if (SelectedProposalWord.NextWords != null)
+                {
+                    ObservableCollection<WordDictionary> MyNextWords = SelectedProposalWord.NextWords;
+                    ProposalWords.Clear();
+                    foreach (WordDictionary NextWord in MyNextWords)
+                    {
+                        foreach (WordDictionary myWords in myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, NextWord.Text, ProspalWords.SearchType.NextWord))
+                        {
+                            ProposalWords.Add(myWords);
+                        }
+                    }
+                    ProposalWords = new ObservableCollection<WordDictionary>(ProposalWords.OrderByDescending(x => x.Calls));
+                }
+                else
+                {
+                    SelectedProposalWordIndex = -1;
+                    ProposalWords.Clear();
+                }
+            }
+        }
+
+        private int SelectNumber(KeyboardChars Chars)
+        {
+            int result;
+            if (int.TryParse(Chars.Text, out result))
+            {
+                int clickedNumber = int.Parse(Chars.Text);
+                if (clickedNumber == 0)
+                {
+                    clickedNumber = 10;
+                }
+                if (clickedNumber - 1 <= ProposalWords.Count)
+                {
+                    SelectedProposalWordIndex = clickedNumber - 1;
+                }
+            }
+
+            return result;
+        }
+
+        private void TextActivityType(KeyboardChars Chars, ProspalWords myProspalWords)
+        {
+            DisplayText = DisplayText + Chars.Text;
+            string lastWord = DisplayText.Trim().Split(' ').Last();
+            ProposalWords = myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, lastWord, ProspalWords.SearchType.All);
         }
 
         //http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html

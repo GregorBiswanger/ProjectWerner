@@ -57,6 +57,8 @@
     <Char Type="mark">§</Char>
     <Char Type="mark">$</Char>
     <Char Type="mark">€</Char>
+    <Char>@</Char>
+    <Char>#</Char>
   </Line>
   <Line>
     <Char Type="ok">OK</Char>
