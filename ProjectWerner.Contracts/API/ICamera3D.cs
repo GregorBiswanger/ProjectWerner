@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using SharpSenses;
 
 namespace ProjectWerner.Contracts.API
 {
+    [InheritedExport]
     public interface ICamera3D
     {
         event Action FaceVisible;
