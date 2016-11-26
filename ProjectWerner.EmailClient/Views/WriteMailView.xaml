@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="ProjectWerner.EmailClient.Views.WriteMailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectWerner.EmailClient.Views"
+             mc:Ignorable="d" 
+             Height="320" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="1.6*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="1">#von</Label>
+        <Label Grid.Column="0" Grid.Row="3">#nach</Label>
+        <Label Grid.Column="0" Grid.Row="5">#betreff</Label>
+        <Label Grid.Column="0" Grid.Row="7">#nachricht</Label>
+        <Label Grid.Column="0" Grid.Row="9">#senden</Label>
+
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="From"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" x:Name="To"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="5" x:Name="Subject"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="7" x:Name="Message"></TextBox>
+        <Button Grid.Column="1" Grid.Row="9" >Senden</Button>
+
+    </Grid>
+
+</UserControl>
+

@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using ProjectWerner.Contracts.Extensions;
+using ProjectWerner.OpenSoftware.ViewModels;
 
 namespace ProjectWerner.OpenSoftware.Views
 {
@@ -13,14 +14,17 @@ namespace ProjectWerner.OpenSoftware.Views
     {
         public MainView()
         {
-           
-
             InitializeComponent();
-            
+           
+            ((UserControl) this).Loaded += (sender, args) =>
+            {
+                MainViewModel xxx = (MainViewModel)AppUserControl.DataContext;
+                xxx.Add("gimp");
+            };
+
         }
 
-	 
-
+        
         public UserControl AppUserControl => this;
     }
 }
