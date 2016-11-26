@@ -13,7 +13,7 @@ namespace ProjectWerner.Face2Speech.Models
     {
         public string Text { get; set; }
         public int Calls { get; set; }
-        public ObservableCollection<WordDictionary> NextWords { get; set; }
+        public ObservableCollection<WordDictionary> NextWords { get; set; } = new ObservableCollection<WordDictionary>();
 
     }
 }

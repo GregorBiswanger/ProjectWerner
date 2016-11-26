@@ -1,6 +1,7 @@
 ﻿using ProjectWerner.Face2Speech.Models;
 using ProjectWerner.Face2Speech.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -33,6 +34,32 @@ namespace ProjectWerner.Face2Speech.Functions
             Serialize();
         }
 
+        public void SaveCallsNextWords(string DisplayText)
+        {
+            string[] allWords = DisplayText.Split(' ');
+            for (int i= 0; i < allWords.Length;i++)
+            {
+                var proposalWords = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i])).First<WordDictionary>();
+                proposalWords.Calls += 1;
+                if (i < allWords.Length - 1)
+                {
+                   
+                    var nextWords = proposalWords.NextWords.Where(MyText => MyText.Text.Equals(allWords[i+1])).FirstOrDefault<WordDictionary>();
+                    if (nextWords == null)
+                    {
+                        WordDictionary newWordDictionary = new WordDictionary();
+                        newWordDictionary.Text = allWords[i + 1];
+                        newWordDictionary.Calls = 1;
+                        proposalWords.NextWords.Add(newWordDictionary);
+                    }
+                    else
+                    {
+                        nextWords.Calls += 1;
+                    }
+                }
+            }
+        }
+  
         private void LoadFromFile(CultureInfo selectedCulture)
         {
             ObservableCollection<WordDictionary> MyReturn = new ObservableCollection<WordDictionary>();

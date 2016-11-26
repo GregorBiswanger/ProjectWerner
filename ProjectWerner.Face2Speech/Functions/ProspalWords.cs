@@ -23,7 +23,7 @@ namespace ProjectWerner.Face2Speech.Functions
 
             if (mySearchType == SearchType.All || mySearchType == SearchType.OnlyEqual)
             {
-                proposalWords = AllWords.Where(MyText => MyText.Text.Equals(LastWord)).OrderBy(x => x.Text.Length).Take(10);
+                proposalWords = AllWords.Where(MyText => MyText.Text.Equals(LastWord)).OrderBy(x =>  x.Text.Length).Take(10);
 
                 proposalWords.ToList().ForEach(myWord =>
                 {
@@ -40,7 +40,7 @@ namespace ProjectWerner.Face2Speech.Functions
                             addedWords.Add(myWord.Text, myWord);
                             newWord = new WordDictionary();
                             newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
-                            //newWord.NextWords = myWord.NextWords;
+                            newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }
                     }
@@ -56,7 +56,6 @@ namespace ProjectWerner.Face2Speech.Functions
                         }
                         newWord = new WordDictionary();
                         newWord.Text = string.Format("{0}: {1}", Number, LastWord);
-                        //newWord.NextWords = myWord.NextWords;
                         myReturnCollection.Add(newWord);
                     }
                 }
@@ -64,9 +63,7 @@ namespace ProjectWerner.Face2Speech.Functions
 
             if (mySearchType == SearchType.All || mySearchType == SearchType.OnlyStartsWith)
             {
-
                 proposalWords = AllWords.Where(myWord => myWord.Text.StartsWith(LastWord)).OrderBy(x => x.Text.Length).Take(10);
-
                 proposalWords.ToList().ForEach(myWord =>
                 {
                     if (!addedWords.ContainsKey(myWord.Text) && myReturnCollection.Count < 10)
@@ -82,14 +79,12 @@ namespace ProjectWerner.Face2Speech.Functions
                             addedWords.Add(myWord.Text, myWord);
                             newWord = new WordDictionary();
                             newWord.Text = string.Format("{0}: {1}", Number, myWord.Text);
-                            //newWord.NextWords = myWord.NextWords;
                             myReturnCollection.Add(newWord);
                         }
 
                     }
                 });
             }
-
 
             return myReturnCollection;
         }
