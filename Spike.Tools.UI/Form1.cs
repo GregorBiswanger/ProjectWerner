@@ -52,7 +52,7 @@ namespace Spike.Tools.UI
                     // Keydown: Alt left or Alt right
                     if (this.WindowState == FormWindowState.Minimized)
                     {
-                        WindowHelper.ShowWindow(this.Handle, WindowHelper.SW_RESTORE);
+                        WindowHelper.ShowWindow(this.Handle, WindowHelper.SwRestore);
                     }
                     else
                     {
@@ -66,23 +66,35 @@ namespace Spike.Tools.UI
         {
             //do
             //{
-            //    if (this.WindowState == FormWindowState.Minimized)
-            //    {
-            //        WindowHelper.ShowWindow(this.Handle, WindowHelper.SW_RESTORE);
-            //    }
-            //    else
-            //    {
-            //        WindowHelper.SetForegroundWindow(this.Handle);
-            //    }
+            //    SendKeys.SendWait("%{TAB}");
+            //    SendKeys.SendWait("%");
+                
 
 
-            //    KeyboardHelper.AltTab();
-            //    Thread.Sleep(5 * 1000);
-            //    if (isCanceled)
-            //    {
-            //        break;
-            //    }
-            //} while (isCanceled == false);
+            //} while (true);
+
+            do
+            {
+                //if (this.WindowState == FormWindowState.Minimized)
+                //{
+                //    WindowHelper.ShowWindow(this.Handle, WindowHelper.SW_RESTORE);
+                //}
+                //else
+                //{
+                //    WindowHelper.SetForegroundWindow(this.Handle);
+                //}
+
+
+                //KeyboardHelper.AltTab();
+                SendKeyHelper.SwitchApplication();
+                
+
+                Thread.Sleep(2 * 1000);
+                if (isCanceled)
+                {
+                    break;
+                }
+            } while (isCanceled == false);
         }
 
         private void button2_Click(object sender, EventArgs e)

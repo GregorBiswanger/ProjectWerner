@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ProjectWerner.SwitchApplication.Views.ButtonList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:ProjectWerner.SwitchApplication.Converter"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <converter:BoolToColorConverter x:Key="BoolToColorConverter" />
+        <DataTemplate x:Key = "ButtonListTemplate">
+            <Button Background="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}"
+                    Content="{Binding Label, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding Command}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <ListBox 
+         ItemsSource = "{Binding Buttons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+         ItemTemplate = "{StaticResource ButtonListTemplate}"
+         SelectedIndex="{Binding SelectedIndex}"/>
+    </Grid>
+</UserControl>

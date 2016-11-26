@@ -16,5 +16,10 @@
         /// Arguments to push into / during startup
         /// </summary>
         string Arguments { get; }
+
+        /// <summary>
+        /// ProcessId of one of the current running processes
+        /// </summary>
+        int ProcessId { get; }
     }
 }

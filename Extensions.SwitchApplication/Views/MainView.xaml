@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Button Name="StartProcess" Width="200px" Height="200px" ></Button>
-    </Grid>
+             xmlns:views="clr-namespace:ProjectWerner.SwitchApplication.Views"
+             xmlns:viewModels="clr-namespace:ProjectWerner.SwitchApplication.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="400">
+    <UserControl.Resources>
+        <viewModels:MainViewModel x:Key="MainViewModel">
+            
+        </viewModels:MainViewModel>
+    </UserControl.Resources>
+    <WrapPanel Name="StackPanel" DataContext="{StaticResource MainViewModel}" Orientation="Vertical"></WrapPanel>
 </UserControl>
