@@ -344,7 +344,10 @@ namespace ProjectWerner.Face2Speech.ViewModels
             }
             else if (int.TryParse(Chars.Text, out result) || Chars.Type == "ok")
             {
-                result = TextActivitySelect(Chars, myProspalWords);
+                if (DisplayText != "")
+                {
+                    result = TextActivitySelect(Chars, myProspalWords);
+                }
             }
             else
             {
