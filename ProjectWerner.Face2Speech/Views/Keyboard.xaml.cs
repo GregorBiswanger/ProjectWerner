@@ -13,9 +13,8 @@ namespace ProjectWerner.Face2Speech.Views
     {
         public Keyboard()
         {
-
             MicroKernel.Kernel.Bind<IDictionaryManager>().To<DictionaryManager>().InSingletonScope();
-           InitializeComponent();
+            InitializeComponent();
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -36,7 +35,7 @@ namespace ProjectWerner.Face2Speech.Views
 
         public void OnApplicationClosed()
         {
-           MicroKernel.Get<IDictionaryManager>().OnExit();
+            MicroKernel.Get<IDictionaryManager>().OnExit();
         }
 
         public UserControl AppUserControl { get { return this; } }

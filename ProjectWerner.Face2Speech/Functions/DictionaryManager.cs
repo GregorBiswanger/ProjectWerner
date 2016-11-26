@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace ProjectWerner.Face2Speech.Functions
 {
-    class DictionaryManager : IDictionaryManager
+    public class DictionaryManager : IDictionaryManager
     {
         private const string WordsTempFileName = "WordsTemp.xml";
 

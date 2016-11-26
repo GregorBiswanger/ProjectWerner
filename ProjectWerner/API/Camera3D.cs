@@ -14,7 +14,6 @@ using SharpSenses.RealSense;
 
 namespace ProjectWerner.API
 {
-    [Export(typeof(ICamera3D))]
     public class Camera3D : ICamera3D
     {
         #region Actions

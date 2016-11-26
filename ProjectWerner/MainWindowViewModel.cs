@@ -33,7 +33,6 @@ namespace ProjectWerner
             {
                 _camera3D = MicroKernel.Get<ICamera3D>();
 
-              
                 Extensions = new ObservableCollection<ExtensionDataSet>(extensionLoader.GetExtensions());
                 Extensions.First().IsSelected = true;
 

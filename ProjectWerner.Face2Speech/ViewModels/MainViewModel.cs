@@ -43,7 +43,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
         public bool MouthOpen { get; set; }
         public bool MouthClosed { get; set; }
 
-        [Import]
+        //[Import]
         private ICamera3D _camera3D;
         private DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
@@ -54,7 +54,6 @@ namespace ProjectWerner.Face2Speech.ViewModels
         {
             LoadConfig();
 
-            
             //ProposalWords = new ObservableCollection<Words>();
             myDictionaryManager = MicroKernel.Get<IDictionaryManager>();
 

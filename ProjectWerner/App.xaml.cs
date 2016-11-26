@@ -14,7 +14,6 @@ using ProjectWerner.Services;
 
 namespace ProjectWerner
 {
-
 	public partial class App : Application
     {
 		public static CompositionContainer CompositionContainer;
@@ -23,7 +22,6 @@ namespace ProjectWerner
         {
             MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
             MicroKernel.Kernel.Bind<IExtensionLoader>().To<ExtensionLoader>().InSingletonScope();
-           
 
             if (e.Args.Contains("camera3d-simulator"))
             {
