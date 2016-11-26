@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
 
@@ -14,5 +15,9 @@ namespace ExamplePluginA.Views
         }
 
         public UserControl AppUserControl { get { return this; } }
+
+        public void OnApplicationClosed()
+        {
+        }
     }
 }

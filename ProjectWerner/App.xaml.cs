@@ -9,6 +9,7 @@ using ProjectWerner.API;
 using ProjectWerner.Contracts.API;
 using ProjectWerner.Features.Camera3DSimulator;
 using ProjectWerner.ServiceLocator;
+using ProjectWerner.Services;
 
 namespace ProjectWerner
 {
@@ -20,6 +21,8 @@ namespace ProjectWerner
         protected override void OnStartup(StartupEventArgs e)
         {
             MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
+            MicroKernel.Kernel.Bind<IExtensionLoader>().To<ExtensionLoader>().InSingletonScope();
+
 
             if (e.Args.Contains("camera3d-simulator"))
             {
@@ -47,6 +50,16 @@ namespace ProjectWerner
             }
 
             base.OnStartup(e);
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            IExtensionLoader extensionloader = MicroKernel.Get<IExtensionLoader>();
+            var allExtensions = extensionloader.GetExtensions();
+            foreach (var extension in allExtensions)
+            {
+                extension.Extension.OnApplicationClosed();
+            }
         }
     }
 }

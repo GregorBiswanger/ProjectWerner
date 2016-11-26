@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged, Version=1.50.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
@@ -93,13 +94,15 @@
   <ItemGroup>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Functions\DictionaryManager.cs" />
+    <Compile Include="Functions\IDictionaryManager.cs" />
     <Compile Include="Functions\ProspalWords.cs" />
-    <Compile Include="Functions\ReadDictionary.cs" />
+    <Compile Include="Models\LanguageDictionary.cs" />
+    <Compile Include="Models\WordDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Line.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\KeyboardChars.cs" />
-    <Compile Include="ViewModels\Words.cs" />
     <Compile Include="Views\Keyboard.xaml.cs">
       <DependentUpon>Keyboard.xaml</DependentUpon>
     </Compile>
