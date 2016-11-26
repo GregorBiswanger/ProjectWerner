@@ -376,10 +376,17 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
                 text = DisplayText.Split(' ');
-                ProposalWords = myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, text[text.Length - 1], ProspalWords.SearchType.All);
+                if (DisplayText == "")
+                {
+                    ProposalWords.Clear();
+                }
+                else
+                {
+                    ProposalWords = myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, text[text.Length - 1], ProspalWords.SearchType.All);
+                }
+
 
             }
-           
             return text;
         }
 
