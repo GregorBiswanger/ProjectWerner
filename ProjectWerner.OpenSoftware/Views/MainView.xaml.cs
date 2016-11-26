@@ -26,5 +26,9 @@ namespace ProjectWerner.OpenSoftware.Views
 
         
         public UserControl AppUserControl => this;
+	    public void OnApplicationClosed()
+	    {
+	        
+	    }
     }
 }

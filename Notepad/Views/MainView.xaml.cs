@@ -30,5 +30,9 @@ namespace ProjectWerner.Notepad.Views
         }
 
         public UserControl AppUserControl => this;
+        public void OnApplicationClosed()
+        {
+            
+        }
     }
 }
