@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using SharpSenses;
 
 namespace ProjectWerner.Contracts.API
 {
@@ -8,8 +9,11 @@ namespace ProjectWerner.Contracts.API
     {
         event Action FaceVisible;
         event Action FaceLost;
+        event Action MouthVisible;
+        event Action MouthLost;
         event Action MouthOpened;
         event Action MouthClosed;
+        event Action<PositionEventArgs> MouthMoved;
         event Action<byte[]> NewImageAvailable;
         bool IsFaceMouthOpen { get; set; }
 

@@ -29,6 +29,10 @@ namespace ProjectWerner.API
         /// </summary>
         public event Action FaceVisible;
 
+        public event Action MouthVisible;
+
+        public event Action MouthLost;
+
         /// <summary>
         /// when mouth is opened
         /// </summary>
@@ -38,6 +42,8 @@ namespace ProjectWerner.API
         /// when mouth is closed
         /// </summary>
         public event Action MouthClosed;
+
+        public event Action<PositionEventArgs> MouthMoved;
 
         /// <summary>
         /// called when camera is connected
@@ -198,8 +204,11 @@ namespace ProjectWerner.API
 
             _camera.Face.Visible += OnFaceVisible;
             _camera.Face.NotVisible += OnFaceLost;
+            _camera.Face.Mouth.Visible += OnMouthVisible;
+            _camera.Face.Mouth.NotVisible += OnMouthNotVisible;
             _camera.Face.Mouth.Opened += OnMouthOpened;
             _camera.Face.Mouth.Closed += OnMouthClosed;
+            _camera.Face.Mouth.Moved += OnMouthMoved;
             _camera.ImageStream.NewImageAvailable += OnNewImageAvailable;
 
             FacialExpressionCapability.MonthOpenThreshold = MouthOpenValue;
@@ -207,6 +216,12 @@ namespace ProjectWerner.API
             _camera.Start();
 
             Connected?.Invoke();
+        }
+
+
+        private void OnMouthMoved(object sender, PositionEventArgs e)
+        {
+            MouthMoved?.Invoke(e);
         }
 
 
@@ -384,6 +399,16 @@ namespace ProjectWerner.API
         public void OnFaceVisible(object sender, EventArgs e)
         {
             FaceVisible?.Invoke();
+        }
+
+        private void OnMouthVisible(object sender, EventArgs e)
+        {
+            MouthVisible?.Invoke();
+        }
+
+        private void OnMouthNotVisible(object sender, EventArgs e)
+        {
+            MouthLost?.Invoke();
         }
 
         /// <summary>
