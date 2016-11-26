@@ -21,7 +21,6 @@ namespace ProjectWerner
         protected override void OnStartup(StartupEventArgs e)
         {
             MicroKernel.Kernel.Bind<ICamera3D>().To<Camera3D>().InSingletonScope();
-            MicroKernel.Kernel.Bind<IExtensionLoader>().To<ExtensionLoader>().InSingletonScope();
 
             if (e.Args.Contains("camera3d-simulator"))
             {
