@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace ProjectWerner.Face2Speech.Functions
 {
-    class DictionaryManager
+    class DictionaryManager : IDictionaryManager
     {
         private const string WordsTempFileName = "WordsTemp.xml";
 
@@ -39,24 +39,31 @@ namespace ProjectWerner.Face2Speech.Functions
             string[] allWords = DisplayText.Split(' ');
             for (int i= 0; i < allWords.Length;i++)
             {
-                var proposalWords = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i])).First<WordDictionary>();
-                proposalWords.Calls += 1;
-                if (i < allWords.Length - 1)
+                var proposalWords = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i])).FirstOrDefault<WordDictionary>();
+                if (proposalWords != null)
                 {
-                    var nextWordsOriginal = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i+1])).First<WordDictionary>();
-                    nextWordsOriginal.Calls += 1;
+                    proposalWords.Calls += 1;
+                    if (i < allWords.Length - 1)
+                    {
+                        var nextWordsOriginal = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i + 1])).FirstOrDefault<WordDictionary>();
+                        if (nextWordsOriginal != null)
+                        {
+                            nextWordsOriginal.Calls += 1;
+                        }
+                        
 
-                    var nextWords = proposalWords.NextWords.Where(MyText => MyText.Text.Equals(allWords[i+1])).FirstOrDefault<WordDictionary>();
-                    if (nextWords == null)
-                    {
-                        WordDictionary newWordDictionary = new WordDictionary();
-                        newWordDictionary.Text = allWords[i + 1];
-                        newWordDictionary.Calls = 1;
-                        proposalWords.NextWords.Add(newWordDictionary);
-                    }
-                    else
-                    {
-                        nextWords.Calls += 1;
+                        var nextWords = proposalWords.NextWords.Where(MyText => MyText.Text.Equals(allWords[i + 1])).FirstOrDefault<WordDictionary>();
+                        if (nextWords == null)
+                        {
+                            WordDictionary newWordDictionary = new WordDictionary();
+                            newWordDictionary.Text = allWords[i + 1];
+                            newWordDictionary.Calls = 1;
+                            proposalWords.NextWords.Add(newWordDictionary);
+                        }
+                        else
+                        {
+                            nextWords.Calls += 1;
+                        }
                     }
                 }
             }

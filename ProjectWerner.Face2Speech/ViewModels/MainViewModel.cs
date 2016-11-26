@@ -47,7 +47,8 @@ namespace ProjectWerner.Face2Speech.ViewModels
         private ICamera3D _camera3D;
         private DispatcherTimer _dispatcherTimer;
         private readonly int _intervalSeconds = 1; // Werner hat 3 Sek.
-        private DictionaryManager myDictionaryManager = new DictionaryManager();
+        //private DictionaryManager myDictionaryManager = new DictionaryManager();
+        private IDictionaryManager myDictionaryManager;
 
         public MainViewModel()
         {
@@ -55,6 +56,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             
             //ProposalWords = new ObservableCollection<Words>();
+            myDictionaryManager = MicroKernel.Get<IDictionaryManager>();
 
             KeyboardLines = myDictionaryManager.LoadKeyboardDictionary(selectedCulture);
 

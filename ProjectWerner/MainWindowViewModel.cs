@@ -21,8 +21,9 @@ namespace ProjectWerner
         private readonly DispatcherTimer _selectionTimer;
 		private int _selectedItemIndex;
 	    private ICamera3D _camera3D;
+        private ExtensionLoader extensionLoader = new ExtensionLoader();
 
-		public MainWindowViewModel()
+        public MainWindowViewModel()
 		{
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
@@ -32,7 +33,7 @@ namespace ProjectWerner
             {
                 _camera3D = MicroKernel.Get<ICamera3D>();
 
-                var extensionLoader = new ExtensionLoader();
+              
                 Extensions = new ObservableCollection<ExtensionDataSet>(extensionLoader.GetExtensions());
                 Extensions.First().IsSelected = true;
 

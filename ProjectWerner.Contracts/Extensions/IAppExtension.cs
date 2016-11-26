@@ -8,5 +8,7 @@ namespace ProjectWerner.Contracts.Extensions
     public interface IAppExtension
     {
          UserControl AppUserControl { get; }
+
+        void OnApplicationClosed();
     }
 }

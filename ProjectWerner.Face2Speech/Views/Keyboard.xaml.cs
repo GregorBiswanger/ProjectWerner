@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
+using ProjectWerner.Face2Speech.Functions;
+using ProjectWerner.ServiceLocator;
 
 namespace ProjectWerner.Face2Speech.Views
 {
@@ -10,6 +13,8 @@ namespace ProjectWerner.Face2Speech.Views
     {
         public Keyboard()
         {
+
+            MicroKernel.Kernel.Bind<IDictionaryManager>().To<DictionaryManager>().InSingletonScope();
            InitializeComponent();
         }
 
@@ -27,6 +32,11 @@ namespace ProjectWerner.Face2Speech.Views
             {
                 Canvas.SetTop(Caret, caretLocation.Y);
             }
+        }
+
+        public void OnApplicationClosed()
+        {
+           MicroKernel.Get<IDictionaryManager>().OnExit();
         }
 
         public UserControl AppUserControl { get { return this; } }
