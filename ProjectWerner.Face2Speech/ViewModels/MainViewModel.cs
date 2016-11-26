@@ -362,6 +362,8 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 SelectedProposalWordIndex = -1;
             }
+
+            myProspalWords.SetNumbers(ProposalWords);
         }
 
         private string[] TextActivityDelete(ProspalWords myProspalWords)
@@ -372,8 +374,9 @@ namespace ProjectWerner.Face2Speech.ViewModels
                 DisplayText = DisplayText.Remove(DisplayText.Length - 1, 1);
                 text = DisplayText.Split(' ');
                 ProposalWords = myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, text[text.Length - 1], ProspalWords.SearchType.All);
-            }
 
+            }
+           
             return text;
         }
 
@@ -451,20 +454,19 @@ namespace ProjectWerner.Face2Speech.ViewModels
                 if (SelectedProposalWord.NextWords != null)
                 {
                     ObservableCollection<WordDictionary> MyNextWords = SelectedProposalWord.NextWords;
-                    myProspalWords.Number = 0;
                     ProposalWords.Clear();
                     foreach (WordDictionary NextWord in MyNextWords)
                     {
-                        foreach (WordDictionary myWords in myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, NextWord.Text, ProspalWords.SearchType.OnlyEqual))
+                        foreach (WordDictionary myWords in myProspalWords.GetFirstLines(myDictionaryManager.AllLanguages[0].Words, NextWord.Text, ProspalWords.SearchType.NextWord))
                         {
                             ProposalWords.Add(myWords);
                         }
                     }
+                    ProposalWords = new ObservableCollection<WordDictionary>(ProposalWords.OrderByDescending(x => x.Calls));
                 }
                 else
                 {
                     SelectedProposalWordIndex = -1;
-                    myProspalWords.Number = 0;
                     ProposalWords.Clear();
                 }
             }

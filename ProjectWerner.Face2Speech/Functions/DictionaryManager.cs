@@ -43,7 +43,9 @@ namespace ProjectWerner.Face2Speech.Functions
                 proposalWords.Calls += 1;
                 if (i < allWords.Length - 1)
                 {
-                   
+                    var nextWordsOriginal = AllLanguages[0].Words.Where(MyText => MyText.Text.Equals(allWords[i+1])).First<WordDictionary>();
+                    nextWordsOriginal.Calls += 1;
+
                     var nextWords = proposalWords.NextWords.Where(MyText => MyText.Text.Equals(allWords[i+1])).FirstOrDefault<WordDictionary>();
                     if (nextWords == null)
                     {
