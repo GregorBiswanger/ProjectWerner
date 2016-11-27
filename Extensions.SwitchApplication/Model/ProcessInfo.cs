@@ -4,36 +4,31 @@ namespace ProjectWerner.SwitchApplication.Model
 {
     public class ProcessInfo : IProcessInfo
     {
-        #region Implementation of IProcessInfo
 
         /// <summary>
         /// Exe Filename, e.g. notepad.exe
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileName { get; set; }
 
         /// <summary>
         /// Path to execution location of <seealso cref="IProcessInfo.FileName"/>
         /// </summary>
-        public string ExecutionPath { get; private set; }
+        public string ExecutionPath { get; set; }
 
         /// <summary>
         /// Arguments to push into / during startup
         /// </summary>
-        public string Arguments { get; private set; }
+        public string Arguments { get; set; }
 
         /// <summary>
         /// ProcessId
         /// </summary>
         public int ProcessId { get; set; }
 
-        #endregion
+        /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
 
-        public ProcessInfo(string fileName, string executionPath, string arguments, int processId)
-        {
-            this.FileName = fileName;
-            this.ExecutionPath = executionPath;
-            this.Arguments = arguments;
-            this.ProcessId = processId;
-        }
     }
 }

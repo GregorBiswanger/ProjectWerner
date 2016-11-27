@@ -1,5 +1,6 @@
 ﻿using ProjectWerner.SwitchApplication.Utilities;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -100,6 +101,13 @@ namespace Spike.Tools.UI
         private void button2_Click(object sender, EventArgs e)
         {
             isCanceled = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var list = WmiHelper.GetAllCurrentlyRunningProcesses().ToList();
+            var ie = list.FirstOrDefault(l => l.FileName.StartsWith("iexplor"));
+            var test = WmiHelper.GetProcessInfo(ie.ProcessId);
         }
     }
 }

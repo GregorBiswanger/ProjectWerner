@@ -21,5 +21,10 @@
         /// ProcessId of one of the current running processes
         /// </summary>
         int ProcessId { get; }
+
+        /// <summary>
+        /// Description
+        /// </summary>
+        string Description { get; }
     }
 }

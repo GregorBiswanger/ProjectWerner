@@ -103,15 +103,6 @@ namespace ProjectWerner.SwitchApplication.ViewModels
                 return process[0].MainWindowTitle;
             }
             var name = fileName.Substring(0, fileName.IndexOf(".exe", StringComparison.InvariantCultureIgnoreCase));
-
-            //name = Path.GetInvalidFileNameChars().Aggregate(name, (current, invalidFileNameChar) => current.Replace(invalidFileNameChar.ToString(), ""));
-            //name = Path.GetInvalidPathChars().Aggregate(name, (current, invalidPathChar) => current.Replace(invalidPathChar.ToString(), ""));
-            //name = name.Replace("-", "");
-            //name = name.Replace(".", "");
-            //name = name.Replace("_", "");
-            //name = name.Replace("~", "");
-            //name = name.Replace(" ", "");
-            //name = name.Replace("+", "");
             return name;
         }
 
@@ -190,6 +181,7 @@ namespace ProjectWerner.SwitchApplication.ViewModels
         private void ExecuteProcess(int processId)
         {
             var process = Process.GetProcessById(processId);
+            
             SetForegroundWindow(FindWindowByCaption(IntPtr.Zero, process.MainWindowTitle));
             process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             SendKeys.SendWait("%{TAB}");
