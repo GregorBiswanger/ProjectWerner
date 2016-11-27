@@ -6,7 +6,17 @@
              xmlns:local="clr-namespace:ProjectWerner.EmailClient.Views"
              mc:Ignorable="d" 
              Height="320" Width="800">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+    
+    <Grid Grid.Row="0" Grid.Column="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -37,6 +47,7 @@
         <TextBox Grid.Column="1" Grid.Row="7" x:Name="Message"></TextBox>
         <Button Grid.Column="1" Grid.Row="9" >Senden</Button>
 
+    </Grid>
     </Grid>
 
 </UserControl>

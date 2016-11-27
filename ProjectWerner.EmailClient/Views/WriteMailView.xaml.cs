@@ -95,7 +95,6 @@ namespace ProjectWerner.EmailClient.Views
             mail.Subject = Mail.Subject;
             mail.Body = Mail.Body;
             client.EnableSsl = true;
-
             client.Send(mail);
         }
         

@@ -47,6 +47,25 @@ namespace ProjectWerner.OpenSoftware.ViewModels
 
         public void Start()
         {
+            string text = Clipboard.GetText();
+
+            text = text.ToLower();
+
+            foreach (var software in SoftwareList)
+            {
+                if (software.Key.Contains(text))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(software.Value);
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                }
+            }
+
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 _dispatcherTimer = new DispatcherTimer();
@@ -112,14 +131,7 @@ namespace ProjectWerner.OpenSoftware.ViewModels
 
                 OnPropertyChanged("SelectedIndex");
             }
-
-           
-
-
-
-            //else
-            //{
-            //}
+            
         }
 
         private bool _waitForConfirmation = false;
@@ -128,9 +140,9 @@ namespace ProjectWerner.OpenSoftware.ViewModels
             _dispatcherTimer.Stop();
 
             Thread.Sleep(new TimeSpan(0, 0, _intervalSeconds));
+
             if (_camera3D.IsFaceMouthOpen)
             {
-               
                 try
                 {
                     System.Diagnostics.Process.Start(SoftwareList[SelectedIndex].Value);
@@ -150,13 +162,7 @@ namespace ProjectWerner.OpenSoftware.ViewModels
 
             //  
         }
-
-
-
-        private void BackToMain()
-        {
-
-        }
+        
 
 
         /// <summary>

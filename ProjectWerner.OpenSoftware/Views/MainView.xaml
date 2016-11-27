@@ -7,36 +7,48 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:behaviors="clr-namespace:ProjectWerner.OpenSoftware.Behaviors"
              mc:Ignorable="d"
              Height="340" Width="660">
     <UserControl.DataContext>
         <src:MainViewModel />
     </UserControl.DataContext>
-
-
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <ei:CallMethodAction MethodName="Start" TargetObject="{Binding Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
-    <Grid >
 
-        <ListBox x:Name="MyListBox" 
+
+
+    <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+        <ListBox   Grid.Column="0"
+                   Grid.Row="0"
+            x:Name="MyListBox" 
                  BorderThickness="1" 
-                 Width="200" Height="200"
-                 BorderBrush="#CE5E48" 
                  DisplayMemberPath="Key" 
                  Background="AliceBlue" 
                   SelectionMode="Single"
                  SelectedIndex="{Binding SelectedIndex}" 
                  IsSynchronizedWithCurrentItem="True"
-             ItemsSource="{Binding SoftwareList}"/>
+             ItemsSource="{Binding SoftwareList}"
+                 FontSize="50"
+                   
+                 >
+            <i:Interaction.Behaviors>
+                <behaviors:ScrollIntoViewBehavior />
+            </i:Interaction.Behaviors>
+
+            
+        </ListBox>
 
        
-    <Label Name="SelectedIndex" VerticalAlignment="Top"
-               Content="{Binding SelectedIndex}"
-               ContentStringFormat="SelectedIndex: {0}"
-               Width="100" Height="30" Background="Lavender" />
 </Grid>
 </UserControl>
