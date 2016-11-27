@@ -1,7 +1,6 @@
 ﻿using SHDocVw;
 using System;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Windows.Controls;
 
 namespace BrowserExtension.Views
@@ -24,6 +23,7 @@ namespace BrowserExtension.Views
             ScrollPos = 0;
             ScrollInteravall = 300;
             ZoomLevel = 5;
+            webBrowser.Loaded += (o, s) => HideScriptErrors(webBrowser, true);
         }
 
         public string URL
@@ -34,8 +34,7 @@ namespace BrowserExtension.Views
                     value = "http://"+value;
                 webBrowser.Source = !string.IsNullOrEmpty(value) ? new Uri(value) : null;
                 tbLink.Text = value;
-                var comBrowser = GetComBrowser(webBrowser);
-                SetSilent(comBrowser, true);              
+                var comBrowser = GetComBrowser(webBrowser);        
             }
         }
 
@@ -60,25 +59,17 @@ namespace BrowserExtension.Views
             }
         }
 
-        public static void SetSilent(SHDocVw.WebBrowser browser, bool silent)
+        public void HideScriptErrors(System.Windows.Controls.WebBrowser webBrowser, bool hide)
         {
-            if (browser == null)
-                return;
-
-            // get an IWebBrowser2 from the document
-            IOleServiceProvider sp = browser.Document as IOleServiceProvider;
-            if (sp != null)
+            var fiComWebBrowser = typeof(System.Windows.Controls.WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (fiComWebBrowser == null) return;
+            var objComWebBrowser = fiComWebBrowser.GetValue(webBrowser);
+            if (objComWebBrowser == null)
             {
-                Guid IID_IWebBrowserApp = new Guid("0002DF05-0000-0000-C000-000000000046");
-                Guid IID_IWebBrowser2 = new Guid("D30C1661-CDAF-11d0-8A3E-00C04FC9E26E");
-
-                object webBrowser;
-                sp.QueryService(ref IID_IWebBrowserApp, ref IID_IWebBrowser2, out webBrowser);
-                if (webBrowser != null)
-                {
-                    webBrowser.GetType().InvokeMember("Silent", BindingFlags.Instance | BindingFlags.Public | BindingFlags.PutDispProperty, null, webBrowser, new object[] { silent });
-                }
+                webBrowser.Loaded += (o, s) => HideScriptErrors(webBrowser, hide); //In case we are to early
+                return;
             }
+            objComWebBrowser.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, objComWebBrowser, new object[] { hide });
         }
 
         private SHDocVw.WebBrowser GetComBrowser(System.Windows.Controls.WebBrowser webBrowser)
@@ -95,13 +86,6 @@ namespace BrowserExtension.Views
                 comBrowser = (SHDocVw.WebBrowser)comWebBrowser;
             }
             return comBrowser;
-        }
-
-        [ComImport, Guid("6D5140C1-7436-11CE-8034-00AA006009FA"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        private interface IOleServiceProvider
-        {
-            [PreserveSig]
-            int QueryService([In] ref Guid guidService, [In] ref Guid riid, [MarshalAs(UnmanagedType.IDispatch)] out object ppvObject);
-        }
+        }        
     }
 }
