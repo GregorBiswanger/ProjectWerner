@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Microsoft.Win32;
+using Ninject.Planning.Bindings;
 using ProjectWerner.Contracts.Extensions;
 using ProjectWerner.OpenSoftware.ViewModels;
 
@@ -15,11 +17,11 @@ namespace ProjectWerner.OpenSoftware.Views
         public MainView()
         {
             InitializeComponent();
-           
+
             ((UserControl) this).Loaded += (sender, args) =>
             {
-                MainViewModel xxx = (MainViewModel)AppUserControl.DataContext;
-                xxx.Add("gimp");
+            //   MainViewModel xxx = (MainViewModel) AppUserControl.DataContext;
+            //xxx.Start();
             };
 
         }
