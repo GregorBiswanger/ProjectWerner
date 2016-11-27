@@ -31,6 +31,10 @@
         <ListBox Grid.Row="0" Grid.Column="0"
          ItemsSource = "{Binding Buttons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
          ItemTemplate = "{StaticResource ButtonListTemplate}"
-         SelectedIndex="{Binding SelectedIndex}"/>
+         SelectedIndex="{Binding SelectedIndex}">
+            <ListBox.Resources>
+                <SolidColorBrush Color="Red" x:Key="{x:Static SystemColors.HighlightBrushKey}"/>
+            </ListBox.Resources>
+        </ListBox>
     </Grid>
 </UserControl>

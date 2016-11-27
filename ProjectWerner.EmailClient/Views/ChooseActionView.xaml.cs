@@ -34,6 +34,7 @@ namespace ProjectWerner.EmailClient.Views
         }
 
         public UserControl AppUserControl => this;
+
         public void OnApplicationClosed()
         {
 

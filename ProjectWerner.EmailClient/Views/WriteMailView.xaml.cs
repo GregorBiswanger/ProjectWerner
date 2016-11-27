@@ -40,6 +40,24 @@ namespace ProjectWerner.EmailClient.Views
             Mail = new MailItem();
 
             DataContext = this;
+
+            string[] text = Clipboard.GetText().Split(' ');
+            foreach (var VARIABLE in text)
+            {
+                AnalyzeText(VARIABLE);
+            }
+        }
+
+        private void AnalyzeText(string text)
+        {
+            if (text.StartsWith("#"))
+            {
+                ChangeField(text.Replace("#", ""));
+            }
+            else
+            {
+                InsertText(text);
+            }
         }
 
 

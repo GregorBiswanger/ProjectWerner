@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using S22.Imap;
@@ -24,22 +25,31 @@ namespace ProjectWerner.EmailClient.Views
 
         public void Start()
         {
+            
             EmailList = new List<string>();
 
             ImapClient client = new ImapClient("imap-mail.outlook.com", 993, true);
                 
                 client.Login("kilianeller12@outlook.com", "Cs870g797863",AuthMethod.Auto);
-            IEnumerable<uint> uids = client.Search(SearchCondition.New());
-            
-            
-                IEnumerable<MailMessage> messages = client.GetMessages(uids);
+            var uids = client.Search(SearchCondition.All());
+            var mailboxes = client.ListMailboxes();
+
+            foreach (var VARIABLE in mailboxes)
+            {
+                Console.WriteLine(VARIABLE);
+            }
+
+                IEnumerable<MailMessage> messages = client.GetMessages(uids.Take(6), false, "Inbox");
 
             foreach (var VARIABLE in messages)
             {
                 EmailList.Add(VARIABLE.Subject);
+                Console.WriteLine(VARIABLE.Subject);
             }
 
-
+            MyListBox.ItemsSource = EmailList;
+            MyListBox.Items.Refresh();
+            Console.WriteLine(EmailList.Count);
         }
 
     }

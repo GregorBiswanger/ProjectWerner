@@ -58,6 +58,7 @@ namespace ProjectWerner.OpenSoftware.ViewModels
                     try
                     {
                         System.Diagnostics.Process.Start(software.Value);
+                        return;
                     }
                     catch (Exception)
                     {

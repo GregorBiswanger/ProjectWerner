@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectWerner.EmailClient.Views"
              mc:Ignorable="d" 
-             Height="320" Width="800">
+             Height="320" Width="600">
 
     <Grid>
         <Grid.ColumnDefinitions>
