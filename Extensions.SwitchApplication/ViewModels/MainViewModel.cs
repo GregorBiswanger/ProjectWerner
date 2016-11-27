@@ -51,20 +51,21 @@ namespace ProjectWerner.SwitchApplication.ViewModels
             var counter = 0;
             foreach (var processInfo in allCurrentlyRunningProcesses)
             {
-                var name = CreateValidName(processInfo.FileName);
+                //var name = CreateValidName(processInfo.FileName);
 
                 if (!IsProcessAvailable(processInfo.ProcessId))
                     continue;
 
-                if (currentProcessInfos.ContainsKey(name) == false)
-                    currentProcessInfos.Add(name, processInfo);
+                //if (currentProcessInfos.ContainsKey(name) == false)
+                //    currentProcessInfos.Add(name, processInfo);
 
                 Buttons.Add(new ButtonItem
                 {
                     ProcessInfo = processInfo,
                     Command = new RelayCommand(p => this.ExecuteProcess(processInfo.ProcessId)),
                     IsActive = counter == 0,
-                    Label = name
+                    Label = processInfo.Name,
+
                 });
                 counter++;
             }

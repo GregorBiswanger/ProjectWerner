@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Management;
 using ProjectWerner.SwitchApplication.Interfaces;
@@ -28,22 +29,28 @@ namespace ProjectWerner.SwitchApplication.Utilities
             var mos = new ManagementObjectSearcher(scope, query);
             var queryCollection = mos.Get();
 
-            var programFiles = Environment.ExpandEnvironmentVariables("%ProgramFiles%");
+            var programFiles = (Environment.Is64BitOperatingSystem 
+                ? Environment.ExpandEnvironmentVariables("%ProgramFiles%") 
+                : Environment.ExpandEnvironmentVariables("%ProgramFiles(x86)%")) + @"\";
 
             var list = (from ManagementBaseObject foundObject in queryCollection
                         orderby foundObject[Name]
                         let tmp = foundObject[ExecutablePath]?.ToString() ?? string.Empty
-                        select new
+                        let name = foundObject[Name]?.ToString() ?? string.Empty
+                        let pId = (uint?)foundObject[ProcessId] ?? 0
+                        select new ProcessInfo
                         {
-                            Name = foundObject[Name],
-                            Caption = foundObject[Caption],
-                            CSName = foundObject[CSName],
-                            Description = foundObject[Description],
-                            ProcessId = foundObject[ProcessId],
-                            DisplayName = tmp.Length < programFiles.Length && string.IsNullOrEmpty(tmp) 
-                            ? string.Empty 
-                            : tmp.Substring(programFiles.Length)
-                }).ToList();
+                            FileName = foundObject[Name]?.ToString(),
+                            Caption = foundObject[Caption]?.ToString(),
+                            CSName = foundObject[CSName]?.ToString(),
+                            Description = foundObject[Description]?.ToString(),
+                            ProcessId = (int)pId,
+                            ExecutionPath = tmp,
+                            DisplayName = tmp.Length < programFiles.Length || string.IsNullOrEmpty(tmp)
+                            ? string.Empty
+                            : (tmp.Replace(programFiles, "").Replace(name, ""))
+                            .Trim('\\', '/', ' ')
+                        }).ToList();
             return list;
         }
 
@@ -62,22 +69,46 @@ namespace ProjectWerner.SwitchApplication.Utilities
             var commonFilesX86 = Environment.ExpandEnvironmentVariables("%CommonProgram(x86)%");
             var programmData = Environment.ExpandEnvironmentVariables("%ProgramData%");
 
-            var list = (from ManagementBaseObject foundObject in queryCollection
-                        orderby foundObject[Name]
-                        let executablePath = foundObject[ExecutablePath]?.ToString() ?? string.Empty
-                        let fileName = foundObject[Name]?.ToString() ?? string.Empty
-                        let processId = (uint?)foundObject[ProcessId] ?? 0
-                        where foundObject[Name] != null && !string.IsNullOrEmpty(executablePath)
-                        select new ProcessInfo
-                        {
-                            FileName = fileName,
-                            ExecutionPath = executablePath,
-                            Arguments = string.Empty,
-                            ProcessId = (int)processId,
-                            Description = foundObject[Description]?.ToString() ?? string.Empty,
+            var programFiles = (Environment.Is64BitOperatingSystem
+                ? Environment.ExpandEnvironmentVariables("%ProgramFiles%")
+                : Environment.ExpandEnvironmentVariables("%ProgramFiles(x86)%")) + @"\";
 
-                        })
-                        .ToList();
+            var list =
+            (from ManagementBaseObject foundObject in queryCollection
+             orderby foundObject[Name]
+             let tmp = foundObject[ExecutablePath]?.ToString() ?? string.Empty
+             let name = foundObject[Name]?.ToString() ?? string.Empty
+             let pId = (uint?)foundObject[ProcessId] ?? 0
+             select new ProcessInfo
+             {
+                 FileName = name,
+                 Name = name,
+                 Caption = foundObject[Caption]?.ToString(),
+                 CSName = foundObject[CSName]?.ToString(),
+                 Description = foundObject[Description]?.ToString(),
+                 ProcessId = (int)pId,
+                 ExecutionPath = tmp,
+                 DisplayName = tmp.Length < programFiles.Length || string.IsNullOrEmpty(tmp)
+                 ? string.Empty
+                 : (tmp.Replace(programFiles, "").Replace(name, ""))
+                 .Trim('\\', '/', ' ')
+             }).ToList();
+            //(from ManagementBaseObject foundObject in queryCollection
+            // orderby foundObject[Name]
+            // let executablePath = foundObject[ExecutablePath]?.ToString() ?? string.Empty
+            // let fileName = foundObject[Name]?.ToString() ?? string.Empty
+            // let processId = (uint?)foundObject[ProcessId] ?? 0
+            // where foundObject[Name] != null && !string.IsNullOrEmpty(executablePath)
+            // select new ProcessInfo
+            // {
+            //     FileName = fileName,
+            //     ExecutionPath = executablePath,
+            //     Arguments = string.Empty,
+            //     ProcessId = (int)processId,
+            //     Description = foundObject[Description]?.ToString() ?? string.Empty,
+
+            // })
+            //        .ToList();
 
             list = list.Where(l => l.ExecutionPath.StartsWith(system32) == false
                                    && l.ExecutionPath.StartsWith(commonFilesX86) == false

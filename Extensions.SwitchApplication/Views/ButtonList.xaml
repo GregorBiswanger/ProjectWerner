@@ -11,7 +11,7 @@
         <DataTemplate x:Key = "ButtonListTemplate">
             <Button Background="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}"
                     Content="{Binding Label, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    Command="{Binding Command}"/>
+                    Command="{Binding Command}" Width="auto" Height="auto"/>
         </DataTemplate>
     </UserControl.Resources>
 

@@ -106,8 +106,8 @@ namespace Spike.Tools.UI
         private void button3_Click(object sender, EventArgs e)
         {
             var list = WmiHelper.GetAllCurrentlyRunningProcesses().ToList();
-            var ie = list.FirstOrDefault(l => l.FileName.StartsWith("iexplor"));
-            var test = WmiHelper.GetProcessInfo(ie.ProcessId);
+            var toCheck = list.FirstOrDefault(l => l.FileName.StartsWith("notepad++"));
+            var test = WmiHelper.GetProcessInfo(toCheck.ProcessId);
         }
     }
 }

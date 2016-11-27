@@ -30,5 +30,25 @@ namespace ProjectWerner.SwitchApplication.Model
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Name
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// CSName
+        /// </summary>
+        public string CSName { get; set; }
+
+        /// <summary>
+        /// Caption
+        /// </summary>
+        public string Caption { get; set; }
+
+        /// <summary>
+        /// DisplayName
+        /// </summary>
+        public string DisplayName { get; set; }
+
     }
 }

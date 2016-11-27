@@ -26,5 +26,11 @@
         /// Description
         /// </summary>
         string Description { get; }
+
+        string Name { get; }
+
+        string Caption { get; }
+        
+        string DisplayName { get; }
     }
 }
