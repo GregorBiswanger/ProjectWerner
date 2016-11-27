@@ -42,11 +42,37 @@ namespace ProjectWerner
                 };
 
                 _selectionTimer.Tick += OnSeletionTimerTick;
-                _selectionTimer.Start();
+                OnActivate();
 
                 FacePreviewView facePreviewView = new FacePreviewView();
                 facePreviewView.Show();
             }
+        }
+
+	    public void OnActivate()
+	    {
+	        if (!_selectionTimer.IsEnabled)
+	        {
+	            _selectionTimer.Start();
+	            _camera3D.MouthOpened += OnMouthOpen;
+	            _camera3D.MouthClosed += OnMouthClosed;
+	        }
+	    }
+
+        private void OnDeactivate()
+        {
+            _selectionTimer.Stop();
+            _camera3D.MouthOpened -= OnMouthOpen;
+            _camera3D.MouthClosed -= OnMouthClosed;
+        }
+
+        private void OnMouthOpen()
+        {
+            StartSelectedExtension();
+        }
+
+        private void OnMouthClosed()
+        {
         }
 
         ~MainWindowViewModel()
@@ -71,7 +97,12 @@ namespace ProjectWerner
 
 	    public void StartSelectedExtension()
 	    {
-            ExtensionStarter.StartExtension(Extensions[_selectedItemIndex].Extension.AppUserControl);
+	        Application.Current.Dispatcher.Invoke(() =>
+	        {
+                OnDeactivate();
+	            var extensionMainElement = Extensions[_selectedItemIndex].Extension.AppUserControl;
+	            ExtensionStarter.StartExtension(extensionMainElement);
+            });
 	    }
 	}
 }

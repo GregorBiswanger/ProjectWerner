@@ -47,6 +47,11 @@
             <Setter Property="Margin" Value="1" />
         </Style>
     </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Activated">
+            <ei:CallMethodAction MethodName="OnActivate" TargetObject="{StaticResource MainWindowViewModel}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid DataContext="{StaticResource MainWindowViewModel}">
         <ItemsControl ItemsSource="{Binding Extensions}" ItemTemplate="{StaticResource ExtensionDataTemplate}">

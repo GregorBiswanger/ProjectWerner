@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:viewModels="clr-namespace:ProjectWerner.Face2Speech.ViewModels"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="700" Width="1200">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">

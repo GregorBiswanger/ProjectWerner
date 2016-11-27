@@ -342,7 +342,11 @@ namespace ProjectWerner.Face2Speech.ViewModels
             {
                 TextActivityMark(Chars);
             }
-            else if (int.TryParse(Chars.Text, out result) || Chars.Type == "ok")
+            else if (Chars.Type == "ok")
+            {
+                TextActivityOk();
+            }
+            else if (int.TryParse(Chars.Text, out result))
             {
                 if (DisplayText != "")
                 {
@@ -440,6 +444,19 @@ namespace ProjectWerner.Face2Speech.ViewModels
 
             }
             return result;
+        }
+
+        private void TextActivityOk()
+        {
+            Clipboard.SetText(DisplayText);
+            Application.Current.MainWindow.Activate();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (!ReferenceEquals(window, Application.Current.MainWindow))
+                {
+                    window.Close();
+                }
+            }
         }
 
         private void RefillProposalWords(ProspalWords myProspalWords)
