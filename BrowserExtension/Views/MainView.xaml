@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:BrowserExtension.Views"
              xmlns:viewModels="clr-namespace:BrowserExtension.ViewModels"
              mc:Ignorable="d" Height="800" Width="1024"
+             Loaded="UserControl_Loaded"
              >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModels:MainViewModel}">

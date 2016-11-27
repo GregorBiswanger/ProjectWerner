@@ -41,6 +41,7 @@ namespace ProjectWerner.Face2Speech.ViewModels
         public bool LostFace { get; set; }
         public bool MouthOpen { get; set; }
         public bool MouthClosed { get; set; }
+        public object ParentWindow { get; internal set; }
 
         [Import]
         private ICamera3D _camera3D;
@@ -457,9 +458,11 @@ namespace ProjectWerner.Face2Speech.ViewModels
         {
             Clipboard.SetText(DisplayText);
             Application.Current.MainWindow.Activate();
+
+
             foreach (Window window in Application.Current.Windows)
             {
-                if (!ReferenceEquals(window, Application.Current.MainWindow))
+                if (!ReferenceEquals(window, Application.Current.MainWindow) && window.Name == "ExtensionWindow")
                 {
                     window.Close();
                 }

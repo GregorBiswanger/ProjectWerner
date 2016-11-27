@@ -29,27 +29,12 @@ namespace BrowserExtension.ViewModels
     public class MainViewModel
     {
         public int ButtonsSelectedIndex { get; set; }
-        public int SearchResultsSelectedIndex { get; set; }
-        public List<ButtonItem> Buttons { get; set; }
-        public List<ListItem> SearchResults { get; set; }
-        public UserControl CurrentContentControl { get; set; }
 
-        //Gesichterkennung
-        public bool LostFace { get; set; }
-        public bool MouthOpen { get; set; }
-        public bool MouthClosed { get; set; }
-
-        [Import]
-        private ICamera3D _camera3D;
-        private DispatcherTimer _buttonsDispatcherTimer;
-        private DispatcherTimer _searchResultsDispatcherTimer;
-        private readonly int _intervalSeconds = 2; // Werner hat 2 Sek.
-
-        public MainViewModel(string searchFor)
+        public void OnLoaded()
         {
             var completeSearchView = new CompleteSearchView();
             CurrentContentControl = new CompleteSearchView();
-            System.Net.HttpWebRequest request = BingSearchHelper.BuildRequest(searchFor, 7, 0, SearchLanguage.German, SafeSearchFilter.Moderate);
+            System.Net.HttpWebRequest request = BingSearchHelper.BuildRequest(Clipboard.GetText(), 7, 0, SearchLanguage.German, SafeSearchFilter.Moderate);
             System.Net.HttpWebResponse response = BingSearchHelper.GetSearchResponse(request);
             List<value> searchResults = BingSearchHelper.GetSearchResultsFrom<List<value>>(response);
 
@@ -94,6 +79,26 @@ namespace BrowserExtension.ViewModels
                 _camera3D.FaceLost += OnFaceLost;
                 //_camera3D.Connected += Connected;
             }
+        }
+
+        public int SearchResultsSelectedIndex { get; set; }
+        public List<ButtonItem> Buttons { get; set; }
+        public List<ListItem> SearchResults { get; set; }
+        public UserControl CurrentContentControl { get; set; }
+
+        //Gesichterkennung
+        public bool LostFace { get; set; }
+        public bool MouthOpen { get; set; }
+        public bool MouthClosed { get; set; }
+
+        [Import]
+        private ICamera3D _camera3D;
+        private DispatcherTimer _buttonsDispatcherTimer;
+        private DispatcherTimer _searchResultsDispatcherTimer;
+        private readonly int _intervalSeconds = 2; // Werner hat 2 Sek.
+
+        public MainViewModel()
+        {
         }
 
         private void Connected()
@@ -337,14 +342,17 @@ namespace BrowserExtension.ViewModels
             if (html != null)
             {
                 var elem = html.activeElement as mshtml.IHTMLElement2;
-                browserControl.ContentHeight = elem.scrollHeight;
+                if (elem != null)
+                {
+                    browserControl.ContentHeight = elem.scrollHeight;
 
-                if (browserControl.ScrollPos < browserControl.ContentHeight)
-                    browserControl.ScrollPos += browserControl.ScrollInteravall;
-                else
-                    browserControl.ScrollPos = browserControl.ContentHeight;
+                    if (browserControl.ScrollPos < browserControl.ContentHeight)
+                        browserControl.ScrollPos += browserControl.ScrollInteravall;
+                    else
+                        browserControl.ScrollPos = browserControl.ContentHeight;
 
-                html.parentWindow.scroll(0, browserControl.ScrollPos);
+                    html.parentWindow.scroll(0, browserControl.ScrollPos);
+                }
             }
 
         }

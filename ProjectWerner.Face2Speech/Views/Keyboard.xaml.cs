@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using ProjectWerner.Contracts.Extensions;
 using ProjectWerner.Face2Speech.Functions;
 using ProjectWerner.ServiceLocator;
+using ProjectWerner.Face2Speech.ViewModels;
 
 namespace ProjectWerner.Face2Speech.Views
 {
@@ -15,6 +16,7 @@ namespace ProjectWerner.Face2Speech.Views
         {
             //MicroKernel.Kernel.Bind<IDictionaryManager>().To<DictionaryManager>().InSingletonScope();
             InitializeComponent();
+            ((MainViewModel)Resources["ViewModel"]).ParentWindow = (this).Parent;
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
