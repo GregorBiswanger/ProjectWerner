@@ -28,7 +28,9 @@ namespace BrowserExtension.ViewModels
     [ImplementPropertyChanged]
     public class MainViewModel
     {
-        public int ButtonsSelectedIndex { get; set; }
+        public MainViewModel()
+        {
+        }
 
         public void OnLoaded()
         {
@@ -53,13 +55,15 @@ namespace BrowserExtension.ViewModels
 
             ButtonsSelectedIndex = 0;
             SearchResultsSelectedIndex = 0;
+            _isSearchOpened = true;
+            _isBrowserOpened = false;
             Buttons = new List<ButtonItem>();
             Buttons.Add(new ButtonItem() { Label = "Zurück", IsActive = true, Command = BackToSearchCommand });
             Buttons.Add(new ButtonItem() { Label = "Hoch", IsActive = false, Command = ScrollUpCommand });
             Buttons.Add(new ButtonItem() { Label = "Runter", IsActive = false, Command = ScrollDownCommand });
             Buttons.Add(new ButtonItem() { Label = "Zoom +", IsActive = false, Command = ZoomInCommand });
             Buttons.Add(new ButtonItem() { Label = "Zoom -", IsActive = false, Command = ZoomOutCommand });
-            //Buttons.Add(new ButtonItem() { Label = "List Links Button", IsActive = false, Command = BackToSearchCommand });
+            //Buttons.Add(new ButtonItem() { Label = "List Links", IsActive = false, Command = BackToSearchCommand });
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
@@ -81,6 +85,7 @@ namespace BrowserExtension.ViewModels
             }
         }
 
+        public int ButtonsSelectedIndex { get; set; }
         public int SearchResultsSelectedIndex { get; set; }
         public List<ButtonItem> Buttons { get; set; }
         public List<ListItem> SearchResults { get; set; }
@@ -96,14 +101,12 @@ namespace BrowserExtension.ViewModels
         private DispatcherTimer _buttonsDispatcherTimer;
         private DispatcherTimer _searchResultsDispatcherTimer;
         private readonly int _intervalSeconds = 2; // Werner hat 2 Sek.
-
-        public MainViewModel()
-        {
-        }
+        private bool _isSearchOpened;
+        private bool _isBrowserOpened;
 
         private void Connected()
         {
-            _searchResultsDispatcherTimer.Start();
+            //_searchResultsDispatcherTimer.Start();
             //_buttonsDispatcherTimer.Start();
 
             // http://pinvoke.net/default.aspx/kernel32/SetThreadExecutionState.html
@@ -193,6 +196,7 @@ namespace BrowserExtension.ViewModels
             {
                 SearchResults[SearchResultsSelectedIndex].Command.Execute(null);
             }
+            if (_isSearchOpened)
             {
                 _waitForConfirmationInSearchResults = false;
                 _searchResultsDispatcherTimer.Start();
@@ -209,9 +213,11 @@ namespace BrowserExtension.ViewModels
             {
                 Buttons[ButtonsSelectedIndex].Command.Execute(null);
             }
-
-            _waitForConfirmationInButtons = false;
-            _buttonsDispatcherTimer.Start();
+            if (_isBrowserOpened)
+            {
+                _waitForConfirmationInButtons = false;
+                _buttonsDispatcherTimer.Start();
+            }
         }
 
         ICommand _openSiteCommandCommand;
@@ -229,6 +235,8 @@ namespace BrowserExtension.ViewModels
 
         private void OpenSite()
         {
+            _isSearchOpened = false;
+            _isBrowserOpened = true;
             var browserControl = new BrowserControl();
             browserControl.URL = SearchResults[SearchResultsSelectedIndex].SearchResult.displayUrl;
             SearchResults[SearchResultsSelectedIndex].IsActive = false;
@@ -239,8 +247,8 @@ namespace BrowserExtension.ViewModels
             Application.Current.Dispatcher.Invoke(() => {
                 CurrentContentControl = browserControl;
             });
-            Thread.Sleep(new TimeSpan(0, 0, 2));
 
+            OnMouthClosed();
             _buttonsDispatcherTimer.Start();
         }
 
@@ -277,6 +285,9 @@ namespace BrowserExtension.ViewModels
 
         private void BackToSearchResults()
         {
+            _isBrowserOpened = false;
+            _isSearchOpened = true;
+
             _buttonsDispatcherTimer.Stop();
             Buttons[ButtonsSelectedIndex].IsActive = false;
             ButtonsSelectedIndex = 0;
@@ -284,9 +295,8 @@ namespace BrowserExtension.ViewModels
                 CurrentContentControl = new CompleteSearchView();
             });
 
-            _searchResultsDispatcherTimer.Start();
             OnMouthClosed();
-            Thread.Sleep(new TimeSpan(0, 0, 2));
+            _searchResultsDispatcherTimer.Start();
         }
 
         ICommand _scrollUpCommand;

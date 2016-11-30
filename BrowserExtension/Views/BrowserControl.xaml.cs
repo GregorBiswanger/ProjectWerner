@@ -21,7 +21,7 @@ namespace BrowserExtension.Views
         {
             InitializeComponent();
             ScrollPos = 0;
-            ScrollInteravall = 300;
+            ScrollInteravall = 400;
             ZoomLevel = 5;
             webBrowser.Loaded += (o, s) => HideScriptErrors(webBrowser, true);
         }
@@ -66,7 +66,7 @@ namespace BrowserExtension.Views
             var objComWebBrowser = fiComWebBrowser.GetValue(webBrowser);
             if (objComWebBrowser == null)
             {
-                webBrowser.Loaded += (o, s) => HideScriptErrors(webBrowser, hide); //In case we are to early
+                webBrowser.Loaded += (o, s) => HideScriptErrors(webBrowser, hide); //In case we are too early
                 return;
             }
             objComWebBrowser.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, objComWebBrowser, new object[] { hide });
